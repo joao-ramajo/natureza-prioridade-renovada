@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CollectionPoint\StoreRequest;
+use App\Http\Requests\CollectionPoint\UpdateRequest;
 use App\Models\CollectionPoint;
+use GuzzleHttp\Psr7\Query;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -47,7 +49,7 @@ class CollectionPointController extends Controller
                 return response()->json(['message' => 'Já existe um ponto de coleta com estas informações'], 409);
             }
 
-            return response()->json(['message' => 'Erro ao salvar registro no banco de dados']);
+            return response()->json(['message' => 'Erro ao salvar registro no banco de dados'], 500);
         }
     }
 
@@ -69,9 +71,36 @@ class CollectionPointController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, string $id)
     {
-        //
+        try {
+            // find point in DB
+            $point = CollectionPoint::findOrFail($id);
+
+            // verify the request origin
+            if ($request->input('user_id') != $point->user_id) {
+                return response()->json(['message' => 'Você não tem permissão para está tarefa.'], 403);
+            }
+
+            $point->name = $request->input('name');
+            // format cep
+            $point->cep = str_replace('-', '', $request->input('cep'));
+            $point->category_id = $request->input('category_id');
+
+            $point->save();
+
+            return response()->json(
+                [
+                    'message' => 'Ponto de coleta atualizado com sucesso',
+                    'info' => CollectionPoint::find($point->id)->toArray()
+                ],
+                200
+            );
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Registro não encontrado no banco de dados'], 404);
+        } catch (QueryException $e) {
+            return response()->json(['message' => 'Erro ao salvar registro no banco de dados'], 500);
+        }
     }
 
     /**
@@ -79,6 +108,14 @@ class CollectionPointController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $point = CollectionPoint::findOrFail($id);
+            $point->delete();
+            return response()->json(['message' => 'Ponto de coleta deletado com sucesso'], 200);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'O ponto de coleta não foi encontrado'], 404);
+        } catch (QueryException $e) {
+            return response()->json(['message' => 'Houve um erro ao apagar o registro'], 500);
+        }
     }
 }

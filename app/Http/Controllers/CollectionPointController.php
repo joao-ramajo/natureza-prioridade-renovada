@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CollectionPoint\StoreRequest;
 use App\Models\CollectionPoint;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class CollectionPointController extends Controller
@@ -21,7 +22,25 @@ class CollectionPointController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        return response()->json('ok');
+        // create model data
+        $point = new CollectionPoint();
+
+        $point->name = $request->input('name');
+        // format cep
+        $point->cep = str_replace('-', '', $request->input('cep'));
+        $point->user_id = $request->input('user_id');
+        $point->category_id = $request->input('category_id');
+        try {
+            $point->save();
+
+            return response()->json(CollectionPoint::find($point->id), 201);
+        } catch (QueryException $e) {
+            if ($e->getCode() === '23000') {
+                return response()->json(['message' => 'Já existe um ponto de coleta com estas informações'], 409);
+            }
+
+            return response()->json(['message' => 'Erro ao salvar registro no banco de dados']);
+        }
     }
 
     /**

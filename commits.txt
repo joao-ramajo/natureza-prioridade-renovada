@@ -1,0 +1,10 @@
+feat(CollectionPoint): Implementando `update` e `delete` para os pontos de coleta
+feature(CollectionPoint): Implementação de busca direta de um único ponto de coleta com suas informações
+feat(CollectionPoint): Implementação do método `store` para inserção de novos registros
+fix: Atualizando regras do form request `CollectionPoint/StoreRequest`
+chore: Adicionando relacionamentos entre as entidades
+feat: Classe Request para novos pontos de coleta `StoreRequest`
+chore: Adição dos Seeders para as tabelas restantes
+chore: adição de uma classe Seeder para a migration categories
+Adicionando arquivos já existentes do projeto
+first commit

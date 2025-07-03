@@ -17,7 +17,7 @@ class CollectionPointController extends Controller
      */
     public function index()
     {
-        return CollectionPoint::all()->toJson(JSON_PRETTY_PRINT);
+        return CollectionPoint::paginate(5);
     }
 
     /**
@@ -60,7 +60,7 @@ class CollectionPointController extends Controller
     {
         try {
             $point = CollectionPoint::with(['category', 'user'])->findOrFail($id);
-            return response()->json($point);
+            return $point;
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Ponto de coleta não encontrado'], 404);
         } catch (QueryException $e) {

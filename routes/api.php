@@ -17,9 +17,10 @@ Route::prefix('user')->group(function () {
     Route::delete('/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
-Route::prefix('collection-point')->group(function() {
+Route::prefix('collection-point')->group(function () {
     Route::get('/', [CollectionPointController::class, 'index'])->name('collection_points.index');
     Route::post('/', [CollectionPointController::class, 'store'])->name('collection_points.store');
     Route::get('/{id}', [CollectionPointController::class, 'show'])->name('collection_points.show');
-    
+    Route::delete('/{id}', [CollectionPointController::class, 'destroy'])->name('collection_points.destroy');
+    Route::put('/{id}', [CollectionPointController::class, 'update'])->name('collection_points.update');
 });

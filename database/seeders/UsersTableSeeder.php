@@ -20,7 +20,14 @@ class UsersTableSeeder extends Seeder
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('123456'),
                 'created_at' => now()
-            ]
+            ],
+            [
+                'username' => 'john@doe',
+                'name' => 'John Doe',
+                'email' => 'john_doe@gmail.com',
+                'password' => bcrypt('123456'),
+                'created_at' => now()
+            ],
             ]);
     }
 }

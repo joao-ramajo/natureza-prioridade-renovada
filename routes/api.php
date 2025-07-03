@@ -19,4 +19,5 @@ Route::prefix('user')->group(function () {
 
 Route::prefix('collection-point')->group(function() {
     Route::get('/', [CollectionPointController::class, 'index'])->name('collection_points.index');
+    Route::post('/', [CollectionPointController::class, 'store'])->name('collection_points.store');
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CollectionPoint\StoreRequest;
 use App\Models\CollectionPoint;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,9 @@ class CollectionPointController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        return response()->json('ok');
     }
 
     /**

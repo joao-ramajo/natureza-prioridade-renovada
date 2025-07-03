@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Model
+class Category extends Model
 {
     use SoftDeletes;
 
     public function collectionPoints(): HasMany{
         return $this->hasMany(CollectionPoint::class);
     }
-
-    protected $hidden = ['password'];
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 60)->unique();
             $table->string('cep', 8);
-            $table->integer('score');
+            $table->integer('score')->default(0);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
 

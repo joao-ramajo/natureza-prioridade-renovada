@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CollectionPoint\StoreRequest;
 use App\Models\CollectionPoint;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -30,10 +31,17 @@ class CollectionPointController extends Controller
         $point->cep = str_replace('-', '', $request->input('cep'));
         $point->user_id = $request->input('user_id');
         $point->category_id = $request->input('category_id');
+
         try {
             $point->save();
 
-            return response()->json(CollectionPoint::find($point->id), 201);
+            return response()->json(
+                [
+                    'message' => 'Ponto de coleta criado com sucesso',
+                    'info' => CollectionPoint::find($point->id)->toArray()
+                ],
+                201
+            );
         } catch (QueryException $e) {
             if ($e->getCode() === '23000') {
                 return response()->json(['message' => 'Já existe um ponto de coleta com estas informações'], 409);
@@ -48,7 +56,14 @@ class CollectionPointController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $point = CollectionPoint::with(['category', 'user'])->findOrFail($id);
+            return response()->json($point);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Ponto de coleta não encontrado'], 404);
+        } catch (QueryException $e) {
+            return response()->json(['message' => 'Houve um erro ao realizar a busca'], 500);
+        }
     }
 
     /**

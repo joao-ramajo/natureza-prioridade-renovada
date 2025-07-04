@@ -8,6 +8,8 @@
             <x-form.input-field label="Senha" type="password" name="password" />
             <x-form.input-field label="Senha" type="password" name="password_confirmation" />
             <x-form.show-pass />
+
+            <a href="{{ route('login') }}">Já possui uma conta ?</a>
         </x-form.form>
     </div>
     <script src="{{ asset('assets/js/ShowPass.js') }}"></script>

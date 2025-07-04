@@ -24,6 +24,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('about') }}">Sobre</a>
                 </li> --}}
+                <li class="nav-item"><a href="{{ route('notes') }}" class="nav-link">Notas</a></li>
             </ul>
 
             {{-- Autenticado --}}

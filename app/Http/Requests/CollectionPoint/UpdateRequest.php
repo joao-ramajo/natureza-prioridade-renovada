@@ -25,7 +25,11 @@ class UpdateRequest extends FormRequest
             'name' => 'required|string|max:60|min:1',
             'cep' => 'required|size:9|string|regex:/^\d{5}-\d{3}$/',
             'user_id' => 'required|integer|exists:users,id',
-            'category_id' => 'required|integer|exists:categories,id'
+            'category_id' => 'required|integer|exists:categories,id',
+            'open_to' => 'required|date_format:H:i',
+            'open_from' => 'required|date_format:H:i',
+            'days_open' => 'required|string|max:50',
+            'description' => 'nullable|string|max:200'
         ];
     }
 }

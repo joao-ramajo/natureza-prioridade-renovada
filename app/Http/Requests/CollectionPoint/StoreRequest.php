@@ -25,7 +25,11 @@ class StoreRequest extends FormRequest
             'name' => 'required|string|max:60|min:1',
             'cep' => 'required|size:9|string|regex:/^\d{5}-\d{3}$/',
             'categories_id' => 'required|array',
-            'categories_id.*' => 'integer|exists:categories,id'
+            'categories_id.*' => 'integer|exists:categories,id',
+            'open_to' => 'required|date_format:H:i',
+            'open_from' => 'required|date_format:H:i',
+            'days_open' => 'required|string|max:50',
+            'description' => 'nullable|string|max:200'
         ];
     }
 }

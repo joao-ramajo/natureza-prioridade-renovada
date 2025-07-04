@@ -14,16 +14,16 @@ class CategoriesTableSeeder extends Seeder
     public function run(): void
     {
         DB::table('categories')->insert([
-            ['name' => 'Ecológico', 'created_at' => now()],
-            ['name' => 'Reciclável', 'created_at' => now()],
-            ['name' => 'Não reciclável', 'created_at' => now()],
-            ['name' => 'Perigoso', 'created_at' => now()],
-            ['name' => 'Eletrônico', 'created_at' => now()],
-            ['name' => 'Hospitalar', 'created_at' => now()],
-            ['name' => 'Radioativo', 'created_at' => now()],
-            ['name' => 'Construção Civil', 'created_at' => now()],
-            ['name' => 'Pneus', 'created_at' => now()],
-            ['name' => 'Óleo usado', 'created_at' => now()],
+            ['name' => 'Ecológico'],
+            ['name' => 'Reciclável'],
+            ['name' => 'Não reciclável'],
+            ['name' => 'Perigoso'],
+            ['name' => 'Eletrônico'],
+            ['name' => 'Hospitalar'],
+            ['name' => 'Radioativo'],
+            ['name' => 'Construção Civil'],
+            ['name' => 'Pneus'],
+            ['name' => 'Óleo usado'],
         ]);
     }
 }

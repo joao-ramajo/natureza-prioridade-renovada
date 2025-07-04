@@ -9,6 +9,7 @@ use GuzzleHttp\Psr7\Query;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CollectionPointController extends Controller
 {
@@ -32,15 +33,18 @@ class CollectionPointController extends Controller
         // format cep
         $point->cep = str_replace('-', '', $request->input('cep'));
         $point->user_id = $request->input('user_id');
-        $point->category_id = $request->input('category_id');
+
+        $categories_id = $request->input('categories_id');
 
         try {
             $point->save();
 
+            $point->categories()->sync($categories_id);
+
             return response()->json(
                 [
                     'message' => 'Ponto de coleta criado com sucesso',
-                    'info' => CollectionPoint::find($point->id)->toArray()
+                    'info' => CollectionPoint::with(['categories', 'user'])->find($point->id)->toArray()
                 ],
                 201
             );
@@ -49,7 +53,7 @@ class CollectionPointController extends Controller
                 return response()->json(['message' => 'Já existe um ponto de coleta com estas informações'], 409);
             }
 
-            return response()->json(['message' => 'Erro ao salvar registro no banco de dados'], 500);
+            return response()->json(['message' => 'Erro ao salvar registro no banco de dados', 'erro' => $e->getMessage()], 500);
         }
     }
 

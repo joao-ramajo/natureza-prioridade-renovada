@@ -16,14 +16,10 @@ return new class extends Migration
             $table->string('name', 60)->unique();
             $table->string('cep', 8);
             $table->integer('score')->default(0);
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('category_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

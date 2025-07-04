@@ -18,7 +18,6 @@ class CollectionPointsTableSeeder extends Seeder
                 'name' => 'Ponto A',
                 'cep' => '12345678',
                 'user_id' => 1,
-                'category_id' => 1,
                 'created_at' => now()
             ]
         ]);

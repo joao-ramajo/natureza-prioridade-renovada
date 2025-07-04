@@ -31,7 +31,7 @@ class CollectionPointsTableSeeder extends Seeder
                 'latitude' => -23.55052,
                 'longitude' => -46.633308,
                 'created_at' => now(),
-                'updated_at' => now(),
+                
             ]
         ]);
     }

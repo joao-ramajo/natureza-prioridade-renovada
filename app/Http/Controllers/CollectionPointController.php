@@ -33,8 +33,13 @@ class CollectionPointController extends Controller
         // format cep
         $point->cep = str_replace('-', '', $request->input('cep'));
         $point->user_id = $request->input('user_id');
+        $point->open_from = $request->input('open_from');
+        $point->open_to = $request->input('open_to');
+        $point->days_open = $request->input('days_open');
+        $point->description = $request->input('description');
 
         $categories_id = $request->input('categories_id');
+
 
         try {
             $point->save();

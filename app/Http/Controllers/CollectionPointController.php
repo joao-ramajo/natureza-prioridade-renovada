@@ -18,7 +18,7 @@ class CollectionPointController extends Controller
      */
     public function index()
     {
-        return CollectionPoint::paginate(5);
+        return CollectionPoint::paginate(1);
     }
 
     /**

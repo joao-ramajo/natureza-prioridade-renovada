@@ -8,6 +8,7 @@
                     <x-collection-point.card :point="$point" />
                 </div>
             @endforeach
+            {{ $data->links() }}
         </div>
     </section>
 @endsection

@@ -1,12 +1,5 @@
-@auth
-    <p>voce esta logado</p>
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <input type="submit" value="Logout" class="btn btn-outline-secondary">
-    </form>
+@extends('layouts.main_layout')
 
-@endauth
-
-@guest
-    <p>Voce esta deslogado faça <a href="{{ route('login') }}">Login</a></p>
-@endguest
+@section('content')
+    <h1>HOME</h1>
+@endsection

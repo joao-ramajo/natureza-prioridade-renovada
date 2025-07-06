@@ -15,12 +15,16 @@ class InputField extends Component
     public string $type;
     public string $label;
     public string $value;
-    public function __construct($name, $label, $type, $value = '')
+    public string $rules;
+    public string $class;
+    public function __construct($name, $label, $type, $value = '', $rules = '', $class = '')
     {
         $this->name = $name;
         $this->type = $type;
         $this->label = $label;
         $this->value = $value;
+        $this->rules = $rules;
+        $this->class = $class;
     }
 
     /**

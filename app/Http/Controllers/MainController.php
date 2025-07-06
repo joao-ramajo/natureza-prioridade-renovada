@@ -16,4 +16,8 @@ class MainController extends Controller
 
         return view('home', ['data' => $data]);
     }
+
+    public function collectionPoint(): View {
+        return view('collectionPoint.index');
+    }
 }

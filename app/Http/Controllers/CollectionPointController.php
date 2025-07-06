@@ -27,6 +27,8 @@ class CollectionPointController extends Controller
     public function store(StoreRequest $request)
     {
         // create model data
+
+        dd($request);
         $point = new CollectionPoint();
 
         $point->name = $request->input('name');

@@ -38,7 +38,7 @@ class StoreRequest extends FormRequest
             'complement' => 'nullable|string|max:50',
             'neighborhood' => 'required|string|max:100',
             'city' => 'required|string|max:100',
-            'state' => 'required|string|size:2',
+            'state' => 'required|string|',
 
             // Categoria (assumindo relacionamento Many to Many)
             'categories_id' => 'required|array',

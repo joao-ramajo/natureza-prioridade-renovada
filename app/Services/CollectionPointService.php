@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\CollectionPoint;
+use Illuminate\Http\Request;
 
 class CollectionPointService
 {
@@ -27,5 +28,22 @@ class CollectionPointService
         } else {
             return false;
         }
+    }
+
+    public function getAllWithSearchIndex(Request $request)
+    {
+        $query = CollectionPoint::query();
+
+        if ($request->filled('category')) {
+            $categoryId = $request->input('category');
+
+            $query->whereHas('categories', function ($q) use ($categoryId) {
+                $q->where('categories.id', $categoryId);
+            });
+        }
+
+        $points = $query->paginate(10)->withQueryString();
+
+        return $points;
     }
 }

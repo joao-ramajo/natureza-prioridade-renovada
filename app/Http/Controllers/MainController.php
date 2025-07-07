@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Http\Controllers\CollectionPointController;
-use App\Http\Controllers\CategoryController;
-use App\Models\Category;
-use App\Models\CollectionPoint;
-use App\Models\User;
+use App\Services\CategoryService;
+use App\Services\CollectionPointService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -16,20 +13,11 @@ use Illuminate\Support\Facades\Crypt;
 
 class MainController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request, CollectionPointService $collectionPointService, CategoryService $categoryService): View
     {
-        $query = CollectionPoint::query();
+        $points = $collectionPointService->getAllWithSearchIndex($request);
 
-        if ($request->filled('category')) {
-            $categoryId = $request->input('category');
-
-            $query->whereHas('categories', function ($q) use ($categoryId) {
-                $q->where('categories.id', $categoryId);
-            });
-        }
-
-        $points = $query->paginate(10)->withQueryString();
-        $categories = Category::has('collectionPoints')->get();
+        $categories = $categoryService->getAllCategoriesWithPointExists();
 
 
         return view('home', [
@@ -38,10 +26,10 @@ class MainController extends Controller
         ]);
     }
 
-    public function collectionPoint(): View
+    public function collectionPoint(CategoryService $service): View
     {
 
-        $categories = Category::all();
+        $categories = $service->getAllCategories();
 
         return view('collectionPoint.index', ['categories' => $categories]);
     }
@@ -51,13 +39,12 @@ class MainController extends Controller
         return view('map');
     }
 
-    public function view($id)
+    public function view($id, CollectionPointService $collectionPointService, CategoryService $categoryService): View | RedirectResponse
     {
         try {
             $id = Crypt::decrypt($id);
-            $point = CollectionPoint::findOrFail($id);
-            $category = new CategoryController;
-            $categories = $category->index();
+            $point = $collectionPointService->findCollectionPointById($id);
+            $categories = $categoryService->getAllCategories();
 
             return view('collectionPoint.view', ['point' => $point, 'categories' => $categories]);
         } catch (Exception $e) {

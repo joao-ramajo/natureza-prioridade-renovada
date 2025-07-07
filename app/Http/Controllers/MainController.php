@@ -8,6 +8,8 @@ use App\Http\Controllers\CollectionPointController;
 use App\Http\Controllers\CategoryController;
 use App\Models\Category;
 use App\Models\CollectionPoint;
+use Exception;
+use Illuminate\Support\Facades\Crypt;
 
 class MainController extends Controller
 {
@@ -40,5 +42,23 @@ class MainController extends Controller
         $categories = $category->index();
 
         return view('collectionPoint.index', ['categories' => $categories]);
+    }
+
+    public function map(): View
+    {
+        return view('map');
+    }
+
+    public function view($id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+            $point = CollectionPoint::findOrFail($id);
+
+            return view('collectionPoint.view', ['point' => $point]);
+        } catch (Exception $e) {
+            return back()
+                ->with('error', 'Não encontramos nenhuma informação');
+        }
     }
 }

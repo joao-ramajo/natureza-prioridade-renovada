@@ -23,7 +23,14 @@ Route::middleware(['auth'])->group(function () {
           Route::post('/ponto-de-coleta', [CollectionPointController::class, 'store'])->name('collection_point.store');
      });
 
-     // USER ACTIONS
      Route::get('/perfil/{id}', [MainController::class, 'profile'])->name('user.profile');
+});
 
+// USER ACTIONS
+Route::prefix('user')->group(function(){
+     Route::middleware(['auth'])->group(function () {
+          Route::middleware(['verified'])->group(function () {
+               Route::put('/{id}', [UserController::class, 'update'])->name('user.update');
+          });
+     });
 });

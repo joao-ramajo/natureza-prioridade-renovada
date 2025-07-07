@@ -15,7 +15,7 @@
 
 <body>
     <x-layout.header />
-
+    <div class="container mt-3"><x-alerts.alert/></div>
     @yield('content')
 
     @yield('scripts')

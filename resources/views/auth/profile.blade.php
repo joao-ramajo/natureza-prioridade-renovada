@@ -30,10 +30,8 @@
                             @endif
                         </dd>
                     </dl>
-
-                    <a href="#" class="btn btn-outline-success">
-                        <i class="bi bi-pencil-square me-1"></i> Editar Perfil
-                    </a>
+ 
+                    @include('auth.profile.edit_profile_modal')
                     <a href="{{ route('password.request') }}" class="btn btn-outline-danger ms-2">
                         <i class="bi bi-key-fill me-1"></i> Alterar Senha
                     </a> 

@@ -72,7 +72,7 @@ class MainController extends Controller
                 ->with('error', 'Conta não encontrada');
         }   
 
-        $user = User::find($id);
+        $user = Auth::user();
 
         return view('auth.profile', ['user' => $user]);
     }

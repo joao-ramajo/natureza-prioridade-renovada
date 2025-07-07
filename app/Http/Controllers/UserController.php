@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Suport\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,28 +24,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // validate request
-        $request->validate(
-            [
-                'username' => 'required|max:30|string',
-                'email' => 'required|email|unique:users|max:40|string',
-                'password' => 'required|min:6|max:12',
-                'name' => 'required|max:60',
-            ]
-        );
-
-        // create user object
-        $user = new User();
-        $user->email = $request->input('email');
-        $user->name = $request->input('name');
-        $user->username = $request->input('username');
-        $user->password = Hash::make($request->input('password'));
-
-        // store user data
-        $user->save();
-
-        // return user data
-        return response()->json($user, 201);
+    //    FORTIFY RESPONSABILITY
     }
 
     /**
@@ -62,30 +43,24 @@ class UserController extends Controller
         // validate request
         $request->validate(
             [
-                'name' => 'required',
-                'username' => 'required',
-                'email' => 'required',
-                'password' => 'required',
+                'name' => 'required|string|max:60',
+                'email' => 'required|string|max:60|',
             ]
         );
 
-        // find user by id
-        $user = User::findOrFail($id);
+        $id = Crypt::decrypt($id);
 
+        $user = User::findOrFail($id);
         // update user data
         $user->email = $request->input('email');
         $user->name = $request->input('name');
-        $user->username = $request->input('username');
-        $user->password = Hash::make($request->input('password'));
 
-        // save new user data 
         $user->save();
 
-        // return new data
-        return response()->json([
-            'message' => 'Dados atualizados com sucesso',
-            'user' => $user
-        ], 200);
+        FacadesAuth::setUser($user);
+
+        return back()
+            ->with('success', 'Dados alterados com sucesso');
     }
 
     /**

@@ -84,11 +84,11 @@
                 <div class="row">
                     <div class="col col-md-2 col-sm-4">
                         <x-form.input-field label="Abre às" type="text" name="open_from" value="{{ old('open_from') }}"
-                            rules='placeholder=00:00 pattern="\d{2}:\d{2}" required' />
+                            rules='placeholder=00:00 pattern=\d{2}:\d{2} required' />
                     </div>
                     <div class="col col-md-2 col-sm-4">
                         <x-form.input-field label="Fecha às" type="text" name="open_to" value="{{ old('open_to') }}"
-                            rules='placeholder=00:00 pattern="\d{2}:\d{2}" required' />
+                            rules='placeholder=00:00 pattern=\d{2}:\d{2} required' />
                     </div>
                 </div>
             </div>

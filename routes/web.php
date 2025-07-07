@@ -15,6 +15,9 @@ Route::get('/notes', function () {
 Route::middleware(['auth'])->group(function () {
      Route::get('/', [MainController::class, 'index'])->name('home');
      Route::get('/home', [MainController::class, 'index'])->name('home');
-     Route::get('/ponto-de-coleta', [MainController::class, 'collectionPoint'])->name('collection_point.index');
-     Route::post('/ponto-de-coleta', [CollectionPointController::class, 'store'])->name('collection_point.store');
+
+     Route::middleware(['verified'])->group(function () {
+          Route::get('/ponto-de-coleta', [MainController::class, 'collectionPoint'])->name('collection_point.index');
+          Route::post('/ponto-de-coleta', [CollectionPointController::class, 'store'])->name('collection_point.store');
+     });
 });

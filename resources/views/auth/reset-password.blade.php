@@ -1,7 +1,7 @@
 @extends('layouts.main_layout')
 
 @section('content')
-    <x-form.form title='Esqueci minha senha' btnLabel='Enviar' route='password.update' method='POST'>
+    <x-form.form title='Nova Senha' btnLabel='Enviar' route='password.update' method='POST'>
 
         <x-form.input-field label="Email" type="email" name="email" value="{{ old('email') }}" />
         <x-form.input-field label="Nova senha" type="password" name="password" value="{{ old('password') }}" />

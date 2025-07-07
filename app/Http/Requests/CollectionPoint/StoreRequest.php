@@ -22,7 +22,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:60|min:1|exists:collection_points,name',
+            'name' => 'required|string|max:60|min:1|unique:collection_points,name',
             'user_id' => 'required|integer|exists:users,id',
 
             // Se usar 'zip_code' em vez de 'cep'

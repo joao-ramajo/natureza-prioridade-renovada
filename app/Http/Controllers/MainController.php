@@ -6,16 +6,31 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Controllers\CollectionPointController;
 use App\Http\Controllers\CategoryController;
+use App\Models\Category;
+use App\Models\CollectionPoint;
 
 class MainController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $point = new CollectionPointController;
-        $data = $point->index();
+        $query = CollectionPoint::query();
+
+        if ($request->filled('category')) {
+            $categoryId = $request->input('category');
+
+            $query->whereHas('categories', function ($q) use ($categoryId) {
+                $q->where('categories.id', $categoryId);
+            });
+        }
+
+        $points = $query->paginate(10)->withQueryString();
+        $categories = Category::has('collectionPoints')->get();
 
 
-        return view('home', ['data' => $data]);
+        return view('home', [
+            'points' => $points,
+            'categories' => $categories
+        ]);
     }
 
     public function collectionPoint(): View

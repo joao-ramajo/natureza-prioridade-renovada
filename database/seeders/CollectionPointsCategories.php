@@ -25,7 +25,7 @@ class CollectionPointsCategories extends Seeder
                 // 'created_at' => now()
             ],
             [
-                'collection_point_id' => 1,
+                'collection_point_id' => 2,
                 'category_id' => 3,
                 // 'created_at' => now()
             ],

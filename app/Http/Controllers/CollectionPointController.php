@@ -59,7 +59,7 @@ class CollectionPointController extends Controller
             $point->save();
 
             $point->categories()->sync($categories_id);
-
+            // dd($categories_id);
             return redirect()
                 ->route('home')
                 ->with('success', 'Ponto de coleta cadastrado com sucesso !');

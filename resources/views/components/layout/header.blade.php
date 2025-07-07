@@ -25,7 +25,8 @@
                     <a class="nav-link" href="{{ route('about') }}">Sobre</a>
                 </li> --}}
                 <li class="nav-item"><a href="{{ route('notes') }}" class="nav-link">Notas</a></li>
-                <li class="nav-item"><a href="{{ route('collection_point.index') }}" class="nav-link">Ponto de Coleta</a></li>
+                <li class="nav-item"><a href="{{ route('collection_point.index') }}" class="nav-link">Ponto de
+                        Coleta</a></li>
                 <li class="nav-item"><a href="{{ route('map') }}" class="nav-link">Mapa</a></li>
                 {{-- <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Usuários</a></li> --}}
             </ul>
@@ -40,6 +41,10 @@
                         @csrf
                         <button class="btn btn-outline-danger btn-sm" type="submit">Sair</button>
                     </form>
+                    {{-- <a href="{{ route('user.profile', ['id' => 2]}}">Perfil</a> --}}
+                    <a href="{{   route('user.profile', ['id'=> Crypt::encrypt(Auth::user()->id)])   }}">
+                        Perfil
+                    </a>
                 </div>
             @endauth
 

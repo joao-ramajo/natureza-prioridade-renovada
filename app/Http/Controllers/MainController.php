@@ -8,7 +8,9 @@ use App\Http\Controllers\CollectionPointController;
 use App\Http\Controllers\CategoryController;
 use App\Models\Category;
 use App\Models\CollectionPoint;
+use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class MainController extends Controller
@@ -60,5 +62,18 @@ class MainController extends Controller
             return back()
                 ->with('error', 'Não encontramos nenhuma informação');
         }
+    }
+
+    public function profile($id): View
+    {
+        $id = Crypt::decrypt($id);
+        if (!$id == Auth::user()->id) {
+            back()
+                ->with('error', 'Conta não encontrada');
+        }   
+
+        $user = User::find($id);
+
+        return view('auth.profile', ['user' => $user]);
     }
 }

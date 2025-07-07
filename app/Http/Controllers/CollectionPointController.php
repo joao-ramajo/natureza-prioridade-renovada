@@ -5,20 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CollectionPoint\StoreRequest;
 use App\Http\Requests\CollectionPoint\UpdateRequest;
 use App\Models\CollectionPoint;
+use App\Services\CollectionPointService;
 use Database\Seeders\CategoriesTableSeeder;
 use Exception;
 use GuzzleHttp\Psr7\Query;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
 class CollectionPointController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected CollectionPointService $collectionPointService;
+
+    public function __construct(CollectionPointService $service)
+    {
+        $this->collectionPointService = $service;
+    }
+
     public function index()
     {
         return CollectionPoint::paginate(5);
@@ -27,10 +33,9 @@ class CollectionPointController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request): RedirectResponse
     {
-        // create model data
-        if (strtotime($request->open_from) >= strtotime($request->open_to)) {
+        if ($this->collectionPointService->timeInputIsNotValid($request->open_from, $request->open_to)) {
             return back()
                 ->withErrors(['open_to' => 'O horário de fechamento deve ser maior que o de abertura.'])
                 ->withInput();
@@ -57,7 +62,6 @@ class CollectionPointController extends Controller
 
         $categories_id = $request->input('categories-id', []); // já é um array ou [] por padrão
 
-        dd($request);
         try {
             $point->save();
 
@@ -78,39 +82,26 @@ class CollectionPointController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        try {
-            $point = CollectionPoint::with(['category', 'user'])->findOrFail($id);
-            return $point;
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Ponto de coleta não encontrado'], 404);
-        } catch (QueryException $e) {
-            return response()->json(['message' => 'Houve um erro ao realizar a busca'], 500);
-        }
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
         try {
             $id = Crypt::decrypt($id);
 
-            $point = CollectionPoint::findOrFail($id);
+            $point = $this->collectionPointService->findCollectionPointById($id);
 
-            if ($id != $point->user_id) {
+
+            if (!$this->collectionPointService->verifyIfUserCreateThePoint($point->user_id, $id)) {
                 return back()
                     ->with('error', 'Desculpe, você não tem permissão para alterar estas informações');
             }
 
 
             // create model data
-            if (strtotime($request->open_from) >= strtotime($request->open_to)) {
+            if ($this->collectionPointService->timeInputIsNotValid($request->open_from, $request->open_to)) {
                 return back()
                     ->withErrors(['open_to' => 'O horário de fechamento deve ser maior que o de abertura.'])
                     ->withInput();
@@ -127,8 +118,6 @@ class CollectionPointController extends Controller
             $point->state = $request->state;
             $point->complement = $request->complement;
 
-
-            $point->user_id = $request->input('user_id');
             $point->open_from = $request->input('open_from');
             $point->open_to = $request->input('open_to');
             $point->days_open = $days_open;
@@ -149,23 +138,23 @@ class CollectionPointController extends Controller
                 ->with('success', 'Informações atualizadas com sucesso');
         } catch (Exception $e) {
             return back()
-                ->with('error', $e->getMessage());
+                ->with('error', 'Desculpe, houve um erro ao atualizar o registro, tente novamente mais tarde.');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
         try {
             $id = Crypt::decrypt($id);
-            $point = CollectionPoint::findOrFail($id);
+            $point = $this->collectionPointService->findCollectionPointById($id);
             $point->delete();
             return redirect()
                 ->route('home')
                 ->with('success', 'Registro apagado com sucesso');
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return back()
                 ->with('error', 'Erro ao apagar registro, tente novamente mais tarde');
         }

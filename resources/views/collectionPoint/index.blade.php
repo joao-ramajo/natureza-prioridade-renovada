@@ -82,16 +82,17 @@
             <div class="mb-3">
                 <h5>Horário de Funcionamento</h5>
                 <div class="row">
-                    <div class="col col-2">
-                        <x-form.input-field label="Abre as" type="text" name="open_from" value="{{ old('open_from') }}"
-                            rules="required max=9999 min=1000 placeholder=00:00 pattern=\d{2}:\d{2}" />
+                    <div class="col col-md-2 col-sm-4">
+                        <x-form.input-field label="Abre às" type="text" name="open_from" value="{{ old('open_from') }}"
+                            rules='placeholder=00:00 pattern="\d{2}:\d{2}" required' />
                     </div>
-                    <div class="col col-2">
-                        <x-form.input-field label="Fecha as" type="text" name="open_to" value="{{ old('open_to') }}"
-                            rules="required max=9999 min=1000 placeholder=00:00 pattern=\d{2}:\d{2}" />
+                    <div class="col col-md-2 col-sm-4">
+                        <x-form.input-field label="Fecha às" type="text" name="open_to" value="{{ old('open_to') }}"
+                            rules='placeholder=00:00 pattern="\d{2}:\d{2}" required' />
                     </div>
                 </div>
             </div>
+
 
             <div class="mb-3">
                 <div class="form-floating">

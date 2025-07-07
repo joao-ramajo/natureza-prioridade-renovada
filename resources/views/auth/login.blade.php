@@ -6,6 +6,7 @@
             <x-form.input-field label="Email" type="email" name="email" />
             <x-form.input-field label="Senha" type="password" name="password" />
             <a href="{{ route('register') }}">Fazer cadastro</a>
+            <a href="{{ route('password.request') }}">Esqueci a senha</a>
         </x-form.form>
     </div>
 @endsection

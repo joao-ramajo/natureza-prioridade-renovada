@@ -32,9 +32,11 @@
                     </dl>
  
                     @include('auth.profile.edit_profile_modal')
-                    <a href="{{ route('password.request') }}" class="btn btn-outline-danger ms-2">
-                        <i class="bi bi-key-fill me-1"></i> Alterar Senha
-                    </a> 
+                    <form action="{{ route('user.destroy', ['id' => Crypt::encrypt(Auth::user()->id)]) }}" method="POST">
+                        @csrf 
+                        @method('DELETE')
+                        <input type="submit" value="Apagar conta" class="btn btn-outline-danger">
+                    </form>
                 </div>
             </div>
 

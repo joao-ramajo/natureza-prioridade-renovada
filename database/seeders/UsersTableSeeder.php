@@ -18,15 +18,16 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('12345678'),
+                'email_verified_at' => now(), // <- E-mail já verificado
                 'created_at' => now(),
-                'email_verified_at' => now(),
             ],
             [
                 'name' => 'John Doe',
                 'email' => 'john_doe@gmail.com',
                 'password' => bcrypt('12345678'),
-                'created_at' => now()
+                'email_verified_at' => null, // <- E-mail não verificado
+                'created_at' => now(),
             ],
-            ]);
+        ]);
     }
 }

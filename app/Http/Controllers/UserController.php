@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Suport\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
@@ -57,9 +58,9 @@ class UserController extends Controller
         if ($emailHasExists) {
             return back()
                 ->with('error', 'Desculpe, este email não está dentro de nossas diretrizes');
-        } 
+        }
 
-    
+
         // update user data
         $user->email = $request->input('email');
         $user->name = $request->input('name');
@@ -77,9 +78,24 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
+        try {
+            $id = Crypt::decrypt($id);
 
-        return response()->json(['message' => 'Usuário deletado com sucesso'], 200);
+
+            $user = User::findOrFail($id);
+            $user->delete();
+
+            FacadesAuth::logout();
+            session()->invalidate();
+            session()->regenerateToken();
+
+            // return response()->json(['message' => 'Usuário deletado com sucesso'], 200);
+            return redirect()
+                ->route('login')
+                ->with('success', 'Conta apagada com sucesso');
+        } catch (Exception $e) {
+            return back()
+                ->with('error', 'Desculpe, houve um erro ao apagar sua conta. Tente novamente mais tarde');
+        }
     }
 }

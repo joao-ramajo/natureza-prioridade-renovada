@@ -29,8 +29,9 @@ Route::middleware(['auth'])->group(function () {
 // USER ACTIONS
 Route::prefix('user')->group(function(){
      Route::middleware(['auth'])->group(function () {
-          Route::middleware(['verified'])->group(function () {
+          Route::middleware(['verified', 'password.confirm'])->group(function () {
                Route::put('/{id}', [UserController::class, 'update'])->name('user.update');
+               Route::delete('/{id}', [UserController::class, 'destroy'])->name('user.destroy');
           });
      });
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CollectionPoint\StoreRequest;
 use App\Http\Requests\CollectionPoint\UpdateRequest;
 use App\Models\CollectionPoint;
+use Database\Seeders\CategoriesTableSeeder;
 use GuzzleHttp\Psr7\Query;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
@@ -18,7 +19,7 @@ class CollectionPointController extends Controller
      */
     public function index()
     {
-        return CollectionPoint::paginate(1);
+        return CollectionPoint::paginate(5);
     }
 
     /**
@@ -27,40 +28,50 @@ class CollectionPointController extends Controller
     public function store(StoreRequest $request)
     {
         // create model data
+        if (strtotime($request->open_from) >= strtotime($request->open_to)) {
+            return back()
+                ->withErrors(['open_to' => 'O horário de fechamento deve ser maior que o de abertura.'])
+                ->withInput();
+        }
 
-        dd($request);
+        $days_open = implode(' - ', $request->days_open);
+
         $point = new CollectionPoint();
 
         $point->name = $request->input('name');
-        // format cep
         $point->cep = str_replace('-', '', $request->input('cep'));
+        $point->street = $request->street;
+        $point->neighborhood = $request->neighborhood;
+        $point->city = $request->city;
+        $point->state = $request->state;
+        $point->complement = $request->complement;
+
+
         $point->user_id = $request->input('user_id');
         $point->open_from = $request->input('open_from');
         $point->open_to = $request->input('open_to');
-        $point->days_open = $request->input('days_open');
+        $point->days_open = $days_open;
         $point->description = $request->input('description');
 
-        $categories_id = $request->input('categories_id');
-
-
+        $categories_id = $request->input('categories-id', []); // já é um array ou [] por padrão
+        
         try {
             $point->save();
 
             $point->categories()->sync($categories_id);
 
-            return response()->json(
-                [
-                    'message' => 'Ponto de coleta criado com sucesso',
-                    'info' => CollectionPoint::with(['categories', 'user'])->find($point->id)->toArray()
-                ],
-                201
-            );
+            return redirect()
+                ->route('home')
+                ->with('success', 'Ponto de coleta cadastrado com sucesso !');
         } catch (QueryException $e) {
             if ($e->getCode() === '23000') {
-                return response()->json(['message' => 'Já existe um ponto de coleta com estas informações'], 409);
+                return back() 
+                    ->withInput()
+                    ->with('error', 'Nome do ponto já cadastrado');
             }
-
-            return response()->json(['message' => 'Erro ao salvar registro no banco de dados', 'erro' => $e->getMessage()], 500);
+            return back()
+                ->withInput()
+                ->with('error', 'Houve um erro ao salvar as informações, aguarde alguns instantes e tente novamente');
         }
     }
 

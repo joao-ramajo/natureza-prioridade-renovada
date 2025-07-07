@@ -22,7 +22,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:60|min:1',
+            'name' => 'required|string|max:60|min:1|exists:collection_points,name',
+            'user_id' => 'required|integer|exists:users,id',
 
             // Se usar 'zip_code' em vez de 'cep'
             'cep' => [
@@ -38,18 +39,20 @@ class StoreRequest extends FormRequest
             'complement' => 'nullable|string|max:50',
             'neighborhood' => 'required|string|max:100',
             'city' => 'required|string|max:100',
-            'state' => 'required|string|',
+            'state' => 'required|string|size:2',
 
             // Categoria (assumindo relacionamento Many to Many)
-            'categories_id' => 'required|array',
-            'categories_id.*' => 'integer|exists:categories,id',
+            'categories-id' => 'required|array',
+            'categories-id.*' => 'integer|exists:categories,id',
+
+            // Dias abertos
+            'days_open' => 'required|array|',
+            'days_open.*' => 'string',
 
             // Horários
             'open_from' => 'required|date_format:H:i',
             'open_to' => 'required|date_format:H:i',
 
-            // Dias abertos
-            'days_open' => 'required|string|max:50',
 
             // Descrição
             'description' => 'nullable|string|max:200',

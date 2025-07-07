@@ -19,7 +19,7 @@ const viaCEP = async (cep) => {
         document.getElementById('city').value = data.localidade
         document.getElementById('complement').value = data.complemento
         document.getElementById('neighborhood').value = data.bairro
-        document.getElementById('state').value = data.estado
+        document.getElementById('state').value = data.uf
 
 
     } catch (err) {

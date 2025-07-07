@@ -2,58 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\StoreRequest;
 use App\Models\User;
+use App\Services\UserService;
 use Exception;
-use Illuminate\Suport\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected UserService $userService;
+
+    public function __construct(UserService $service)
     {
-        return response()->json(User::all()->toArray());
+        $this->userService = $service;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(StoreRequest $request, string $id): RedirectResponse
     {
-        //    FORTIFY RESPONSABILITY
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        return response()->json(User::findOrFail($id));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        // validate request
-        $request->validate(
-            [
-                'name' => 'required|string|max:60',
-                'email' => 'required|string|max:60|',
-            ]
-        );
 
         $id = Crypt::decrypt($id);
+        $user = $this->userService->findUserById($id);
 
-        $user = User::findOrFail($id);
-
-        $emailHasExists = User::where('email', $request->input('email'));
+        $emailHasExists = $this->userService->verifyIfEmailExists($request->input('email'));
 
         if ($emailHasExists) {
             return back()
@@ -76,13 +50,14 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
         try {
             $id = Crypt::decrypt($id);
 
 
-            $user = User::findOrFail($id);
+            // $user = User::findOrFail($id);
+            $user = $this->userService->findUserById($id);
             $user->delete();
 
             FacadesAuth::logout();

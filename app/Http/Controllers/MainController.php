@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\CollectionPoint;
 use App\Models\User;
 use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
@@ -40,8 +41,7 @@ class MainController extends Controller
     public function collectionPoint(): View
     {
 
-        $category = new CategoryController;
-        $categories = $category->index();
+        $categories = Category::all();
 
         return view('collectionPoint.index', ['categories' => $categories]);
     }
@@ -66,12 +66,11 @@ class MainController extends Controller
         }
     }
 
-    public function profile($id): View
+    public function profile($id): View | RedirectResponse
     {
         $id = Crypt::decrypt($id);
-        if (!$id == Auth::user()->id) {
-            back()
-                ->with('error', 'Conta não encontrada');
+        if ($id != Auth::user()->id) {
+            return back()->with('error', 'Conta não encontrada');
         }
 
         $user = Auth::user();

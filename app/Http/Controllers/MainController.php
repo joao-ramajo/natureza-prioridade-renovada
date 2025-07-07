@@ -56,8 +56,10 @@ class MainController extends Controller
         try {
             $id = Crypt::decrypt($id);
             $point = CollectionPoint::findOrFail($id);
+            $category = new CategoryController;
+            $categories = $category->index();
 
-            return view('collectionPoint.view', ['point' => $point]);
+            return view('collectionPoint.view', ['point' => $point, 'categories' => $categories]);
         } catch (Exception $e) {
             return back()
                 ->with('error', 'Não encontramos nenhuma informação');
@@ -70,7 +72,7 @@ class MainController extends Controller
         if (!$id == Auth::user()->id) {
             back()
                 ->with('error', 'Conta não encontrada');
-        }   
+        }
 
         $user = Auth::user();
 

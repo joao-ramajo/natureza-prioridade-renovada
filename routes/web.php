@@ -13,7 +13,7 @@ Route::get('/notes', function () {
 
 
 Route::middleware(['auth'])->group(function () {
-     Route::get('/', [MainController::class, 'index'])->name('home');
+     Route::redirect('/', '/home');
      Route::get('/home', [MainController::class, 'index'])->name('home');
      Route::get('/ponto-de-coleta/{id}', [MainController::class, 'view'])->name('collection_point.view');
 
@@ -27,11 +27,17 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // USER ACTIONS
-Route::prefix('user')->group(function(){
-     Route::middleware(['auth'])->group(function () {
-          Route::middleware(['verified', 'password.confirm'])->group(function () {
-               Route::put('/{id}', [UserController::class, 'update'])->name('user.update');
-               Route::delete('/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-          });
+Route::prefix('user')->group(function () {
+     Route::middleware(['auth', 'verified', 'password.confirm'])->group(function () {
+          Route::put('/{id}', [UserController::class, 'update'])->name('user.update');
+
+          Route::delete('/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+     });
+});
+
+Route::prefix('collection-point')->group(function () {
+     Route::middleware(['auth', 'verified'])->group(function () {
+          Route::put('/{id}', [CollectionPointController::class, 'update'])->name('collection_point.update');
+          // Route::put('/asdjasiodasdjoi', [CollectionPointController::class, 'update']);
      });
 });

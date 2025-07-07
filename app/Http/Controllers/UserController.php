@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-    //    FORTIFY RESPONSABILITY
+        //    FORTIFY RESPONSABILITY
     }
 
     /**
@@ -51,6 +51,15 @@ class UserController extends Controller
         $id = Crypt::decrypt($id);
 
         $user = User::findOrFail($id);
+
+        $emailHasExists = User::where('email', $request->input('email'));
+
+        if ($emailHasExists) {
+            return back()
+                ->with('error', 'Desculpe, este email não está dentro de nossas diretrizes');
+        } 
+
+    
         // update user data
         $user->email = $request->input('email');
         $user->name = $request->input('name');

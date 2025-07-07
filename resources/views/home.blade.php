@@ -3,7 +3,7 @@
 @section('content')
     <section id="collectionPoints" class="container py-5">
 
-        <x-alerts.alert />
+      
 
         <h2 class="mb-4 text-center">Pontos de Coleta</h2>
 

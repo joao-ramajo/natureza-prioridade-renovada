@@ -69,6 +69,12 @@
             <i class="bi bi-arrow-left-circle me-2"></i> Voltar à lista
         </a>
         @include('collectionPoint.modal.edit_modal')
+        <form action="{{ route('collection_point.destroy', ['id' => Crypt::encrypt($point->id)]) }}" method="POST">
+            @method('DELETE')
+            @csrf
+
+            <input type="submit" value="Apagar Ponto" class="btn btn-outline-danger">
+        </form>
 
     </div>
 @endsection

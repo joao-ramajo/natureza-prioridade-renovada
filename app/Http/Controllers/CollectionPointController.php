@@ -159,13 +159,15 @@ class CollectionPointController extends Controller
     public function destroy(string $id)
     {
         try {
+            $id = Crypt::decrypt($id);
             $point = CollectionPoint::findOrFail($id);
             $point->delete();
-            return response()->json(['message' => 'Ponto de coleta deletado com sucesso'], 200);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'O ponto de coleta não foi encontrado'], 404);
-        } catch (QueryException $e) {
-            return response()->json(['message' => 'Houve um erro ao apagar o registro'], 500);
+            return redirect()
+                ->route('home')
+                ->with('success', 'Registro apagado com sucesso');
+        } catch (Exception $e){
+            return back()
+                ->with('error', 'Erro ao apagar registro, tente novamente mais tarde');
         }
     }
 }

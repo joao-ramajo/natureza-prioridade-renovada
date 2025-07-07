@@ -38,6 +38,6 @@ Route::prefix('user')->group(function () {
 Route::prefix('collection-point')->group(function () {
      Route::middleware(['auth', 'verified'])->group(function () {
           Route::put('/{id}', [CollectionPointController::class, 'update'])->name('collection_point.update');
-          // Route::put('/asdjasiodasdjoi', [CollectionPointController::class, 'update']);
+          Route::delete('/{id}', [CollectionPointController::class, 'destroy'])->name('collection_point.destroy');
      });
 });

@@ -1,15 +1,15 @@
 @extends('layouts.main_layout')
 
 @section('content')
-<x-form.form method="POST" route="collection_point.store" title="Novo ponto de coleta" btnLabel="Cadastrar">
-        <x-alerts.alert/>
+    <x-form.form method="POST" route="collection_point.store" title="Novo ponto de coleta" btnLabel="Cadastrar">
+        <x-alerts.alert />
 
         <x-form.input-field label="" type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
-            
-            
-            {{-- address info --}}
-            <h5 class="mb-3">Informações do Endereço</h5>
-            <x-form.input-field label="Nome do Ponto" type="text" name="name" value="{{ old('name') }}" />
+
+
+        {{-- address info --}}
+        <h5 class="mb-3">Informações do Endereço</h5>
+        <x-form.input-field label="Nome do Ponto" type="text" name="name" value="{{ old('name') }}" />
         <div class="row mx-auto">
             <x-form.input-field label="cep" type="text" name="cep" value="{{ old('cep') }}"
                 rules=" required maxlength=9 " class="col col-6 px-0 pe-2" />
@@ -37,19 +37,9 @@
                 @foreach ($categories as $category)
                     <div class="col-md-4 mb-3">
                         <div class="form-check">
-                            <input 
-                                type="checkbox" 
-                                name="categories-id[]" 
-                                value="{{ $category->id }}"
-                                id="category-{{ $category->id }}" 
-                                class="form-check-input"
-                                
-                                  @if( is_array(old('categories-id')) && in_array($category->id, old('categories-id')) )
-                                   checked 
-                                   @else 
-                                     desgraça
-                                   @endif
-                                >
+                            <input type="checkbox" name="categories-id[]" value="{{ $category->id }}"
+                                id="category-{{ $category->id }}" class="form-check-input"
+                                @if (is_array(old('categories-id')) && in_array($category->id, old('categories-id'))) checked @endif>
                             <label for="category-{{ $category->id }}" class="form-check-label">
                                 {{ $category->name }}
                             </label>
@@ -77,18 +67,13 @@
 
             <h5>Dias da semana</h5>
             <div class="row">
-                @foreach($days as $abbr => $day)
+                @foreach ($days as $abbr => $day)
                     <div class="col col-md-4 mb-3">
                         <div class="form-check">
-                        <input
-                            type="checkbox"
-                            name="days_open[]"
-                            value="{{ $abbr }}"
-                            id="day_{{ strtolower($abbr) }}"
-                            class="form-check-input"
-                            @if( is_array(old('days_open')) && in_array($abbr, old('days_open')) ) checked @endif
-                        >
-                        <label for="day_{{ strtolower($abbr) }}" class="form-check-label">{{ $day }}</label>
+                            <input type="checkbox" name="days_open[]" value="{{ $abbr }}"
+                                id="day_{{ strtolower($abbr) }}" class="form-check-input"
+                                @if (is_array(old('days_open')) && in_array($abbr, old('days_open'))) checked @endif>
+                            <label for="day_{{ strtolower($abbr) }}" class="form-check-label">{{ $day }}</label>
                         </div>
                     </div>
                 @endforeach
@@ -111,7 +96,7 @@
             <div class="mb-3">
                 <div class="form-floating">
                     <textarea class="form-control" placeholder="Leave a comment here" id="description" name="description"
-                        style="height: 100px"></textarea>
+                        style="height: 100px">{{ old('description') }}</textarea>
                     <label for="floatingTextarea2">Descrição</label>
                 </div>
             </div>

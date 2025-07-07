@@ -1,10 +1,12 @@
-        <div class="mb-3 {{ $class }}">
-            <label for="{{ $name }}" class="form-label">
-                {{ $label }}
-            </label>
-            <input type="{{ $type }}" name="{{ $name }}" id="{{ $name }}" class="form-control "
-                value="{{ $value }}" {{ $rules }} >
+<div class="mb-3 {{ $class }}">
+    @if ($label)
+        <label for="{{ $name }}" class="form-label">{{ $label }}</label>
+    @endif
 
-             
+    <input type="{{ $type }}" name="{{ $name }}" id="{{ $name }}"
+        class="form-control @error($name) is-invalid @enderror" value="{{ old($name, $value) }}" {{ $rules }}>
 
-        </div>
+    @error($name)
+        <div class="invalid-feedback d-block">{{ $message }}</div>
+    @enderror
+</div>

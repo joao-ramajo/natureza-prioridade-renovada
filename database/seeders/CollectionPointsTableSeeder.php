@@ -41,7 +41,7 @@ class CollectionPointsTableSeeder extends Seeder
                 'neighborhood' => 'Liberdade',
                 'city' => 'São Paulo',
                 'state' => 'SP',
-                'user_id' => 1,
+                'user_id' => 2,
                 'open_from' => '09:00',
                 'open_to' => '19:00',
                 'days_open' => 'Seg - Sab',

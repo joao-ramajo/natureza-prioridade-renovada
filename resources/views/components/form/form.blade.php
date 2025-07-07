@@ -1,7 +1,12 @@
     <form action="{{ route($route) }}" method="{{ $method }}" class="w-50 mt-5 mx-auto">
         @csrf
 
-        <h2 class="text-center text-secondary"> <span class="text-success">NPR</span> | {{ $title }}</h2>
+        <h2 class="text-center text-secondary">
+            @if ($title)
+                <span class="text-success">NPR</span> | {{ $title }}
+            @endif
+
+        </h2>
 
         {{ $slot }}
 
@@ -9,7 +14,7 @@
 
 
         <hr>
-        @if ($errors->any())
+        {{-- @if ($errors->any())
             <div class="alert alert-danger">
                 @foreach ($errors->all() as $error)
                     <p class="mb-2">
@@ -17,6 +22,6 @@
                     </p>
                 @endforeach
             </div>
-        @endif
+        @endif --}}
 
     </form>

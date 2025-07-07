@@ -20,4 +20,10 @@ Route::middleware(['auth'])->group(function () {
           Route::get('/ponto-de-coleta', [MainController::class, 'collectionPoint'])->name('collection_point.index');
           Route::post('/ponto-de-coleta', [CollectionPointController::class, 'store'])->name('collection_point.store');
      });
+
+
+     // Route::middleware(['password.confirm'])->group(function() {
+     //      Route::get('/teste', function(){
+     //      });
+     // });
 });

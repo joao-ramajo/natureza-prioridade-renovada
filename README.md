@@ -10,6 +10,7 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 - [Operações de Usuário](#operações-das-entidades-do-sistema)
 - [Pontos de Coleta](#pontos-de-coleta)
 - [Níveis de Acesso](#níveis-de-acesso)
+- [Como Rodar o Projeto](#como-rodar-o-projeto-localmente)
 ---
 
 ### TECNOLOGIAS IMPLEMENTADAS
@@ -113,7 +114,7 @@ Após isso, o `array` de informações sobre os dias da semana que abre, será f
 O CEP irá ser formatado para remover a pontuação.
 
 Após isso é realizado o registro das informações no banco de dados na entidade `collection_points` e após isso com base nas informações das categorias será registrado na tabela pivô entre os pontos de coleta e as categorias suas respectivas categorias.
->⚠️ *Aviso sobre permissões* <br>
+>⚠️ *Aviso sobre permissões*
 >Somente usuários que validaram sua conta atrâves da verificação por email podem reaalizar realizar está tarefa 
 
 #### APAGAR PONTO DE COLETA
@@ -144,6 +145,61 @@ Apesar disso ele pode acessar o restante das opções do projeto como as página
 
 #### USUÁRIO VERIFICADO
 Após a validação do perfil atravês do link enviado para o *email* do usuário, ele terá total acesso às funcionalidades do projeto, podendo criar e editar novos pontos de coleta.
+
+--- 
+
+## COMO RODAR O PROJETO LOCALMENTE
+
+1. Clone o repositório
+```bash
+    git clone https://github.com/seu-usuario/npr.git
+    cd npr
+
+```
+
+Após isso use o comando `cd` para acessar a pasta do projeto
+
+2. Instale as dependências
+```bash
+    composer update
+```
+Com isso o *composer* irá carregar todos os arquivos necessários para o projeto funcionar
+
+3. Configure o arquivo de configurações `.env`
+```
+    cp .env.example .env
+    php artisan key:generate    
+```
+Altere as informações do `.env` com base nas informações de configurações do seu banco de dados para poder acessa-lo.
+
+4. Rode as migrações e seeders
+```bash
+    php artisan migrate --seed
+```
+Com este comando o artisan será encarregado de realizar a criaçao de todas as tabelas necessárias e junto do `--seed` irá criar alguns registros para poder testar as funcionalidades básicas
+
+5. Inicie o servidor local
+```bash
+    php artisan serve
+```
+
+Após estas etapas se tudo ocorrer bem, a aplicação estára disponível localmente atravês da rota `http://localhost:8000/`
+Se a porta `8000` estiver ocupada será informado uma nova rota para acesso.
+
+#### SEEDER
+
+Seguindo o passo 4 será inserido no banco de dados as seguintes informações
+
+- USUÁRIOS (2 registros)
+    Serão inseridos dois usuários base, um com todas as verificações e outro com a necessidade de validar o email
+
+| nome | email | senha | observação |
+|-------|------|------|-----|
+| Admin| admin@gmail.com | 123456| Acesso total a todas as funcionalidades |
+| John Doe | john_doe@gmail.com  | 123456 | Acesso restrito, necessário válidação do email |
+
+Também será criado as categorias base e alguns registros de pontos de coleta que serão renderizados na home page do projeto para visualização.
+        
 
 
 <!-- 

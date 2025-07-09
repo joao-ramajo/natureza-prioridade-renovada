@@ -6,19 +6,31 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Services\CategoryService;
 use App\Services\CollectionPointService;
+use App\Services\UserService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
 {
-    public function index(Request $request, CollectionPointService $collectionPointService, CategoryService $categoryService): View
-    {
-        $points = $collectionPointService->getAllWithSearchIndex($request);
 
-        $categories = $categoryService->getAllCategoriesWithPointExists();
+    protected CollectionPointService $collectionPointService;
+    protected UserService $userService;
+    protected CategoryService $categoryService;
+
+    public function __construct(CollectionPointService $cps, UserService $us, CategoryService $cs)
+    {
+        $this->collectionPointService = $cps;
+        $this->userService = $us;
+        $this->categoryService = $cs;
+    }
+
+    public function index(Request $request): View
+    {
+        $points = $this->collectionPointService->getAllWithSearchIndex($request);
+
+        $categories = $this->categoryService->getAllCategoriesWithPointExists();
 
         return view('home', [
             'points' => $points,
@@ -26,10 +38,10 @@ class MainController extends Controller
         ]);
     }
 
-    public function collectionPoint(CategoryService $service): View
+    public function collectionPoint(): View
     {
 
-        $categories = $service->getAllCategories();
+        $categories = $this->categoryService->getAllCategories();
 
         return view('collectionPoint.index', ['categories' => $categories]);
     }
@@ -39,23 +51,23 @@ class MainController extends Controller
         return view('map');
     }
 
-    public function view($id, CollectionPointService $collectionPointService, CategoryService $categoryService): View | RedirectResponse
+    public function view($id): View | RedirectResponse
     {
-
         $id = Crypt::decrypt($id);
-        $point = $collectionPointService->findCollectionPointById($id);
+        $point = $this->collectionPointService->findCollectionPointById($id);
         if (!$point) {
             return back()
                 ->with('error', 'Não encontramos nenhuma informação');
         }
-        $categories = $categoryService->getAllCategories();
+        $categories = $this->categoryService->getAllCategories();
         return view('collectionPoint.view', ['point' => $point, 'categories' => $categories]);
     }
 
     public function profile($id): View | RedirectResponse
     {
         $id = Crypt::decrypt($id);
-        if ($id != Auth::user()->id) {
+
+        if ($id === null || $id != Auth::user()->id) {
             return back()->with('error', 'Conta não encontrada');
         }
 

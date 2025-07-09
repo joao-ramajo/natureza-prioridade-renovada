@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\User;
-use Egulias\EmailValidator\Result\Reason\ExpectingCTEXT;
 use Exception;
 use Illuminate\Support\Facades\Log;
 

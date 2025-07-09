@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Services\CategoryService;
 use App\Services\CollectionPointService;
+use App\Services\Operations;
 use App\Services\UserService;
-use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
+
 
 class MainController extends Controller
 {
@@ -53,8 +53,16 @@ class MainController extends Controller
 
     public function view($id): View | RedirectResponse
     {
-        $id = Crypt::decrypt($id);
+        $id = Operations::decryptId($id);
+
+        if ($id === null || $id != Auth::user()->id) {
+            return back()
+                ->with('server_error', 'Desculpe houve um erro ao acessar está página');
+        }
+
+
         $point = $this->collectionPointService->findCollectionPointById($id);
+
         if (!$point) {
             return back()
                 ->with('error', 'Não encontramos nenhuma informação');
@@ -65,10 +73,12 @@ class MainController extends Controller
 
     public function profile($id): View | RedirectResponse
     {
-        $id = Crypt::decrypt($id);
+        $id = Operations::decryptId($id);
 
         if ($id === null || $id != Auth::user()->id) {
-            return back()->with('error', 'Conta não encontrada');
+            return redirect()
+                ->route('home')
+                ->with('server_error', 'Conta não encontrada');
         }
 
         $user = Auth::user();

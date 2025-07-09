@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\CollectionPoint;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CollectionPointService
 {
@@ -32,18 +34,23 @@ class CollectionPointService
 
     public function getAllWithSearchIndex(Request $request)
     {
-        $query = CollectionPoint::query();
+        try {
+            $query = CollectionPoint::query();
 
-        if ($request->filled('category')) {
-            $categoryId = $request->input('category');
+            if ($request->filled('category')) {
+                $categoryId = $request->input('category');
 
-            $query->whereHas('categories', function ($q) use ($categoryId) {
-                $q->where('categories.id', $categoryId);
-            });
+                $query->whereHas('categories', function ($q) use ($categoryId) {
+                    $q->where('categories.id', $categoryId);
+                });
+            }
+
+            $points = $query->paginate(10)->withQueryString();
+
+            return $points;
+        } catch (Exception $e) {
+            Log::channel('npr')->error("Erro ao buscar categorias para esquema de buscas", ['exception' => $e->getMessage()]);
+            
         }
-
-        $points = $query->paginate(10)->withQueryString();
-
-        return $points;
     }
 }

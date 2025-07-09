@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
 {
@@ -18,7 +19,6 @@ class MainController extends Controller
         $points = $collectionPointService->getAllWithSearchIndex($request);
 
         $categories = $categoryService->getAllCategoriesWithPointExists();
-
 
         return view('home', [
             'points' => $points,
@@ -45,9 +45,13 @@ class MainController extends Controller
             $id = Crypt::decrypt($id);
             $point = $collectionPointService->findCollectionPointById($id);
             $categories = $categoryService->getAllCategories();
-
             return view('collectionPoint.view', ['point' => $point, 'categories' => $categories]);
         } catch (Exception $e) {
+
+            Log::channel('npr')->error('Erro ao acessar página de ponto de coleta', [
+                'email' => Auth::user()->email,
+                'exception' => $e->getMessage(),
+            ]);
             return back()
                 ->with('error', 'Não encontramos nenhuma informação');
         }

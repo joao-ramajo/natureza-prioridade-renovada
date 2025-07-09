@@ -200,6 +200,57 @@ Seguindo o passo 4 será inserido no banco de dados as seguintes informações
 
 Também será criado as categorias base e alguns registros de pontos de coleta que serão renderizados na home page do projeto para visualização.
         
+---
+
+## ROTAS
+
+A seguir está as rotas disponiveis pelo projeto, para um melhor contexto aqui está uma breve explicação dos middlewares.
+
+auth: Usuários logados
+verified: Contas que válidas(validação via email)
+password.confirm: para acessar é necessário inserir a senha do usuário
+
+### ROTAS PÚBLICAS
+
+| Método | Rota    | Nome (alias) | Controller / Ação | Descrição                                     | Middlewares |
+|--------|---------|--------------|-------------------|-----------------------------------------------|-------------|
+| GET    | /       | –            | (Closure)         | Verifica conexão com o BD e redireciona login ou erro | Nenhum     |
+| GET    | /notes  | notes        | (Closure)         | Exibe view de notas                            | Nenhum     |
+
+
+### ROTAS AUTENTICADAS (auth)
+
+| Método | Rota                  | Nome (alias)             | Controller / Ação              | Descrição                                           | Middlewares          |
+|--------|-----------------------|--------------------------|-------------------------------|-----------------------------------------------------|----------------------|
+| GET    | /home                 | home                     | MainController@index           | Página inicial do sistema após login                | auth                 |
+| GET    | /ponto-de-coleta/{id} | collection_point.view    | MainController@view            | Exibe detalhes de um ponto de coleta específico     | auth                 |
+| GET    | /perfil/{id}          | user.profile             | MainController@profile         | Exibe perfil do usuário                              | auth                 |
+
+### ROTAS AUTENTICADAS E VERIFICADAS (auth + verified)
+
+| Método | Rota                | Nome (alias)           | Controller / Ação               | Descrição                                         | Middlewares          |
+|--------|---------------------|------------------------|-------------------------------|---------------------------------------------------|----------------------|
+| GET    | /ponto-de-coleta    | collection_point.index | MainController@collectionPoint | Lista todos os pontos de coleta                    | auth, verified       |
+| GET    | /mapa               | map                    | MainController@map             | Exibe mapa com pontos de coleta                    | auth, verified       |
+| POST   | /ponto-de-coleta    | collection_point.store | CollectionPointController@store | Cadastra um novo ponto de coleta                   | auth, verified       |
+
+
+### ROTAS DE AÇÃO DO USUÁRIO (auth + verified + password.confirm)
+
+| Método | Rota                  | Nome (alias)           | Controller / Ação               | Descrição                                          | Middlewares                    |
+|--------|-----------------------|------------------------|-------------------------------|----------------------------------------------------|-------------------------------|
+| PUT    | /user/{id}            | user.update            | UserController@update          | Atualiza dados do usuário                           | auth, verified, password.confirm |
+| DELETE | /user/{id}            | user.destroy           | UserController@destroy         | Apaga conta do usuário                              | auth, verified, password.confirm |
+
+
+### ROTAS DE AÇÃO DOS PONTOS DE COLETA (auth + verified + password.confirm)
+
+| Método | Rota                  | Nome (alias)             | Controller / Ação               | Descrição                                          | Middlewares                    |
+|--------|-----------------------|--------------------------|-------------------------------|----------------------------------------------------|-------------------------------|
+| PUT    | /ponto-de-coleta/{id} | collection_point.update  | CollectionPointController@update | Atualiza dados de ponto de coleta                   | auth, verified, password.confirm |
+| DELETE | /ponto-de-coleta/{id} | collection_point.destroy | CollectionPointController@destroy | Remove ponto de coleta                              | auth, verified, password.confirm |
+
+---
 
 
 <!-- 

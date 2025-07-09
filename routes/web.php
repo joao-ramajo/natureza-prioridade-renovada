@@ -6,16 +6,6 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-// routes/web.php
-Route::middleware(['db-safe'])->get('/teste-conexao', function () {
-     return 'Conexão com banco ativa';
-});
-
-Route::get('/sem-banco', function () {
-     return 'Essa rota não depende de banco de dados';
-});
-
-
 Route::get('/notes', function () {
      return view('notes');
 })->name('notes');

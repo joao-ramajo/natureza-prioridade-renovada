@@ -38,7 +38,7 @@ O usuário preenche um formulário com suas informações(nome, email, senha) e 
 
 O **Fortify** valida as  informações e registra o usuário caso esteja com as informações corretas e assim cria um novo usuário, após isso o usuário é redirecionado para a página de login.
 
-Após a criação do usuário o sistema 2 *emails* sendo um referente a válidação da conta e outro com uma mensagem personalizada de boas vindas.
+Após a criação do usuário o sistema 2 *emails* sendo um referente a validação da conta e outro com uma mensagem personalizada de boas vindas.
 
 > ⚠️*Aviso* 
 >o usuário ainda poderá acessar alguns recursos do sistema sem essa validação mas outros recursos como a criação de novos pontos de coleta é permitida somente para *Usuários Verificados*.
@@ -53,7 +53,7 @@ O usuário preenche as informações para login(email, senha) e faz o envio.
 
 Novamente o **Fortify** válida as informações assim realizando o login ou retornando o usuário para a página de login com mais informações.
 
-Após logado, o usuário tem acesso a novas funcionalidades como a criação de um novo ponto de coleta.
+Após logado, o usuário tem acesso a novas funcionalidades como a criação de um novo Ponto de Coleta.
 
 #### LOGOUT - `Fortify`  
 O logout é realizado atrâves de um botão encontrado no *header*  da aplicação.
@@ -86,10 +86,10 @@ Acessando a home é carregado as informações dos pontos de coletas registrados
 
 Ao clicar em qualquer card sobre um ponto, o usuário é redirecionado para uma página com mais detalhes e informações sobre o ponto.
 
-#### CADASTRAR UM NOVO PONTO DE COLETA
-Para cadastrar um novo ponto de coleta, é realizar o preenchimento do formulário com as seguintes informações
+#### CADASTRAR UM NOVO Ponto de Coleta
+Para cadastrar um novo Ponto de Coleta, é realizar o preenchimento do formulário com as seguintes informações
 
-- Nome do ponto de coleta
+- Nome do Ponto de Coleta
 - Cep
 - Estado
 - Cidade 
@@ -128,15 +128,15 @@ Caso aconteça algum erro ou não encontre as informações, o usuário será in
 >⚠️ *Aviso sobre permissões*
 >Somente usuários que validaram sua conta atrâves da verificação por email podem reaalizar realizar esta tarefa 
 
-#### APAGAR PONTO DE COLETA
-Para apagar um ponto de coleta o usuário deve estar na página de visualização do ponto e deve ser o **mesmo usuário que cadastrou o ponto de coleta**, caso contrário nenhuma opção sera mostrada.
+#### APAGAR Ponto de Coleta
+Para apagar um Ponto de Coleta o usuário deve estar na página de visualização do ponto e deve ser o **mesmo usuário que cadastrou o Ponto de Coleta**, caso contrário nenhuma opção sera mostrada.
 
-O mesmo se aplica a questão de *Editar* as informações do ponto de coleta
+O mesmo se aplica a questão de *Editar* as informações do Ponto de Coleta
 
-#### EDITAR INFORMAÇÕES DO PONTO DE COLETA
-A alteração de informações de um ponto de coleta esta disponivel a partir de um modal com um formulário com as informações atuais do ponto de coleta, onde **somente o usuário que registrou o ponto de coleta** terá acesso a estas informações e funcionalidades.
+#### EDITAR INFORMAÇÕES DO Ponto de Coleta
+A alteração de informações de um Ponto de Coleta esta disponivel a partir de um modal com um formulário com as informações atuais do Ponto de Coleta, onde **somente o usuário que registrou o Ponto de Coleta** terá acesso a estas informações e funcionalidades.
 
-O mesmo se aplica a questão de *Apagar* um ponto de coleta do banco de dados.
+O mesmo se aplica a questão de *Apagar* um Ponto de Coleta do banco de dados.
 
 ---
 ## NÍVEIS DE ACESSO
@@ -206,7 +206,7 @@ Seguindo o passo 4 será inserido no banco de dados as seguintes informações
 | nome | email | senha | observação |
 |-------|------|------|-----|
 | Admin| admin@gmail.com | 123456| Acesso total a todas as funcionalidades |
-| John Doe | john_doe@gmail.com  | 123456 | Acesso restrito, necessário válidação do email |
+| John Doe | john_doe@gmail.com  | 123456 | Acesso restrito, necessário validação do email |
 
 Também será criado as categorias base e alguns registros de pontos de coleta que serão renderizados na home page do projeto para visualização.
         
@@ -233,7 +233,7 @@ password.confirm: para acessar é necessário inserir a senha do usuário
 | Método | Rota                  | Nome (alias)             | Controller / Ação              | Descrição                                           | Middlewares          |
 |--------|-----------------------|--------------------------|-------------------------------|-----------------------------------------------------|----------------------|
 | GET    | /home                 | home                     | MainController@index           | Página inicial do sistema após login                | auth                 |
-| GET    | /ponto-de-coleta/{id} | collection_point.view    | MainController@view            | Exibe detalhes de um ponto de coleta específico     | auth                 |
+| GET    | /ponto-de-coleta/{id} | collection_point.view    | MainController@view            | Exibe detalhes de um Ponto de Coleta específico     | auth                 |
 | GET    | /perfil/{id}          | user.profile             | MainController@profile         | Exibe perfil do usuário                              | auth                 |
 
 ### ROTAS AUTENTICADAS E VERIFICADAS (auth + verified)
@@ -242,7 +242,7 @@ password.confirm: para acessar é necessário inserir a senha do usuário
 |--------|---------------------|------------------------|-------------------------------|---------------------------------------------------|----------------------|
 | GET    | /ponto-de-coleta    | collection_point.index | MainController@collectionPoint | Lista todos os pontos de coleta                    | auth, verified       |
 | GET    | /mapa               | map                    | MainController@map             | Exibe mapa com pontos de coleta                    | auth, verified       |
-| POST   | /ponto-de-coleta    | collection_point.store | CollectionPointController@store | Cadastra um novo ponto de coleta                   | auth, verified       |
+| POST   | /ponto-de-coleta    | collection_point.store | CollectionPointController@store | Cadastra um novo Ponto de Coleta                   | auth, verified       |
 
 
 ### ROTAS DE AÇÃO DO USUÁRIO (auth + verified + password.confirm)
@@ -257,8 +257,8 @@ password.confirm: para acessar é necessário inserir a senha do usuário
 
 | Método | Rota                  | Nome (alias)             | Controller / Ação               | Descrição                                          | Middlewares                    |
 |--------|-----------------------|--------------------------|-------------------------------|----------------------------------------------------|-------------------------------|
-| PUT    | /ponto-de-coleta/{id} | collection_point.update  | CollectionPointController@update | Atualiza dados de ponto de coleta                   | auth, verified, password.confirm |
-| DELETE | /ponto-de-coleta/{id} | collection_point.destroy | CollectionPointController@destroy | Remove ponto de coleta                              | auth, verified, password.confirm |
+| PUT    | /ponto-de-coleta/{id} | collection_point.update  | CollectionPointController@update | Atualiza dados de Ponto de Coleta                   | auth, verified, password.confirm |
+| DELETE | /ponto-de-coleta/{id} | collection_point.destroy | CollectionPointController@destroy | Remove Ponto de Coleta                              | auth, verified, password.confirm |
 
 ---
 
@@ -287,6 +287,9 @@ Ao ser lançado uma exceção do tipo `QueryException` será interpretada como u
 Caso aconteça de o envio de email também falhar, é logado junto do erro crítico uma mensagem informando que o email não foi enviado.
 
 Se não acontecer e ocorrer tudo bem também é guardado uma mensagem informando que o email foi enviado com sucesso.
+
+> ⚠️*Sobre o envio de email*
+> Para o desenvolvimento local, o driver do envio de emails guarda os emails apenas em logs em `laravel.log`
 
 ## ENTIDADES E BANCO DE DADOS
 O uso de um banco de dados relacional como o *MySQL* parece uma escolha certa quando vou pensar no escopo do projeto, estrutura de dados fixos e relacionamentos entre entidades trazem muitos benefícios com a estrutura do projeto, a partir do momento em que as informações que vão ser utilizadas são fixas e possuem relacionamentos com um certo nivel de complexidade.
@@ -357,7 +360,7 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 | Campo                 | Tipo                    | Observações                                                   |
 | --------------------- | ----------------------- | ------------------------------------------------------------- |
 | id                    | bigint (auto-increment) | Chave primária                                                   |
-| collection\_point\_id | foreignId               | ID do ponto de coleta |
+| collection\_point\_id | foreignId               | ID do Ponto de Coleta |
 | category\_id          | foreignId               | ID da categoria        |
 
 ###### RELACIONAMENTOS
@@ -366,12 +369,12 @@ Explicação sobre os relacionamentos entre as tabelas
 *users 1 ------ n collection_points*
 *(OneToMany)*
 
-Relacionamento de um para muitos, um usuário pode ter vários pontos de coleta registrados, e um ponto de coleta tem apenas um usuário como "dono".
+Relacionamento de um para muitos, um usuário pode ter vários pontos de coleta registrados, e um Ponto de Coleta tem apenas um usuário como "dono".
 
 *collection_points n ------ n categories* 
 *(ManyToMany)*
 
-Relacionamento muitos para muitos, onde um ponto de coleta pode estar relacionado a diversas categorias, e uma categoria pode estar ligada com vários pontos de coleta. 
+Relacionamento muitos para muitos, onde um Ponto de Coleta pode estar relacionado a diversas categorias, e uma categoria pode estar ligada com vários pontos de coleta. 
 
 Neste caso foi necessário a criação de uma tabela pivô para o gerenciamento entre este relacionamento. 
 

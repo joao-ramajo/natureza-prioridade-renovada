@@ -4,13 +4,14 @@
 Este projeto é uma aplicação web com foco no auxílio as questões ambienteis, com o objetivo de facilitar o compartilhamento de informações até a localização sobre pontos de coleta de diversos tipos de materiais. 
 
 Acredito que seja um bom projeto para implementar e aprofundar meus conhecimentos no **Laravel** de maneira a testar meu conhecimento nas suas funcionalidades essenciais e recursos extras.
-## 📑 Sumário
+## SUMÁRIO
 
 - [Tecnologias](#tecnologias-implementadas)
 - [Operações de Usuário](#operações-das-entidades-do-sistema)
 - [Pontos de Coleta](#pontos-de-coleta)
 - [Níveis de Acesso](#níveis-de-acesso)
 - [Como Rodar o Projeto](#como-rodar-o-projeto-localmente)
+- [Rotas](#rotas)
 ---
 
 ### TECNOLOGIAS IMPLEMENTADAS
@@ -106,6 +107,9 @@ Apesar de extensas, acredito serem informações importantes para o registro de 
 Após preencher e realizar o envio, o sistema irá validar as informações usando a classe `Requests/CollectionPoint/StoreRequest` para realizar a verificação dos campos com base em regras especificas para cada campo, caso não tenha problemas seguira o fluxo até o `CollectionPointController` para realizar a inserção no banco de dados.
 
 Neste ponto, será válidade primeiro se os hórarios de funcionamento são coerentes, evitando assim que um horário de abertura seja maior que o hórario de fechamento 
+
+**Integração com a *api* da [ViaCEP](https://viacep.com.br/)**
+O uso da api é feito a partir de uma requisição *fetch* em javascript que se encontrar resultados válidos irá substituir os campos rua, bairro, cidade e estado, automaticamente, facilitando assim o preenchimento das informações.
 
 **Exemplo:** Se o local abre as 12:00 e fecha as 06:00 não será uma informação válida para o sistema e irá retornar para a página de cadastro com um aviso.
 

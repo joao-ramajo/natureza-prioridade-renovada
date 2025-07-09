@@ -290,11 +290,11 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 | id                           | bigint (auto-increment) | Chave primária                      |
 | name                         | string(100)             | –                                |
 | email                        | string(100)             | Valor único                         |
-| email\_verified\_at          | timestamp               | opacional                       |
+| email\_verified\_at          | timestamp               | opcional                       |
 | password                     | string(200)             | –                                |
-| two\_factor\_secret          | text                    | opacional                       |
-| two\_factor\_recovery\_codes | text                    | opacional                       |
-| two\_factor\_confirmed\_at   | timestamp               | opacional                       |
+| two\_factor\_secret          | text                    | opcional                       |
+| two\_factor\_recovery\_codes | text                    | opcional                       |
+| two\_factor\_confirmed\_at   | timestamp               | opcional                       |
 | remember\_token              | string (100)            | Token de sessão automática       |
 | created\_at                  | timestamp               |            |
 | updated\_at                  | timestamp               | –                                |
@@ -306,7 +306,7 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 | ----------- | --------- | ------------- |
 | email       | string    | Chave primária |
 | token       | string    | –             |
-| created\_at | timestamp | opacional    |
+| created\_at | timestamp | opcional    |
 
 3. Tabela `categories` (Categorias)
 
@@ -325,17 +325,17 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 | score        | integer                 |                                       |
 | user\_id     | foreignId               | ID do usuário que registrou |
 | street       | string                  | –                                                 |
-| number       | string                  | opacional                                        |
-| complement   | string                  | opacional                                        |
+| number       | string                  | opcional                                        |
+| complement   | string                  | opcional                                        |
 | neighborhood | string                  | –                                                 |
 | city         | string                  | –                                                 |
 | state        | string(2)               | –                                                 |
-| latitude     | decimal(10, 7)          | opacional                                        |
-| longitude    | decimal(10, 7)          | opacional                                        |
+| latitude     | decimal(10, 7)          | opcional                                        |
+| longitude    | decimal(10, 7)          | opcional                                        |
 | open\_from   | time                    | Horário de abertura                               |
 | open\_to     | time                    | Horário de fechamento                             |
 | days\_open   | string                  | Dias de funcionamento (ex: seg-sex)               |
-| description  | text                    | opacional                                        |
+| description  | text                    | opcional                                        |
 | created\_at  | timestamp               |                                     |
 | updated\_at  | timestamp               | –                                                 |
 | deleted\_at  | timestamp               |                   |

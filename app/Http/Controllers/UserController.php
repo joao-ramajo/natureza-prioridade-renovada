@@ -27,10 +27,27 @@ class UserController extends Controller
         $id = Crypt::decrypt($id);
         $user = $this->userService->findUserById($id);
 
+        if(!$user){
+            return back()
+                ->with('error', 'Desculpe houve um erro ao atualizar suas informações, tente novamente ou entre em contato com o suporte');
+        }
+
         $emailHasExists = $this->userService->verifyIfEmailExists($request->input('email'));
+
+
+        if(empty($emailHasExists)){
+            return back()
+                ->with('server_error', 'Desculpe, não foi possivel fazer está operação, nenhuma alteração realizada.');
+        }
+       
 
         if ($emailHasExists) {
             $email_user = $this->userService->findUserByEmail($request->input('email'));
+
+            if(empty($email_user)){
+                return back()
+                    ->with('error', 'Desculpe, este email não está dentro de nossas diretrizes de nossas permissões'); 
+            }
             if ($email_user->id != $id) {
                 return back()
                     ->with('error', 'Desculpe, este email não está dentro de nossas diretrizes'); 

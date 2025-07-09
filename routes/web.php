@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
 
      Route::get('/home', [MainController::class, 'index'])->name('home');
      Route::get('/ponto-de-coleta/{id}', [MainController::class, 'view'])->name('collection_point.view');
-
+     
      Route::middleware(['verified'])->group(function () {
           Route::get('/ponto-de-coleta', [MainController::class, 'collectionPoint'])->name('collection_point.index');
           Route::get('/mapa', [MainController::class, 'map'])->name('map');

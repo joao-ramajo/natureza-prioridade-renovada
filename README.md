@@ -108,9 +108,6 @@ Após preencher e realizar o envio, o sistema irá validar as informações usan
 
 Neste ponto, será válidade primeiro se os hórarios de funcionamento são coerentes, evitando assim que um horário de abertura seja maior que o hórario de fechamento 
 
-**Integração com a *api* da [ViaCEP](https://viacep.com.br/)**
-O uso da api é feito a partir de uma requisição *fetch* em javascript que se encontrar resultados válidos irá substituir os campos rua, bairro, cidade e estado, automaticamente, facilitando assim o preenchimento das informações.
-
 **Exemplo:** Se o local abre as 12:00 e fecha as 06:00 não será uma informação válida para o sistema e irá retornar para a página de cadastro com um aviso.
 
 Após isso, o `array` de informações sobre os dias da semana que abre, será formatado como string.
@@ -118,6 +115,13 @@ Após isso, o `array` de informações sobre os dias da semana que abre, será f
 O CEP irá ser formatado para remover a pontuação.
 
 Após isso é realizado o registro das informações no banco de dados na entidade `collection_points` e após isso com base nas informações das categorias será registrado na tabela pivô entre os pontos de coleta e as categorias suas respectivas categorias.
+
+**Integração com a *api* da [ViaCEP](https://viacep.com.br/)**
+O uso da api é feito a partir de uma requisição *fetch* em javascript que se encontrar resultados válidos irá substituir os campos rua, bairro, cidade e estado, automaticamente, facilitando assim o preenchimento das informações.
+
+A requisição acontece apartir de uma chamada de função assíncrona que espera uma resposta *json* com as informações de endereço.
+
+Caso aconteça algum erro ou não encontre as informações, o usuário será informado que deve verificar o cep ou preencher as informações a mão caso tenha certeza.   
 >⚠️ *Aviso sobre permissões*
 >Somente usuários que validaram sua conta atrâves da verificação por email podem reaalizar realizar está tarefa 
 
@@ -158,7 +162,6 @@ Após a validação do perfil atravês do link enviado para o *email* do usuári
 ```bash
     git clone https://github.com/seu-usuario/npr.git
     cd npr
-
 ```
 
 Após isso use o comando `cd` para acessar a pasta do projeto

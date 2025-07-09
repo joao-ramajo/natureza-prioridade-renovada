@@ -271,6 +271,23 @@ Para isso, em métodos que podem lançar exceções (principalmente uso de Model
 
 Para garantir o fluxo de informações, acabei por criar uma camada de Service da qual sempre irá logar tanto o erro quanto o envio do email se foi enviado com sucesso ou caso tenha dado algum problema. Em ambos os casos o `Log` acontece ao mesmo tempo. 
 
+###### TRATAMENTO DE EXCEÇÔES
+Um dos pontos essenciais para que um projeto não tenha encerramentos repentinos em seu fluxo, é o tratamento de exceções durante o desenvolvimento.
+
+Com o uso de blocos `try-catch` em operações que podem lidar com exceções como o uso de pacotes, comunicação com serviços externos e comunicação com o banco de dados, a ocorrência de erros não cause quebras no sistema, apenas retorna para o usuário mensagens genéricas e retorno para páginas anteriores. 
+
+Enquanto isso os erros são guardados em arquivos de logs usando um canal personalizado para o projeto.
+
+Para erros críticos em funcionalidades essenciais como um erro de conexão de banco de dados, além deo `Log` implementei um handler com o envio de email para no momento em que algum problema acontecer o tempo de reação seja o rápido possível.
+
+###### COMO FUNCIONA ? 
+
+Ao ser lançado uma exceção do tipo `QueryException` será interpretada como um erro de conexão com o banco de dados que deve ser verificado o quanto antes, com isso é chamado a `Facade` de envio de emails do laravel, executa o envio de email. 
+
+Caso aconteça de o envio de email também falhar, é logado junto do erro crítico uma mensagem informando que o email não foi enviado.
+
+Se não acontecer e ocorrer tudo bem também é guardado uma mensagem informando que o email foi enviado com sucesso.
+
 ## ENTIDADES E BANCO DE DADOS
 O uso de um banco de dados relacional como o *MySQL* parece uma escolha certa quando vou pensar no escopo do projeto, estrutura de dados fixos e relacionamentos entre entidades trazem muitos benefícios com a estrutura do projeto, a partir do momento em que as informações que vão ser utilizadas são fixas e possuem relacionamentos com um certo nivel de complexidade.
 
@@ -351,12 +368,12 @@ Explicação sobre os relacionamentos entre as tabelas
 
 Relacionamento de um para muitos, um usuário pode ter vários pontos de coleta registrados, e um ponto de coleta tem apenas um usuário como "dono".
 
-*collection_points n ------ n catetegories* 
+*collection_points n ------ n categories* 
 *(ManyToMany)*
 
 Relacionamento muitos para muitos, onde um ponto de coleta pode estar relacionado a diversas categorias, e uma categoria pode estar ligada com vários pontos de coleta. 
 
-Neste caso foi necessário a criação de uma tabela pivô para o gerenciamento entre este relacionamneto 
+Neste caso foi necessário a criação de uma tabela pivô para o gerenciamento entre este relacionamento. 
 
 
 <!-- 

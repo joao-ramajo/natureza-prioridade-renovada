@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\StoreRequest;
-use App\Models\User;
 use App\Services\Operations;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth ;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -72,7 +69,7 @@ class UserController extends Controller
                 ->with('error_server', 'Aconteceu algo inesperado ao tentar atualizar as informações, tente novamente mais tarde');
         }
 
-        FacadesAuth::setUser($user);
+        Auth::setUser($user);
 
         return back()
             ->with('success', 'Dados alterados com sucesso');
@@ -95,7 +92,7 @@ class UserController extends Controller
             $user = $this->userService->findUserById($id);
             $user->delete();
 
-            FacadesAuth::logout();
+            Auth::logout();
             session()->invalidate();
             session()->regenerateToken();
 

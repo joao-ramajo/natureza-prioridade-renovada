@@ -30,10 +30,12 @@ class UserController extends Controller
         $emailHasExists = $this->userService->verifyIfEmailExists($request->input('email'));
 
         if ($emailHasExists) {
-            return back()
-                ->with('error', 'Desculpe, este email não está dentro de nossas diretrizes');
+            $email_user = $this->userService->findUserByEmail($request->input('email'));
+            if ($email_user->id != $id) {
+                return back()
+                    ->with('error', 'Desculpe, este email não está dentro de nossas diretrizes'); 
+            } 
         }
-
 
         // update user data
         $user->email = $request->input('email');

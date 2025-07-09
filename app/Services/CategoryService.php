@@ -17,7 +17,7 @@ class CategoryService
             return Category::has('collectionPoints')->get();
         } catch (Exception $e) {
             Log::channel('npr')->error('Erro ao buscar pontos de coleta e categorias', ['exception' => $e->getMessage()]);
-            return collect();
+            return new Collection();
         }
     }
 
@@ -27,7 +27,8 @@ class CategoryService
             return Category::all();
         } catch (Exception $e) {
             Log::channel('npr')->error('Erro ao buscar categorias', ['exception' => $e->getMessage()]);
-            return collect();
+            session()->flash('server_error', 'Erro ao buscar categorias, por favor tente novamente mais tarde');
+            return new Collection();
         }
     }
 }

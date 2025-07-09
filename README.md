@@ -12,6 +12,8 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 - [Níveis de Acesso](#níveis-de-acesso)
 - [Como Rodar o Projeto](#como-rodar-o-projeto-localmente)
 - [Rotas](#rotas)
+- [Observabilidade](#observabilidade)
+- [Entidades e Banco e Dados](#entidades-e-banco-de-dados)
 ---
 
 ### TECNOLOGIAS IMPLEMENTADAS
@@ -41,9 +43,9 @@ Após a criação do usuário o sistema 2 *emails* sendo um referente a válida�
 >o usuário ainda poderá acessar alguns recursos do sistema sem essa validação mas outros recursos como a criação de novos pontos de coleta é permitida somente para *Usuários Verificados*.
 
 #### APAGAR CONTA
-Está opção está disponível na página de perfil do usuário, onde será encontrada em um botão cuja rota seguira para as operações necessárias para apagar a conta.
+Eesta opção eesta disponível na página de perfil do usuário, onde será encontrada em um botão cuja rota seguira para as operações necessárias para apagar a conta.
 
-A operação está protegida por um *middleware* que solicita a senha atual do perfil para garantir que seja uma operação válida.
+A operação eesta protegida por um *middleware* que solicita a senha atual do perfil para garantir que seja uma operação válida.
  
 #### LOGIN - `Fortify`
 O usuário preenche as informações para login(email, senha) e faz o envio.
@@ -123,7 +125,7 @@ A requisição acontece apartir de uma chamada de função assíncrona que esper
 
 Caso aconteça algum erro ou não encontre as informações, o usuário será informado que deve verificar o cep ou preencher as informações a mão caso tenha certeza.   
 >⚠️ *Aviso sobre permissões*
->Somente usuários que validaram sua conta atrâves da verificação por email podem reaalizar realizar está tarefa 
+>Somente usuários que validaram sua conta atrâves da verificação por email podem reaalizar realizar eesta tarefa 
 
 #### APAGAR PONTO DE COLETA
 Para apagar um ponto de coleta o usuário deve estar na página de visualização do ponto e deve ser o **mesmo usuário que cadastrou o ponto de coleta**, caso contrário nenhuma opção sera mostrada.
@@ -131,13 +133,13 @@ Para apagar um ponto de coleta o usuário deve estar na página de visualizaçã
 O mesmo se aplica a questão de *Editar* as informações do ponto de coleta
 
 #### EDITAR INFORMAÇÕES DO PONTO DE COLETA
-A alteração de informações de um ponto de coleta está disponivel a partir de um modal com um formúlario com as informações atuais do ponto de coleta, onde **somente o usuário que registrou o ponto de coleta** terá acesso a estas informações e funcionalidades.
+A alteração de informações de um ponto de coleta eesta disponivel a partir de um modal com um formúlario com as informações atuais do ponto de coleta, onde **somente o usuário que registrou o ponto de coleta** terá acesso a estas informações e funcionalidades.
 
 O mesmo se aplica a questão de *Apagar* um ponto de coleta do banco de dados.
 
 ---
 ## NÍVEIS DE ACESSO
-O projeto está disponivel a partir de 3 níveis de acesso, sendo eles:
+O projeto eesta disponivel a partir de 3 níveis de acesso, sendo eles:
  *guest*, *usuário* e *usuário verificado* 
 
 #### GUEST
@@ -190,7 +192,7 @@ Com este comando o artisan será encarregado de realizar a criaçao de todas as 
     php artisan serve
 ```
 
-Após estas etapas se tudo ocorrer bem, a aplicação estára disponível localmente atravês da rota `http://localhost:8000/`
+Após estas etapas se tudo ocorrer bem, a aplicação eestara disponível localmente atravês da rota `http://localhost:8000/`
 Se a porta `8000` estiver ocupada será informado uma nova rota para acesso.
 
 #### SEEDER
@@ -211,7 +213,7 @@ Também será criado as categorias base e alguns registros de pontos de coleta q
 
 ## ROTAS
 
-A seguir está as rotas disponiveis pelo projeto, para um melhor contexto aqui está uma breve explicação dos middlewares.
+A seguir eesta as rotas disponiveis pelo projeto, para um melhor contexto aqui eesta uma breve explicação dos middlewares.
 
 auth: Usuários logados
 verified: Contas que válidas(validação via email)
@@ -258,6 +260,95 @@ password.confirm: para acessar é necessário inserir a senha do usuário
 | DELETE | /ponto-de-coleta/{id} | collection_point.destroy | CollectionPointController@destroy | Remove ponto de coleta                              | auth, verified, password.confirm |
 
 ---
+
+## OBSERVABILIDADE
+Com o crescimento do projeto e aumento de métodos que podem lançar exceções, é necessário pensar em implementar soluções para se preparar e entender que problemas estão acontecendo no código sem que isso fique exposto para os usuários. 
+
+Imagine que deu um erro em uma chamada interna de serviços e que a mensagem de erro traga alguma informação sensível sobre o sistema, seria um erro terrível de observabilidade e arquitetura do sistema.
+
+Para isso, em métodos que podem lançar exceções (principalmente uso de Models) foi implementado um *handler* para fazer o `Log` dos erros e mensagens genéricas para o usuário, e junto disso um envio automático de um *email* onde hipoteticamente iria para o responsável do sistema(no caso eu) as informações do erro.
+
+Para garantir o fluxo de informações, acabei por criar uma camada de Service da qual sempre irá logar tanto o erro quanto o envio do email se foi enviado com sucesso ou caso tenha dado algum problema. Em ambos os casos o `Log` acontece ao mesmo tempo. 
+
+## ENTIDADES E BANCO DE DADOS
+O uso de um banco de dados relacional como o *MySQL* parece uma escolha certa quando vou pensar no escopo do projeto, estrutura de dados fixos e relacionamentos entre entidades trazem muitos benefícios com a estrutura do projeto, a partir do momento em que as informações que vão ser utilizadas são fixas e possuem relacionamentos com um certo nivel de complexidade.
+
+Um usuário pode criar muitos pontos de coleta, ao mesmo tempo, um ponto de coleta pertence a apenas um usuário. 
+Relacionamento: *(OneToMany)*
+
+Atravês de uma tabela pivô vários pontos de coleta podem ter várias categorias, podendo assim possuir multíplos relacionamentos. 
+Relacionamneto: *(ManyToMany)*
+
+Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, seja por estrutura ou por escalabilidade.
+
+#### ESTRUTURA DAS TABELAS
+
+1. Tabela `users` (Usuários)
+
+| Campo                        | Tipo                    | Observações                      |
+| ---------------------------- | ----------------------- | -------------------------------- |
+| id                           | bigint (auto-increment) | Primary key                      |
+| name                         | string(100)             | –                                |
+| email                        | string(100)             | `unique`                         |
+| email\_verified\_at          | timestamp               | `nullable`                       |
+| password                     | string(200)             | –                                |
+| two\_factor\_secret          | text                    | `nullable`                       |
+| two\_factor\_recovery\_codes | text                    | `nullable`                       |
+| two\_factor\_confirmed\_at   | timestamp               | `nullable`                       |
+| remember\_token              | string (100)            | Token de sessão automática       |
+| created\_at                  | timestamp               | `timestamps()` Laravel           |
+| updated\_at                  | timestamp               | –                                |
+| deleted\_at                  | timestamp               | `softDeletes()` – remoção lógica |
+
+2. Tabela `password_reset_tokens` - `Fortify`
+
+| Campo       | Tipo      | Observações   |
+| ----------- | --------- | ------------- |
+| email       | string    | `primary key` |
+| token       | string    | –             |
+| created\_at | timestamp | `nullable`    |
+
+3. Tabela `categories` (Categorias)
+
+| Campo | Tipo                    | Observações |
+| ----- | ----------------------- | ----------- |
+| id    | bigint (auto-increment) | Primary key |
+| name  | string(30)              | `unique`    |
+
+4. Tabela `collection_points` (Pontos de Coleta) 
+
+| Campo        | Tipo                    | Observações                                       |
+| ------------ | ----------------------- | ------------------------------------------------- |
+| id           | bigint (auto-increment) | Primary key                                       |
+| name         | string(60)              | `unique`                                          |
+| cep          | string(8)               | –                                                 |
+| score        | integer                 | `default(0)`                                      |
+| user\_id     | foreignId               | `constrained`, `onDelete('cascade')` → `users.id` |
+| street       | string                  | –                                                 |
+| number       | string                  | `nullable`                                        |
+| complement   | string                  | `nullable`                                        |
+| neighborhood | string                  | –                                                 |
+| city         | string                  | –                                                 |
+| state        | string(2)               | –                                                 |
+| latitude     | decimal(10, 7)          | `nullable`                                        |
+| longitude    | decimal(10, 7)          | `nullable`                                        |
+| open\_from   | time                    | Horário de abertura                               |
+| open\_to     | time                    | Horário de fechamento                             |
+| days\_open   | string                  | Dias de funcionamento (ex: seg-sex)               |
+| description  | text                    | `nullable`                                        |
+| created\_at  | timestamp               | `timestamps()`                                    |
+| updated\_at  | timestamp               | –                                                 |
+| deleted\_at  | timestamp               | `softDeletes()` – remoção lógica                  |
+
+5. Tabela Pivô `collection_point_category`
+
+| Campo                 | Tipo                    | Observações                                                   |
+| --------------------- | ----------------------- | ------------------------------------------------------------- |
+| id                    | bigint (auto-increment) | Primary key                                                   |
+| collection\_point\_id | foreignId               | `constrained`, `onDelete('cascade')` → `collection_points.id` |
+| category\_id          | foreignId               | `constrained`, `onDelete('cascade')` → `categories.id`        |
+
+
 
 
 <!-- 

@@ -24,7 +24,7 @@ class UserService extends Service
         }
     }
 
-    public function findUserById($id): ?User
+    public function findUserById(int|string $id): ?User
     {
         try {
             return User::findOrFail($id);
@@ -37,7 +37,7 @@ class UserService extends Service
         }
     }
 
-    public function findUserByEmail($email): ?User
+    public function findUserByEmail(string $email): ?User
     {
         try {
             return User::where('email', $email)->first();

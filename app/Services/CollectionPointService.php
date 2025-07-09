@@ -4,13 +4,14 @@ namespace App\Services;
 
 use App\Models\CollectionPoint;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
-class CollectionPointService
+class CollectionPointService extends Service
 {
-    public function timeInputIsNotValid($input_1, $input_2): bool
+    public function timeInputIsNotValid(string $input_1, string $input_2): bool
     {
         if (strtotime($input_1) >= strtotime($input_2)) {
             return true;
@@ -19,16 +20,19 @@ class CollectionPointService
         }
     }
 
-    public function findCollectionPointById($id): ?CollectionPoint
+    public function findCollectionPointById(string|int $id): ?CollectionPoint
     {
         try {
             return CollectionPoint::findOrFail($id);
+        } catch (QueryException $e) {
+            $this->handleCriticalException($e, 'Erro ao buscar ponto de coleta por ID');
+            return null;
         } catch (Exception $e) {
             return null;
         }
     }
 
-    public function verifyIfUserCreateThePoint($user_id, $user_point_id): bool
+    public function verifyIfUserCreateThePoint(string|int $user_id, string|int $user_point_id): bool
     {
         if ($user_id == $user_point_id) {
             return true;
@@ -53,6 +57,9 @@ class CollectionPointService
             $points = $query->paginate(10)->withQueryString();
 
             return $points;
+        } catch (QueryException $e) {
+            $this->handleCriticalException($e, 'Erro ao buscar pontos de coleta e categorias.');
+            return new LengthAwarePaginator([], 0, 10);
         } catch (Exception $e) {
             Log::channel('npr')->error("Erro ao buscar categorias para esquema de buscas", ['exception' => $e->getMessage()]);
             session()->flash('server_error', 'Houve um erro ao buscar os pontos de coleta, por favor tente novamente mais tarde');

@@ -113,7 +113,7 @@ Após isso, o `array` de informações sobre os dias da semana que abre, será f
 O CEP irá ser formatado para remover a pontuação.
 
 Após isso é realizado o registro das informações no banco de dados na entidade `collection_points` e após isso com base nas informações das categorias será registrado na tabela pivô entre os pontos de coleta e as categorias suas respectivas categorias.
->⚠️ *Aviso sobre permissões*
+>⚠️ *Aviso sobre permissões* <br>
 >Somente usuários que validaram sua conta atrâves da verificação por email podem reaalizar realizar está tarefa 
 
 #### APAGAR PONTO DE COLETA

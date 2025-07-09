@@ -2,18 +2,39 @@
 
 use App\Http\Controllers\CollectionPointController;
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\NoteController;
 use App\Http\Controllers\UserController;
-use App\Models\CollectionPoint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+
+// routes/web.php
+Route::middleware(['db-safe'])->get('/teste-conexao', function () {
+     return 'Conexão com banco ativa';
+});
+
+Route::get('/sem-banco', function () {
+     return 'Essa rota não depende de banco de dados';
+});
+
 
 Route::get('/notes', function () {
      return view('notes');
 })->name('notes');
 
 
+Route::get('/', function () {
+     try {
+          DB::connection()->getPdo();
+          return redirect()
+               ->route('login');
+     } catch (Exception $e) {
+          return view('errors.db-down');
+     }
+});
+
+
+
 Route::middleware(['auth'])->group(function () {
-     Route::redirect('/', '/home');
+
      Route::get('/home', [MainController::class, 'index'])->name('home');
      Route::get('/ponto-de-coleta/{id}', [MainController::class, 'view'])->name('collection_point.view');
 

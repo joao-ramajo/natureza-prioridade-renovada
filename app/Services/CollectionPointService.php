@@ -62,7 +62,7 @@ class CollectionPointService extends Service
             return new LengthAwarePaginator([], 0, 10);
         } catch (Exception $e) {
             Log::channel('npr')->error("Erro ao buscar categorias para esquema de buscas", ['exception' => $e->getMessage()]);
-            session()->flash('server_error', 'Houve um erro ao buscar os pontos de coleta, por favor tente novamente mais tarde');
+
             return new LengthAwarePaginator([], 0, 10);
         }
     }

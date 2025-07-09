@@ -32,6 +32,7 @@ class MainController extends Controller
 
         $categories = $this->categoryService->getAllCategoriesWithPointExists();
 
+
         return view('home', [
             'points' => $points,
             'categories' => $categories

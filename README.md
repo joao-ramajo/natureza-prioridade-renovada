@@ -287,7 +287,7 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 
 | Campo                        | Tipo                    | Observações                      |
 | ---------------------------- | ----------------------- | -------------------------------- |
-| id                           | bigint (auto-increment) | Primary key                      |
+| id                           | bigint (auto-increment) | Chave primária                      |
 | name                         | string(100)             | –                                |
 | email                        | string(100)             | `unique`                         |
 | email\_verified\_at          | timestamp               | `nullable`                       |
@@ -296,15 +296,15 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 | two\_factor\_recovery\_codes | text                    | `nullable`                       |
 | two\_factor\_confirmed\_at   | timestamp               | `nullable`                       |
 | remember\_token              | string (100)            | Token de sessão automática       |
-| created\_at                  | timestamp               | `timestamps()` Laravel           |
+| created\_at                  | timestamp               |            |
 | updated\_at                  | timestamp               | –                                |
-| deleted\_at                  | timestamp               | `softDeletes()` – remoção lógica |
+| deleted\_at                  | timestamp               |  |
 
 2. Tabela `password_reset_tokens` - `Fortify`
 
 | Campo       | Tipo      | Observações   |
 | ----------- | --------- | ------------- |
-| email       | string    | `primary key` |
+| email       | string    | `Chave primária` |
 | token       | string    | –             |
 | created\_at | timestamp | `nullable`    |
 
@@ -312,18 +312,18 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 
 | Campo | Tipo                    | Observações |
 | ----- | ----------------------- | ----------- |
-| id    | bigint (auto-increment) | Primary key |
+| id    | bigint (auto-increment) | Chave primária |
 | name  | string(30)              | `unique`    |
 
 4. Tabela `collection_points` (Pontos de Coleta) 
 
 | Campo        | Tipo                    | Observações                                       |
 | ------------ | ----------------------- | ------------------------------------------------- |
-| id           | bigint (auto-increment) | Primary key                                       |
+| id           | bigint (auto-increment) | Chave primária                                       |
 | name         | string(60)              | `unique`                                          |
 | cep          | string(8)               | –                                                 |
-| score        | integer                 | `default(0)`                                      |
-| user\_id     | foreignId               | `constrained`, `onDelete('cascade')` → `users.id` |
+| score        | integer                 |                                       |
+| user\_id     | foreignId               | ID do usuário que registrou |
 | street       | string                  | –                                                 |
 | number       | string                  | `nullable`                                        |
 | complement   | string                  | `nullable`                                        |
@@ -336,17 +336,17 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 | open\_to     | time                    | Horário de fechamento                             |
 | days\_open   | string                  | Dias de funcionamento (ex: seg-sex)               |
 | description  | text                    | `nullable`                                        |
-| created\_at  | timestamp               | `timestamps()`                                    |
+| created\_at  | timestamp               |                                     |
 | updated\_at  | timestamp               | –                                                 |
-| deleted\_at  | timestamp               | `softDeletes()` – remoção lógica                  |
+| deleted\_at  | timestamp               |                   |
 
 5. Tabela Pivô `collection_point_category`
 
 | Campo                 | Tipo                    | Observações                                                   |
 | --------------------- | ----------------------- | ------------------------------------------------------------- |
-| id                    | bigint (auto-increment) | Primary key                                                   |
-| collection\_point\_id | foreignId               | `constrained`, `onDelete('cascade')` → `collection_points.id` |
-| category\_id          | foreignId               | `constrained`, `onDelete('cascade')` → `categories.id`        |
+| id                    | bigint (auto-increment) | Chave primária                                                   |
+| collection\_point\_id | foreignId               | ID do ponto de coleta |
+| category\_id          | foreignId               | ID da categoria        |
 
 
 

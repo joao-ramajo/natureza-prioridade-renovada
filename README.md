@@ -14,6 +14,7 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 - [Rotas](#rotas)
 - [Observabilidade](#observabilidade)
 - [Entidades e Banco e Dados](#entidades-e-banco-de-dados)
+    - [Relacionamentos](#relacionamentos)
 ---
 
 ### TECNOLOGIAS IMPLEMENTADAS
@@ -273,12 +274,6 @@ Para garantir o fluxo de informações, acabei por criar uma camada de Service d
 ## ENTIDADES E BANCO DE DADOS
 O uso de um banco de dados relacional como o *MySQL* parece uma escolha certa quando vou pensar no escopo do projeto, estrutura de dados fixos e relacionamentos entre entidades trazem muitos benefícios com a estrutura do projeto, a partir do momento em que as informações que vão ser utilizadas são fixas e possuem relacionamentos com um certo nivel de complexidade.
 
-Um usuário pode criar muitos pontos de coleta, ao mesmo tempo, um ponto de coleta pertence a apenas um usuário. 
-Relacionamento: *(OneToMany)*
-
-Atravês de uma tabela pivô vários pontos de coleta podem ter várias categorias, podendo assim possuir multíplos relacionamentos. 
-Relacionamneto: *(ManyToMany)*
-
 Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, seja por estrutura ou por escalabilidade.
 
 #### ESTRUTURA DAS TABELAS
@@ -348,7 +343,20 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 | collection\_point\_id | foreignId               | ID do ponto de coleta |
 | category\_id          | foreignId               | ID da categoria        |
 
+###### RELACIONAMENTOS
+Explicação sobre os relacionamentos entre as tabelas
 
+*users 1 ------ n collection_points*
+*(OneToMany)*
+
+Relacionamento de um para muitos, um usuário pode ter vários pontos de coleta registrados, e um ponto de coleta tem apenas um usuário como "dono".
+
+*collection_points n ------ n catetegories* 
+*(ManyToMany)*
+
+Relacionamento muitos para muitos, onde um ponto de coleta pode estar relacionado a diversas categorias, e uma categoria pode estar ligada com vários pontos de coleta. 
+
+Neste caso foi necessário a criação de uma tabela pivô para o gerenciamento entre este relacionamneto 
 
 
 <!-- 

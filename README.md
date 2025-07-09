@@ -43,9 +43,9 @@ Após a criação do usuário o sistema 2 *emails* sendo um referente a válida�
 >o usuário ainda poderá acessar alguns recursos do sistema sem essa validação mas outros recursos como a criação de novos pontos de coleta é permitida somente para *Usuários Verificados*.
 
 #### APAGAR CONTA
-Eesta opção eesta disponível na página de perfil do usuário, onde será encontrada em um botão cuja rota seguira para as operações necessárias para apagar a conta.
+Esta opção esta disponível na página de perfil do usuário, onde será encontrada em um botão cuja rota seguira para as operações necessárias para apagar a conta.
 
-A operação eesta protegida por um *middleware* que solicita a senha atual do perfil para garantir que seja uma operação válida.
+A operação esta protegida por um *middleware* que solicita a senha atual do perfil para garantir que seja uma operação válida.
  
 #### LOGIN - `Fortify`
 O usuário preenche as informações para login(email, senha) e faz o envio.
@@ -104,7 +104,7 @@ Para cadastrar um novo ponto de coleta, é realizar o preenchimento do formulár
 Apesar de extensas, acredito serem informações importantes para o registro de novas informações.
 
 >:bulb:*Dica sobre o Formulário*
-> O formúlario disponibiliza um autopreencher das informações com o CEP fornecido, onde após o preenchimento do campo, será buscado as informações a partir da *api* da [ViaCEP](https://viacep.com.br/)
+> O formulário disponibiliza um autopreencher das informações com o CEP fornecido, onde após o preenchimento do campo, será buscado as informações a partir da *api* da [ViaCEP](https://viacep.com.br/)
 
 Após preencher e realizar o envio, o sistema irá validar as informações usando a classe `Requests/CollectionPoint/StoreRequest` para realizar a verificação dos campos com base em regras especificas para cada campo, caso não tenha problemas seguira o fluxo até o `CollectionPointController` para realizar a inserção no banco de dados.
 
@@ -125,7 +125,7 @@ A requisição acontece apartir de uma chamada de função assíncrona que esper
 
 Caso aconteça algum erro ou não encontre as informações, o usuário será informado que deve verificar o cep ou preencher as informações a mão caso tenha certeza.   
 >⚠️ *Aviso sobre permissões*
->Somente usuários que validaram sua conta atrâves da verificação por email podem reaalizar realizar eesta tarefa 
+>Somente usuários que validaram sua conta atrâves da verificação por email podem reaalizar realizar esta tarefa 
 
 #### APAGAR PONTO DE COLETA
 Para apagar um ponto de coleta o usuário deve estar na página de visualização do ponto e deve ser o **mesmo usuário que cadastrou o ponto de coleta**, caso contrário nenhuma opção sera mostrada.
@@ -133,13 +133,13 @@ Para apagar um ponto de coleta o usuário deve estar na página de visualizaçã
 O mesmo se aplica a questão de *Editar* as informações do ponto de coleta
 
 #### EDITAR INFORMAÇÕES DO PONTO DE COLETA
-A alteração de informações de um ponto de coleta eesta disponivel a partir de um modal com um formúlario com as informações atuais do ponto de coleta, onde **somente o usuário que registrou o ponto de coleta** terá acesso a estas informações e funcionalidades.
+A alteração de informações de um ponto de coleta esta disponivel a partir de um modal com um formulário com as informações atuais do ponto de coleta, onde **somente o usuário que registrou o ponto de coleta** terá acesso a estas informações e funcionalidades.
 
 O mesmo se aplica a questão de *Apagar* um ponto de coleta do banco de dados.
 
 ---
 ## NÍVEIS DE ACESSO
-O projeto eesta disponivel a partir de 3 níveis de acesso, sendo eles:
+O projeto esta disponivel a partir de 3 níveis de acesso, sendo eles:
  *guest*, *usuário* e *usuário verificado* 
 
 #### GUEST
@@ -150,7 +150,7 @@ Usuário não logado, acesso restrito as funcionalidades básicas, sendo necess�
 
 
 #### USUÁRIO
-Mesmo após criar uma conta e realizar o *Login* o usuário deve válidar sua conta atravês do link enviado para o seu *email* sem isso ele não pode cadastrar novos pontos de coletas.
+Mesmo após criar uma conta e realizar o *Login* o usuário deve validar sua conta atravês do link enviado para o seu *email* sem isso ele não pode cadastrar novos pontos de coletas.
 Apesar disso ele pode acessar o restante das opções do projeto como as páginas de perfil e dos pontos de coleta já cadastrados.
 
 #### USUÁRIO VERIFICADO
@@ -192,7 +192,7 @@ Com este comando o artisan será encarregado de realizar a criaçao de todas as 
     php artisan serve
 ```
 
-Após estas etapas se tudo ocorrer bem, a aplicação eestara disponível localmente atravês da rota `http://localhost:8000/`
+Após estas etapas se tudo ocorrer bem, a aplicação estara disponível localmente atravês da rota `http://localhost:8000/`
 Se a porta `8000` estiver ocupada será informado uma nova rota para acesso.
 
 #### SEEDER
@@ -213,7 +213,7 @@ Também será criado as categorias base e alguns registros de pontos de coleta q
 
 ## ROTAS
 
-A seguir eesta as rotas disponiveis pelo projeto, para um melhor contexto aqui eesta uma breve explicação dos middlewares.
+A seguir esta as rotas disponiveis pelo projeto, para um melhor contexto aqui esta uma breve explicação dos middlewares.
 
 auth: Usuários logados
 verified: Contas que válidas(validação via email)
@@ -289,12 +289,12 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 | ---------------------------- | ----------------------- | -------------------------------- |
 | id                           | bigint (auto-increment) | Chave primária                      |
 | name                         | string(100)             | –                                |
-| email                        | string(100)             | `unique`                         |
-| email\_verified\_at          | timestamp               | `nullable`                       |
+| email                        | string(100)             | Valor único                         |
+| email\_verified\_at          | timestamp               | opacional                       |
 | password                     | string(200)             | –                                |
-| two\_factor\_secret          | text                    | `nullable`                       |
-| two\_factor\_recovery\_codes | text                    | `nullable`                       |
-| two\_factor\_confirmed\_at   | timestamp               | `nullable`                       |
+| two\_factor\_secret          | text                    | opacional                       |
+| two\_factor\_recovery\_codes | text                    | opacional                       |
+| two\_factor\_confirmed\_at   | timestamp               | opacional                       |
 | remember\_token              | string (100)            | Token de sessão automática       |
 | created\_at                  | timestamp               |            |
 | updated\_at                  | timestamp               | –                                |
@@ -304,38 +304,38 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 
 | Campo       | Tipo      | Observações   |
 | ----------- | --------- | ------------- |
-| email       | string    | `Chave primária` |
+| email       | string    | Chave primária |
 | token       | string    | –             |
-| created\_at | timestamp | `nullable`    |
+| created\_at | timestamp | opacional    |
 
 3. Tabela `categories` (Categorias)
 
 | Campo | Tipo                    | Observações |
 | ----- | ----------------------- | ----------- |
 | id    | bigint (auto-increment) | Chave primária |
-| name  | string(30)              | `unique`    |
+| name  | string(30)              | Valor único    |
 
 4. Tabela `collection_points` (Pontos de Coleta) 
 
 | Campo        | Tipo                    | Observações                                       |
 | ------------ | ----------------------- | ------------------------------------------------- |
 | id           | bigint (auto-increment) | Chave primária                                       |
-| name         | string(60)              | `unique`                                          |
+| name         | string(60)              | Valor único                                          |
 | cep          | string(8)               | –                                                 |
 | score        | integer                 |                                       |
 | user\_id     | foreignId               | ID do usuário que registrou |
 | street       | string                  | –                                                 |
-| number       | string                  | `nullable`                                        |
-| complement   | string                  | `nullable`                                        |
+| number       | string                  | opacional                                        |
+| complement   | string                  | opacional                                        |
 | neighborhood | string                  | –                                                 |
 | city         | string                  | –                                                 |
 | state        | string(2)               | –                                                 |
-| latitude     | decimal(10, 7)          | `nullable`                                        |
-| longitude    | decimal(10, 7)          | `nullable`                                        |
+| latitude     | decimal(10, 7)          | opacional                                        |
+| longitude    | decimal(10, 7)          | opacional                                        |
 | open\_from   | time                    | Horário de abertura                               |
 | open\_to     | time                    | Horário de fechamento                             |
 | days\_open   | string                  | Dias de funcionamento (ex: seg-sex)               |
-| description  | text                    | `nullable`                                        |
+| description  | text                    | opacional                                        |
 | created\_at  | timestamp               |                                     |
 | updated\_at  | timestamp               | –                                                 |
 | deleted\_at  | timestamp               |                   |

@@ -17,5 +17,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
     </div>
 @endif
+@if (session('server_error'))
+    <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2" style="font-size: 1.5rem;"></i>
+        <div>
+            {{ session('server_error') }}
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+@endif
 
 

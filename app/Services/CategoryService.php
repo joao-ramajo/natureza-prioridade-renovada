@@ -16,7 +16,7 @@ class CategoryService
         try {
             return Category::has('collectionPoints')->get();
         } catch (Exception $e) {
-            Log::channel('npr')->error('Erro ao buscar pontos de coleta', ['exception' => $e->getMessage()]);
+            Log::channel('npr')->error('Erro ao buscar pontos de coleta e categorias', ['exception' => $e->getMessage()]);
             return collect();
         }
     }

@@ -41,20 +41,15 @@ class MainController extends Controller
 
     public function view($id, CollectionPointService $collectionPointService, CategoryService $categoryService): View | RedirectResponse
     {
-        try {
-            $id = Crypt::decrypt($id);
-            $point = $collectionPointService->findCollectionPointById($id);
-            $categories = $categoryService->getAllCategories();
-            return view('collectionPoint.view', ['point' => $point, 'categories' => $categories]);
-        } catch (Exception $e) {
 
-            Log::channel('npr')->error('Erro ao acessar página de ponto de coleta', [
-                'email' => Auth::user()->email,
-                'exception' => $e->getMessage(),
-            ]);
+        $id = Crypt::decrypt($id);
+        $point = $collectionPointService->findCollectionPointById($id);
+        if (!$point) {
             return back()
                 ->with('error', 'Não encontramos nenhuma informação');
         }
+        $categories = $categoryService->getAllCategories();
+        return view('collectionPoint.view', ['point' => $point, 'categories' => $categories]);
     }
 
     public function profile($id): View | RedirectResponse

@@ -38,10 +38,9 @@ O usuário preenche um formulário com suas informações(nome, email, senha) e 
 
 O **Fortify** valida as  informações e registra o usuário caso esteja com as informações corretas e assim cria um novo usuário, após isso o usuário é redirecionado para a página de login.
 
-Após a criação do usuário o sistema 2 *emails* sendo um referente a validação da conta e outro com uma mensagem personalizada de boas vindas.
+Após a criação do usuário o sistema envia 2 *emails* sendo um referente a validação da conta, e o outro uma mensagem personalizada de boas vindas.
 
-> ⚠️*Aviso* 
->o usuário ainda poderá acessar alguns recursos do sistema sem essa validação mas outros recursos como a criação de novos pontos de coleta é permitida somente para *Usuários Verificados*.
+> ⚠️*Aviso:* o usuário ainda poderá acessar alguns recursos do sistema sem essa validação mas outros recursos como a criação de novos pontos de coleta é permitida somente para *Usuários Verificados*.
 
 #### APAGAR CONTA
 Esta opção esta disponível na página de perfil do usuário, onde será encontrada em um botão cuja rota seguira para as operações necessárias para apagar a conta.
@@ -104,8 +103,7 @@ Para cadastrar um novo Ponto de Coleta, é realizar o preenchimento do formulár
 
 Apesar de extensas, acredito serem informações importantes para o registro de novas informações.
 
->:bulb:*Dica sobre o Formulário*
-> O formulário disponibiliza um autopreencher das informações com o CEP fornecido, onde após o preenchimento do campo, será buscado as informações a partir da *api* da [ViaCEP](https://viacep.com.br/)
+>:bulb:*Dica sobre o Formulário:* o formulário disponibiliza um autopreencher das informações com o CEP fornecido, onde após o preenchimento do campo, será buscado as informações a partir da *api* da [ViaCEP](https://viacep.com.br/)
 
 Após preencher e realizar o envio, o sistema irá validar as informações usando a classe `Requests/CollectionPoint/StoreRequest` para realizar a verificação dos campos com base em regras especificas para cada campo, caso não tenha problemas seguira o fluxo até o `CollectionPointController` para realizar a inserção no banco de dados.
 
@@ -124,9 +122,9 @@ O uso da api é feito a partir de uma requisição *fetch* em javascript que se 
 
 A requisição acontece apartir de uma chamada de função assíncrona que espera uma resposta *json* com as informações de endereço.
 
-Caso aconteça algum erro ou não encontre as informações, o usuário será informado que deve verificar o cep ou preencher as informações a mão caso tenha certeza.   
->⚠️ *Aviso sobre permissões*
->Somente usuários que validaram sua conta atrâves da verificação por email podem reaalizar realizar esta tarefa 
+Caso aconteça algum erro ou não encontre as informações, o usuário será informado que deve verificar o cep ou preencher as informações a mão caso tenha certeza que a informaçãoe está correta.   
+
+>⚠️ *Aviso sobre permissões:* somente usuários que validaram sua conta atrâves da verificação por email podem reaalizar realizar esta tarefa 
 
 #### APAGAR Ponto de Coleta
 Para apagar um Ponto de Coleta o usuário deve estar na página de visualização do ponto e deve ser o **mesmo usuário que cadastrou o Ponto de Coleta**, caso contrário nenhuma opção sera mostrada.
@@ -146,13 +144,12 @@ O projeto esta disponivel a partir de 3 níveis de acesso, sendo eles:
 #### GUEST
 Usuário não logado, acesso restrito as funcionalidades básicas, sendo necessário realizar *Login* para acessar qualquer rota da aplicação.
 
->*Nota*
-> Não acredito que sejá o ideal, pretendo mudar este modelo de permissões, um usuário não logado poderia no mínimo ver os pontos de coleta cadastrados para facilitar o compartilhamento destas informações.
+>*Nota:* não acredito que sejá o ideal, pretendo mudar este modelo de permissões, um usuário não logado poderia no mínimo ver os pontos de coleta cadastrados para facilitar o compartilhamento destas informações.
 
 
 #### USUÁRIO
 Mesmo após criar uma conta e realizar o *Login* o usuário deve validar sua conta atravês do link enviado para o seu *email* sem isso ele não pode cadastrar novos pontos de coletas.
-Apesar disso ele pode acessar o restante das opções do projeto como as páginas de perfil e dos pontos de coleta já cadastrados.
+Apesar disso ele pode acessar o restante das funcionalidades do projeto como as páginas de perfil e dos pontos de coleta já cadastrados.
 
 #### USUÁRIO VERIFICADO
 Após a validação do perfil atravês do link enviado para o *email* do usuário, ele terá total acesso às funcionalidades do projeto, podendo criar e editar novos pontos de coleta.
@@ -274,11 +271,11 @@ Para garantir o fluxo de informações, acabei por criar uma camada de Service d
 ###### TRATAMENTO DE EXCEÇÔES
 Um dos pontos essenciais para que um projeto não tenha encerramentos repentinos em seu fluxo, é o tratamento de exceções durante o desenvolvimento.
 
-Com o uso de blocos `try-catch` em operações que podem lidar com exceções como o uso de pacotes, comunicação com serviços externos e comunicação com o banco de dados, a ocorrência de erros não cause quebras no sistema, apenas retorna para o usuário mensagens genéricas e retorno para páginas anteriores. 
+Com o uso de blocos `try-catch` em operações que podem lidar com exceções como o uso de pacotes, comunicação com serviços externos e comunicação com o banco de dados, terá assim uma segurança maior em relação a eventos que possam acontecer e garantir que o sistema esteja protegido contra isso. 
 
 Enquanto isso os erros são guardados em arquivos de logs usando um canal personalizado para o projeto.
 
-Para erros críticos em funcionalidades essenciais como um erro de conexão de banco de dados, além deo `Log` implementei um handler com o envio de email para no momento em que algum problema acontecer o tempo de reação seja o rápido possível.
+Para erros críticos em funcionalidades essenciais como um erro de conexão de banco de dados, além do sistema de `Log` implementei um handler com o envio de email para no momento em que algum problema for identificado, que seja rapidamente encontrado pela equipe de desenvolvimento.
 
 ###### COMO FUNCIONA ? 
 
@@ -288,8 +285,7 @@ Caso aconteça de o envio de email também falhar, é logado junto do erro crít
 
 Se não acontecer e ocorrer tudo bem também é guardado uma mensagem informando que o email foi enviado com sucesso.
 
-> ⚠️*Sobre o envio de email*
-> Para o desenvolvimento local, o driver do envio de emails guarda os emails apenas em logs em `laravel.log`
+> ⚠️*Sobre o envio de email:* para o desenvolvimento local, o driver do envio de emails guarda os emails apenas em logs em `laravel.log`
 
 ## ENTIDADES E BANCO DE DADOS
 O uso de um banco de dados relacional como o *MySQL* parece uma escolha certa quando vou pensar no escopo do projeto, estrutura de dados fixos e relacionamentos entre entidades trazem muitos benefícios com a estrutura do projeto, a partir do momento em que as informações que vão ser utilizadas são fixas e possuem relacionamentos com um certo nivel de complexidade.

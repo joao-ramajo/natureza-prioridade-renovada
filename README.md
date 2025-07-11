@@ -1,9 +1,9 @@
 # NPR | Laravel
 
 
-Este projeto é uma aplicação web com foco no auxílio as questões ambienteis, com o objetivo de facilitar o compartilhamento de informações até a localização sobre pontos de coleta de diversos tipos de materiais. 
+Este projeto é uma aplicação web com foco no auxílio às questões ambienteis, com o objetivo de facilitar o compartilhamento de informações até a localização sobre pontos de coleta de diversos tipos de materiais. 
 
-Acredito que seja um bom projeto para implementar e aprofundar meus conhecimentos no **Laravel** de maneira a testar meu conhecimento nas suas funcionalidades essenciais e recursos extras.
+Acredito que seja um bom projeto para implementar e aprofundar meus conhecimentos no **Laravel**, de maneira a testar meu conhecimento nas suas funcionalidades essenciais e recursos extras.
 ## SUMÁRIO
 
 - [Tecnologias](#tecnologias-implementadas)
@@ -29,16 +29,16 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 ---
 
 ## OPERAÇÕES DAS ENTIDADES DO SISTEMA
-O projeto se baseia em dois elementos principais: o `Usuário` e os `Pontos de Coleta`, cujas funcionalidades são direcionadas a essas duas entidades.
+O projeto se baseia em dois elementos principais: o `Usuário` e os `Pontos de Coleta` cujas funcionalidades são direcionadas a essas duas entidades.
 
 ### USUÁRIO
 
 #### CRIAÇÃO DE UMA NOVA CONTA
-O usuário preenche um formulário com suas informações(nome, email, senha) e faz o envio para o sistema.
+O usuário preenche um formulário com suas informações (nome, email, senha) e faz o envio para o sistema.
 
-O **Fortify** valida as  informações e registra o usuário caso esteja com as informações corretas e assim cria um novo usuário, após isso o usuário é redirecionado para a página de login.
+O **Fortify** valida as informações e registra o usuário, caso esteja com as informações corretas, e assim cria um novo usuário. Após isso o usuário é redirecionado para a página de login.
 
-Após a criação do usuário o sistema envia 2 *emails* sendo um referente a validação da conta, e o outro uma mensagem personalizada de boas vindas.
+Após a criação do usuário o sistema envia 2 *emails*, sendo um referente à validação da conta, e o outro uma mensagem personalizada de boas-vindas.
 
 > ⚠️*Aviso:* o usuário ainda poderá acessar alguns recursos do sistema sem essa validação mas outros recursos como a criação de novos pontos de coleta é permitida somente para *Usuários Verificados*.
 

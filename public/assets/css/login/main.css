@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Protest+Riot&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #666;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #3d3d3d;
+  margin: 0 10px;
+}
+
+body {
+  overflow: hidden;
+}
+
+.logo {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  z-index: -1;
+  width: 100px;
+}
+
+.main_content {
+  min-height: 98vh;
+}
+.main_content .left-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main_content .left-side .form {
+  width: 400px;
+  height: 500px;
+}
+.main_content .left-side .form .form-subtitle {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 20px;
+  font-family: "Protest Riot", cursive !important;
+}
+.main_content .left-side .form .form-input {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin-bottom: 20px;
+}
+.main_content .left-side .form .form-input .form-input__label {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.main_content .left-side .form .form-input .form-input__input {
+  width: 100%;
+  height: 50px;
+  padding: 18px 10px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+.main_content .left-side .form .form-input .form-input__forgot-password {
+  margin-top: 10px;
+}
+.main_content .left-side .form .form-input__show-password {
+  margin-left: 10px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.main_content .left-side .form .form-input__show-password .form-show-password__checkbox {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+.main_content .left-side .form .form-input__show-password .form-show-password__label {
+  font-size: 14px;
+}
+.main_content .left-side .form .form__submit-button {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  border-radius: 8px;
+  background-color: #03a303;
+  color: white;
+  box-shadow: none;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 200;
+  transition: 0.5s ease all;
+}
+.main_content .left-side .form .form__submit-button:hover {
+  background-color: #007000;
+}
+.main_content .right-side {
+  background-color: rgb(10, 0, 152) !important;
+  position: relative;
+  background-image: url("/assets/img/arvores.jpg");
+  background-size: cover;
+  background-position: center;
+}/*# sourceMappingURL=main.css.map */

@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <x-layout.header />
+    {{-- <x-layout.header /> --}}
     <div class="container mt-3"><x-alerts.alert/></div>
     @yield('content')
 

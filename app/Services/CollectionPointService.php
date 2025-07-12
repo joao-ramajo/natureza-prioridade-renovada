@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class CollectionPointService extends Service
@@ -20,7 +21,7 @@ class CollectionPointService extends Service
         }
     }
 
-    public function findCollectionPointById(string|int $id): ?CollectionPoint
+    public function findCollectionPointById(string|int $id)
     {
         try {
             return CollectionPoint::findOrFail($id);

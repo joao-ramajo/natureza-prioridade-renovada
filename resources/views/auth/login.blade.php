@@ -1,13 +1,55 @@
 @extends('layouts.main_layout')
 
+@section('head')
+    <link rel="stylesheet" href="{{ asset('assets/css/login/main.css') }}">
+@endsection
+
 @section('content')
-    <div class="container">
-        <x-form.form method="POST" route="login" title="Login" btnLabel="Login">
-            <x-form.input-field label="Email" type="email" name="email" />
-            <x-form.input-field label="Senha" type="password" name="password" />
-            <x-form.show-pass />
-            <a href="{{ route('register') }}">Fazer cadastro</a>
-            <a href="{{ route('password.request') }}">Esqueci a senha</a>
-        </x-form.form>
+    <div class="logo">
+        <img src="{{ asset('assets/img/logosimp.svg') }}" alt="Logo da NPR">
     </div>
+    <main class="main_content row w-100">
+
+        <div class="col col-md-6 left-side">
+            <form action="{{ route('login') }}" method="POST" class="form">
+                @csrf
+                <h2 class="form-subtitle">Entre em sua conta</h2>
+                <div class="form-input">
+                    <label for="email" class="form-input__label">Email</label>
+                    <input type="email" name="email" id="email" class="form-input__input"
+                        placeholder="admin@gmail.com">
+                </div>
+                <div class="form-input">
+                    <label for="password" class="form-input__label">Senha</label>
+                    <input type="password" name="password" id="password" class="form-input__input" placeholder="1234576">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-input__show-password">
+                                <input type="checkbox" id="showPassCheckbox" class="form-show-password__checkbox">
+                                <label for="showPassCheckbox" class="form-show-password__label">Mostrar senha</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-input__forgot-password">
+                                <a href="{{ route('password.request') }}">Esqueci minha senha</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="form__submit-button">Entrar</button>
+
+                <div class="separator">Ou</div>
+
+                <div class="text-center mx-auto w-100">Não tem uma conta ? <a href="{{ route('register') }}"> cadastre-se
+                        aqui !</a></div>
+
+            </form>
+        </div>
+
+        <div class="col col-md-6 right-side">
+
+        </div>
+
+    </main>
 @endsection

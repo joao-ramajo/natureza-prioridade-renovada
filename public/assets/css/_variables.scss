@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Protest+Riot&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+$fonte-riot: "Protest Riot", cursive;
+$fonte-roboto: "Roboto", sans-serif;
+
+* {
+    margin: 0px;
+    padding: 0px;
+    // height: 100%;
+    box-sizing: border-box;
+    font-family: $fonte-roboto;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #666;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #3d3d3d;
+    margin: 0 10px;
+}
+
+$verde-floresta: #03a303;
+$verde-floresta-negra: #007000;
+$fonte-padrao: "sans";

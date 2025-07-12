@@ -1,9 +1,9 @@
 # NPR | Laravel
 
 
-Este projeto é uma aplicação web com foco no auxílio as questões ambienteis, com o objetivo de facilitar o compartilhamento de informações até a localização sobre pontos de coleta de diversos tipos de materiais. 
+Este projeto é uma aplicação web com foco no auxílio às questões ambienteis, com o objetivo de facilitar o compartilhamento de informações até a localização sobre pontos de coleta de diversos tipos de materiais. 
 
-Acredito que seja um bom projeto para implementar e aprofundar meus conhecimentos no **Laravel** de maneira a testar meu conhecimento nas suas funcionalidades essenciais e recursos extras.
+Acredito que seja um bom projeto para implementar e aprofundar meus conhecimentos no **Laravel**, de maneira a testar meu conhecimento nas suas funcionalidades essenciais e recursos extras.
 ## SUMÁRIO
 
 - [Tecnologias](#tecnologias-implementadas)
@@ -15,6 +15,7 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 - [Observabilidade](#observabilidade)
 - [Entidades e Banco e Dados](#entidades-e-banco-de-dados)
     - [Relacionamentos](#relacionamentos)
+- [Prótotipo e implementação](#protótipo-e-implementação)
 ---
 
 ### TECNOLOGIAS IMPLEMENTADAS
@@ -29,16 +30,16 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 ---
 
 ## OPERAÇÕES DAS ENTIDADES DO SISTEMA
-O projeto se baseia em dois elementos principais: o `Usuário` e os `Pontos de Coleta`, cujas funcionalidades são direcionadas a essas duas entidades.
+O projeto se baseia em dois elementos principais: o `Usuário` e os `Pontos de Coleta` cujas funcionalidades são direcionadas a essas duas entidades.
 
 ### USUÁRIO
 
 #### CRIAÇÃO DE UMA NOVA CONTA
-O usuário preenche um formulário com suas informações(nome, email, senha) e faz o envio para o sistema.
+O usuário preenche um formulário com suas informações (nome, email, senha) e faz o envio para o sistema.
 
-O **Fortify** valida as  informações e registra o usuário caso esteja com as informações corretas e assim cria um novo usuário, após isso o usuário é redirecionado para a página de login.
+O **Fortify** valida as informações e registra o usuário, caso esteja com as informações corretas, e assim cria um novo usuário. Após isso o usuário é redirecionado para a página de login.
 
-Após a criação do usuário o sistema envia 2 *emails* sendo um referente a validação da conta, e o outro uma mensagem personalizada de boas vindas.
+Após a criação do usuário o sistema envia 2 *emails*, sendo um referente à validação da conta, e o outro uma mensagem personalizada de boas-vindas.
 
 > ⚠️*Aviso:* o usuário ainda poderá acessar alguns recursos do sistema sem essa validação mas outros recursos como a criação de novos pontos de coleta é permitida somente para *Usuários Verificados*.
 
@@ -373,6 +374,26 @@ Relacionamento de um para muitos, um usuário pode ter vários pontos de coleta 
 Relacionamento muitos para muitos, onde um Ponto de Coleta pode estar relacionado a diversas categorias, e uma categoria pode estar ligada com vários pontos de coleta. 
 
 Neste caso foi necessário a criação de uma tabela pivô para o gerenciamento entre este relacionamento. 
+
+
+#### PROTÓTIPO E IMPLEMENTAÇÃO 
+
+Durante o desenvolvimento do projeto, acabei por manter o foco no desenvolvimento do sistema, assim acabei por criar páginas simples somente para visualizar o essencial.
+
+Com o avanço atual, acredito que seja um bom momento para dar um foco maior no design da aplicação, com isso seguirei um protótipo desenvolvido por mim a alguns meses. 
+
+>*💡Link para o protótipo:* [Figma](https://www.figma.com/proto/kqSC0SenHVFGteao7iXU4s/NPR?node-id=47-150&t=Nlp0cxyyPYAvJCA0-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=4%3A34)
+
+Será necessário realizar algumas alterações com base em mudanças que aconteceram durante o desenvolvimento, algumas escolhas que eu havia feito para o protótipo não são tão coesas quando falamos sobre Usabilidade e Responsividade.
+
+###### BEM-CSS E BOOSTRAP
+
+Embora a biblioteca Bootstrap seja extremamente poderosa para a criação de layouts, seu uso nem sempre é ideal quando o objetivo é criar uma identidade visual marcante e única. Isso não significa, entretanto, que o Bootstrap não possa ser utilizado.
+
+Ao aplicar a metodologia BEM-CSS, o desenvolvimento de classes e estilos torna-se mais organizado e baseado em convenções muito úteis. A combinação da praticidade do Bootstrap com as boas práticas do BEM-CSS resulta em uma abordagem poderosa para a criação de novos layouts.
+
+
+
 
 
 <!-- 

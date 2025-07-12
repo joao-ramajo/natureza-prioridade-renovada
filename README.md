@@ -32,6 +32,8 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 | Blade      | Template engine do Laravel utilizada para renderização de views e criação de componentes reutilizáveis.    |
 | MySQL      | Banco de dados relacional, ideal para modelar relacionamentos entre entidades e manter integridade dos dados. |
 | Fortify    | Sistema de autenticação e autorização, gerenciando o controle de acesso aos recursos do projeto.           |
+| ViaCEP | API para busca de informações de endereços baseado no CEP| 
+| OpenCage | API para buscar latitude e longitude de endereços |
 
 ---
 

@@ -1,16 +1,16 @@
 # NPR | Laravel
 
 
-Este projeto é uma aplicação web com foco no auxílio às questões ambienteis, com o objetivo de facilitar o compartilhamento de informações até a localização sobre pontos de coleta de diversos tipos de materiais. 
+Este projeto é uma aplicação web com foco no auxílio às questões ambientais, com o objetivo de facilitar o compartilhamento de informações até a localização sobre pontos de coleta de diversos tipos de materiais. 
 
 Acredito que seja um bom projeto para implementar e aprofundar meus conhecimentos no **Laravel**, de maneira a testar meu conhecimento nas suas funcionalidades essenciais e recursos extras.
 ## SUMÁRIO
 
-- [Tecnologias](#tecnologias-implementadas)
+- [Tecnologias Implementadas](#tecnologias-implementadas)
 - [Operações de Usuário](#operações-das-entidades-do-sistema)
 - [Pontos de Coleta](#pontos-de-coleta)
     - [Integração com a ViaCEP](#integração-com-a-api-da-viacep)
-    - [Integração com OpenCage API]()
+    - [Integração com OpenCage API](#integração-com-a-api-da-opencage)
 - [Níveis de Acesso](#níveis-de-acesso)
 - [Como Rodar o Projeto](#como-rodar-o-projeto-localmente)
 - [Rotas](#rotas)
@@ -64,7 +64,7 @@ Novamente o **Fortify** válida as informações assim realizando o login ou ret
 Após logado, o usuário tem acesso a novas funcionalidades como a criação de um novo Ponto de Coleta.
 
 #### LOGOUT - `Fortify`  
-O logout é realizado atrâves de um botão encontrado no *header*  da aplicação.
+O logout é realizado através de um botão encontrado no *header*  da aplicação.
 
 Nada mais é de que um formulário com **POST** com design de um botão para realizar o logout atravês do `Fortify`.
 
@@ -143,7 +143,7 @@ Em relação as limitações, na busca por apis que ofereçam este tipo de servi
 
 Mas dentro das limitações ela serve bem a um objetivo simples.
 
->⚠️ *Aviso sobre permissões:* somente usuários que validaram sua conta atrâves da verificação por email podem realizar realizar esta tarefa 
+>⚠️ *Aviso sobre permissões:* somente usuários que validaram sua conta através da verificação por email podem realizar realizar esta tarefa 
 
 #### APAGAR Ponto de Coleta
 Para apagar um Ponto de Coleta o usuário deve estar na página de visualização do ponto e deve ser o **mesmo usuário que cadastrou o Ponto de Coleta**, caso contrário nenhuma opção sera mostrada.

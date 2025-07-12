@@ -56,12 +56,6 @@ class MainController extends Controller
     {
         $id = Operations::decryptId($id);
 
-        if ($id === null || $id != Auth::user()->id) {
-            return back()
-                ->with('server_error', 'Desculpe houve um erro ao acessar está página');
-        }
-
-
         $point = $this->collectionPointService->findCollectionPointById($id);
 
         if (!$point) {

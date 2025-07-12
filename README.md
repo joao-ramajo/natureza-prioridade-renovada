@@ -11,6 +11,7 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 - [Pontos de Coleta](#pontos-de-coleta)
     - [Integração com a ViaCEP](#integração-com-a-api-da-viacep)
     - [Integração com OpenCage API](#integração-com-a-api-da-opencage)
+    - [Integração com o Google My Maps](#integração-com-o-google-my-maps)
 - [Níveis de Acesso](#níveis-de-acesso)
 - [Como Rodar o Projeto](#como-rodar-o-projeto-localmente)
 - [Rotas](#rotas)
@@ -86,7 +87,33 @@ Seguindo as orientações o usuário irá ser redirecionado a um formulário par
 
 Os pontos de coleta são locais/organizações que estão a disposição para o recolhimento de materiais que serão descartados com o objetivo de garantir o melhor destino aos resíduos.
 
-O projeto disponibiliza as seguintes operações.
+###### INTEGRAÇÃO COM A API DA [ViaCEP](https://viacep.com.br/)
+O uso da api é feito a partir de uma requisição *fetch* em javascript que se encontrar resultados válidos irá substituir os campos rua, bairro, cidade e estado, automaticamente, facilitando assim o preenchimento das informações.
+
+A requisição acontece apartir de uma chamada de função assíncrona que espera uma resposta *json* com as informações de endereço.
+
+Caso aconteça algum erro ou não encontre as informações, o usuário será informado que deve verificar o cep ou preencher as informações a mão caso tenha certeza que a informaçãoe está correta.   
+
+###### INTEGRAÇÃO COM A API DA [OpenCage](https://opencagedata.com/)
+
+Para buscar as informações de latitude e longitude dos endereços, buscando diminuir a complexidade do formulário de cadastro de um novo ponto de coleta.
+
+A *OpenCage* disponibiliza uma api que com base nas informações do endereço, retorna dados detalhados relacionados a outras informações que a *ViaCEP* não disponibiliza como `Latitude` e `Longitude` que para uma integração com mapas é de grande utilizade por facilitar a comunicação entre estes serviços.
+
+Em relação as limitações, na busca por apis que ofereçam este tipo de serviço, a OpenCage disponibiliza um plano gratuito com uma quantidade generosa de requisições por mês, mas infelizmente sua precisão se perde por alguns bairros.
+
+Mas dentro das limitações ela serve bem a um objetivo simples.
+
+###### INTEGRAÇÃO COM O [Google My Maps](https://www.google.com/intl/pt-BR/maps/about/mymaps/)
+
+O projeto conta com um mapa personalizado, feito com o *Google My Maps* que disponbiliza uma série de ferramentas para a criação de um mapa para que os usuários possam visualizar mais informações sobre os pontos de coleta.
+
+Embora a *Google Maps API* fosse minha escolha ideal para uma integração mais dinâmica e automatizada, optei pelo uso do *Google My Maps* devido a certas limitações técnicas e de custos durante o desenvolvimento.
+
+A atualização de informações acontece manualmente apartir da geração de um `.csv` com informações atualizadas que devem ser exportadas para a plataforma do *Google My Maps*.
+
+Ainda estou vendo alguma maneira de conseguir buscar o ponto especifico no mapa apartir da página com mais informações sobre um ponto.
+
 
 #### LISTAR PONTOS 
 
@@ -126,22 +153,6 @@ O CEP irá ser formatado para remover a pontuação.
 
 Após isso é realizado o registro das informações no banco de dados na entidade `collection_points` e após isso com base nas informações das categorias será registrado na tabela pivô entre os pontos de coleta e as categorias suas respectivas categorias.
 
-###### INTEGRAÇÃO COM A API DA [ViaCEP](https://viacep.com.br/)
-O uso da api é feito a partir de uma requisição *fetch* em javascript que se encontrar resultados válidos irá substituir os campos rua, bairro, cidade e estado, automaticamente, facilitando assim o preenchimento das informações.
-
-A requisição acontece apartir de uma chamada de função assíncrona que espera uma resposta *json* com as informações de endereço.
-
-Caso aconteça algum erro ou não encontre as informações, o usuário será informado que deve verificar o cep ou preencher as informações a mão caso tenha certeza que a informaçãoe está correta.   
-
-###### INTEGRAÇÃO COM A API DA [OpenCage](https://opencagedata.com/)
-
-Para buscar as informações de latitude e longitude dos endereços, buscando diminuir a complexidade do formulário de cadastro de um novo ponto de coleta.
-
-A *OpenCage* disponibiliza uma api que com base nas informações do endereço, retorna dados detalhados relacionados a outras informações que a *ViaCEP* não disponibiliza como `Latitude` e `Longitude` que para uma integração com mapas é de grande utilizade por facilitar a comunicação entre estes serviços.
-
-Em relação as limitações, na busca por apis que ofereçam este tipo de serviço, a OpenCage disponibiliza um plano gratuito com uma quantidade generosa de requisições por mês, mas infelizmente sua precisão se perde por alguns bairros.
-
-Mas dentro das limitações ela serve bem a um objetivo simples.
 
 >⚠️ *Aviso sobre permissões:* somente usuários que validaram sua conta através da verificação por email podem realizar realizar esta tarefa 
 

@@ -46,6 +46,7 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 | Fortify    | Sistema de autenticação e autorização, gerenciando o controle de acesso aos recursos do projeto.           |
 | ViaCEP | API para busca de informações de endereços baseado no CEP| 
 | OpenCage | API para buscar latitude e longitude de endereços |
+| Google My Maps |  Ferramenta para visualização dos pontos de coleta usando mapas personalizados. Permite importar arquivos `.csv` gerados pelo sistema para exibir os locais de coleta. |
 
 ---
 

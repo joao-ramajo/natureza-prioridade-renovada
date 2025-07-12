@@ -161,8 +161,9 @@ O projeto esta disponivel a partir de 3 níveis de acesso, sendo eles:
 #### GUEST
 Usuário não logado, acesso restrito as funcionalidades básicas, sendo necessário realizar *Login* para acessar qualquer rota da aplicação.
 
->*Nota:* não acredito que sejá o ideal, pretendo mudar este modelo de permissões, um usuário não logado poderia no mínimo ver os pontos de coleta cadastrados para facilitar o compartilhamento destas informações.
+O usuário que não estiver logado pode acessar recursos limitados, sendo eles a home que mostra todos os pontos de coleta cadastrado, podendo ver as páginas com mais detalhes, o mapa disponível e as telas de login e cadastro.
 
+Para acessar os recursos restantes como a criação de pontos de coleta ele deve criar e validar uma conta nova.
 
 #### USUÁRIO
 Mesmo após criar uma conta e realizar o *Login* o usuário deve validar sua conta atravês do link enviado para o seu *email* sem isso ele não pode cadastrar novos pontos de coletas.

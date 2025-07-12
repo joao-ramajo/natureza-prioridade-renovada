@@ -386,6 +386,14 @@ Com o avanço atual, acredito que seja um bom momento para dar um foco maior no 
 
 Será necessário realizar algumas alterações com base em mudanças que aconteceram durante o desenvolvimento, algumas escolhas que eu havia feito para o protótipo não são tão coesas quando falamos sobre Usabilidade e Responsividade.
 
+###### BEM-CSS E BOOSTRAP
+
+Embora a biblioteca Bootstrap seja extremamente poderosa para a criação de layouts, seu uso nem sempre é ideal quando o objetivo é criar uma identidade visual marcante e única. Isso não significa, entretanto, que o Bootstrap não possa ser utilizado.
+
+Ao aplicar a metodologia BEM-CSS, o desenvolvimento de classes e estilos torna-se mais organizado e baseado em convenções muito úteis. A combinação da praticidade do Bootstrap com as boas práticas do BEM-CSS resulta em uma abordagem poderosa para a criação de novos layouts.
+
+
+
 
 
 <!-- 

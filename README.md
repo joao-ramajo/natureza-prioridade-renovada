@@ -7,11 +7,22 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 ## SUMÁRIO
 
 - [Tecnologias Implementadas](#tecnologias-implementadas)
-- [Operações de Usuário](#operações-das-entidades-do-sistema)
+- [Operações das Entidades](#operações-das-entidades-do-sistema)
+    - [Operações de Usuário](#operações-das-entidades-do-sistema)
+        - [Criar Conta](#criação-de-uma-nova-conta)
+        - [Apagar Conta](#apagar-conta)
+        - [Login](#login---fortify)
+        - [Logout](#logout---fortify)
+        - [Recuperação de Senha](#recuperação-de-senha---fortify)
 - [Pontos de Coleta](#pontos-de-coleta)
     - [Integração com a ViaCEP](#integração-com-a-api-da-viacep)
     - [Integração com OpenCage API](#integração-com-a-api-da-opencage)
     - [Integração com o Google My Maps](#integração-com-o-google-my-maps)
+    - [Operações do Ponto de Coleta](#listar-pontos)
+        - [Listar Pontos](#listar-pontos)
+        - [Cadastrar Novo Ponto](#cadastrar-um-novo-ponto-de-coleta)
+        - [Apagar Ponto](#apagar-ponto-de-coleta)
+        - [Editar Ponto](#editar-informações-do-ponto-de-coleta)
 - [Níveis de Acesso](#níveis-de-acesso)
 - [Como Rodar o Projeto](#como-rodar-o-projeto-localmente)
 - [Rotas](#rotas)
@@ -43,7 +54,7 @@ O projeto se baseia em dois elementos principais: o `Usuário` e os `Pontos de C
 
 ### USUÁRIO
 
-#### CRIAÇÃO DE UMA NOVA CONTA
+###### CRIAR CONTA
 O usuário preenche um formulário com suas informações (nome, email, senha) e faz o envio para o sistema.
 
 O **Fortify** valida as informações e registra o usuário, caso esteja com as informações corretas, e assim cria um novo usuário. Após isso o usuário é redirecionado para a página de login.
@@ -52,19 +63,19 @@ Após a criação do usuário o sistema envia 2 *emails*, sendo um referente à 
 
 > ⚠️*Aviso:* o usuário ainda poderá acessar alguns recursos do sistema sem essa validação mas outros recursos como a criação de novos pontos de coleta é permitida somente para *Usuários Verificados*.
 
-#### APAGAR CONTA
+###### APAGAR CONTA
 Esta opção esta disponível na página de perfil do usuário, onde será encontrada em um botão cuja rota seguira para as operações necessárias para apagar a conta.
 
 A operação esta protegida por um *middleware* que solicita a senha atual do perfil para garantir que seja uma operação válida.
  
-#### LOGIN - `Fortify`
+###### LOGIN - `Fortify`
 O usuário preenche as informações para login(email, senha) e faz o envio.
 
 Novamente o **Fortify** válida as informações assim realizando o login ou retornando o usuário para a página de login com mais informações.
 
 Após logado, o usuário tem acesso a novas funcionalidades como a criação de um novo Ponto de Coleta.
 
-#### LOGOUT - `Fortify`  
+###### LOGOUT - `Fortify`  
 O logout é realizado através de um botão encontrado no *header*  da aplicação.
 
 Nada mais é de que um formulário com **POST** com design de um botão para realizar o logout atravês do `Fortify`.
@@ -72,7 +83,7 @@ Nada mais é de que um formulário com **POST** com design de um botão para rea
 Após isso o usuário será redirecionado a área de login e suas informações da sessão serão removidas.
 
 
-#### RECUPERAÇÃO DE SENHA - `Fortify`
+###### RECUPERAÇÃO DE SENHA - `Fortify`
 
 Caso o usuário esqueça sua senha, a recuperação da informação segue o seguinte fluxo: 
 
@@ -115,13 +126,13 @@ A atualização de informações acontece manualmente apartir da geração de um
 Ainda estou vendo alguma maneira de conseguir buscar o ponto especifico no mapa apartir da página com mais informações sobre um ponto.
 
 
-#### LISTAR PONTOS 
+###### LISTAR PONTOS 
 
 Acessando a home é carregado as informações dos pontos de coletas registrados no banco de dados e renderizado como cards para a visualização. 
 
 Ao clicar em qualquer card sobre um ponto, o usuário é redirecionado para uma página com mais detalhes e informações sobre o ponto.
 
-#### CADASTRAR UM NOVO PONTO DE COLETA
+###### CADASTRAR UM NOVO PONTO DE COLETA
 Para cadastrar um novo Ponto de Coleta, é realizar o preenchimento do formulário com as seguintes informações
 
 - Nome do Ponto de Coleta
@@ -156,12 +167,12 @@ Após isso é realizado o registro das informações no banco de dados na entida
 
 >⚠️ *Aviso sobre permissões:* somente usuários que validaram sua conta através da verificação por email podem realizar realizar esta tarefa 
 
-#### APAGAR Ponto de Coleta
+###### APAGAR PONTO DE COLETA
 Para apagar um Ponto de Coleta o usuário deve estar na página de visualização do ponto e deve ser o **mesmo usuário que cadastrou o Ponto de Coleta**, caso contrário nenhuma opção sera mostrada.
 
 O mesmo se aplica a questão de *Editar* as informações do Ponto de Coleta
 
-#### EDITAR INFORMAÇÕES DO Ponto de Coleta
+###### EDITAR INFORMAÇÕES DO PONTO DE COLETA
 A alteração de informações de um Ponto de Coleta esta disponivel a partir de um modal com um formulário com as informações atuais do Ponto de Coleta, onde **somente o usuário que registrou o Ponto de Coleta** terá acesso a estas informações e funcionalidades.
 
 O mesmo se aplica a questão de *Apagar* um Ponto de Coleta do banco de dados.

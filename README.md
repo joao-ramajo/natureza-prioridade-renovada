@@ -18,6 +18,7 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
     - [Tratamento de Exceções](#tratamento-de-exceçôes)
     - [Envio de Email Crítico](#envio-de-email-crítico)
 - [Entidades e Banco e Dados](#entidades-e-banco-de-dados)
+    - [Estrutura das Tabelas](#estrutura-das-tabelas)
     - [Relacionamentos](#relacionamentos)
 - [Prótotipo e implementação](#protótipo-e-implementação)
     - [BEM-CSS e Boostrap](#bem-css-e-boostrap)
@@ -313,7 +314,7 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 #### ESTRUTURA DAS TABELAS
 
 
-![Estrutura do banco de dados](./public/readme/db_tables_structure.png)
+![Diagrama do banco de dados](./public/readme/db_tables_structure.png)
 
 ###### RELACIONAMENTOS
 Explicação sobre os relacionamentos entre as tabelas
@@ -337,9 +338,10 @@ Durante o desenvolvimento do projeto, acabei por manter o foco no desenvolviment
 
 Com o avanço atual, acredito que seja um bom momento para dar um foco maior no design da aplicação, com isso seguirei um protótipo desenvolvido por mim a alguns meses. 
 
->*💡Link para o protótipo:* [Figma](https://www.figma.com/proto/kqSC0SenHVFGteao7iXU4s/NPR?node-id=47-150&t=Nlp0cxyyPYAvJCA0-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=4%3A34)
 
 Será necessário realizar algumas alterações com base em mudanças que aconteceram durante o desenvolvimento, algumas escolhas que eu havia feito para o protótipo não são tão coesas quando falamos sobre Usabilidade e Responsividade.
+
+>*💡Link para o protótipo:* [Figma](https://www.figma.com/proto/kqSC0SenHVFGteao7iXU4s/NPR?node-id=47-150&t=Nlp0cxyyPYAvJCA0-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=4%3A34)
 
 ###### BEM-CSS E BOOSTRAP
 

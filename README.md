@@ -15,6 +15,7 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 - [Observabilidade](#observabilidade)
 - [Entidades e Banco e Dados](#entidades-e-banco-de-dados)
     - [Relacionamentos](#relacionamentos)
+- [Prótotipo e implementação](#protótipo-e-implementação)
 ---
 
 ### TECNOLOGIAS IMPLEMENTADAS
@@ -373,6 +374,18 @@ Relacionamento de um para muitos, um usuário pode ter vários pontos de coleta 
 Relacionamento muitos para muitos, onde um Ponto de Coleta pode estar relacionado a diversas categorias, e uma categoria pode estar ligada com vários pontos de coleta. 
 
 Neste caso foi necessário a criação de uma tabela pivô para o gerenciamento entre este relacionamento. 
+
+
+#### PROTÓTIPO E IMPLEMENTAÇÃO 
+
+Durante o desenvolvimento do projeto, acabei por manter o foco no desenvolvimento do sistema, assim acabei por criar páginas simples somente para visualizar o essencial.
+
+Com o avanço atual, acredito que seja um bom momento para dar um foco maior no design da aplicação, com isso seguirei um protótipo desenvolvido por mim a alguns meses. 
+
+>*💡Link para o protótipo:* [Figma](https://www.figma.com/proto/kqSC0SenHVFGteao7iXU4s/NPR?node-id=47-150&t=Nlp0cxyyPYAvJCA0-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=4%3A34)
+
+Será necessário realizar algumas alterações com base em mudanças que aconteceram durante o desenvolvimento, algumas escolhas que eu havia feito para o protótipo não são tão coesas quando falamos sobre Usabilidade e Responsividade.
+
 
 
 <!-- 

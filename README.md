@@ -16,6 +16,7 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 - [Entidades e Banco e Dados](#entidades-e-banco-de-dados)
     - [Relacionamentos](#relacionamentos)
 - [Prótotipo e implementação](#protótipo-e-implementação)
+    - [BEM-CSS e Boostrap](#bem-css-e-boostrap)
 ---
 
 ### TECNOLOGIAS IMPLEMENTADAS
@@ -108,7 +109,7 @@ Apesar de extensas, acredito serem informações importantes para o registro de 
 
 Após preencher e realizar o envio, o sistema irá validar as informações usando a classe `Requests/CollectionPoint/StoreRequest` para realizar a verificação dos campos com base em regras especificas para cada campo, caso não tenha problemas seguira o fluxo até o `CollectionPointController` para realizar a inserção no banco de dados.
 
-Neste ponto, será válidade primeiro se os hórarios de funcionamento são coerentes, evitando assim que um horário de abertura seja maior que o hórario de fechamento 
+Neste ponto, será válidade primeiro se os horários de funcionamento são coerentes, evitando assim que um horário de abertura seja maior que o horário de fechamento 
 
 **Exemplo:** Se o local abre as 12:00 e fecha as 06:00 não será uma informação válida para o sistema e irá retornar para a página de cadastro com um aviso.
 
@@ -125,7 +126,7 @@ A requisição acontece apartir de uma chamada de função assíncrona que esper
 
 Caso aconteça algum erro ou não encontre as informações, o usuário será informado que deve verificar o cep ou preencher as informações a mão caso tenha certeza que a informaçãoe está correta.   
 
->⚠️ *Aviso sobre permissões:* somente usuários que validaram sua conta atrâves da verificação por email podem reaalizar realizar esta tarefa 
+>⚠️ *Aviso sobre permissões:* somente usuários que validaram sua conta atrâves da verificação por email podem realizar realizar esta tarefa 
 
 #### APAGAR Ponto de Coleta
 Para apagar um Ponto de Coleta o usuário deve estar na página de visualização do ponto e deve ser o **mesmo usuário que cadastrou o Ponto de Coleta**, caso contrário nenhuma opção sera mostrada.

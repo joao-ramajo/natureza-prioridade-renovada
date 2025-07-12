@@ -69,15 +69,17 @@
             <i class="bi bi-arrow-left-circle me-2"></i> Voltar à lista
         </a>
 
-        @if ($point->user_id == Auth::user()->id)
-            @include('collectionPoint.modal.edit_modal')
-            <form action="{{ route('collection_point.destroy', ['id' => Crypt::encrypt($point->id)]) }}" method="POST">
-                @method('DELETE')
-                @csrf
+        @auth
+            @if ($point->user_id == Auth::user()->id)
+                @include('collectionPoint.modal.edit_modal')
+                <form action="{{ route('collection_point.destroy', ['id' => Crypt::encrypt($point->id)]) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
 
-                <input type="submit" value="Apagar Ponto" class="btn btn-outline-danger">
-            </form>
-        @endif
+                    <input type="submit" value="Apagar Ponto" class="btn btn-outline-danger">
+                </form>
+            @endif
+        @endauth
 
     </div>
 @endsection

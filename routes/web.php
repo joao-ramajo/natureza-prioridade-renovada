@@ -25,12 +25,12 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
 
-     Route::get('/home', [MainController::class, 'index'])->name('home');
-     Route::get('/ponto-de-coleta/{id}', [MainController::class, 'view'])->name('collection_point.view');
-     
+
+
+
      Route::middleware(['verified'])->group(function () {
           Route::get('/ponto-de-coleta', [MainController::class, 'collectionPoint'])->name('collection_point.index');
-          Route::get('/mapa', [MainController::class, 'map'])->name('map');
+
           Route::post('/ponto-de-coleta', [CollectionPointController::class, 'store'])->name('collection_point.store');
      });
 
@@ -52,3 +52,8 @@ Route::prefix('ponto-de-coleta')->group(function () {
           Route::delete('/{id}', [CollectionPointController::class, 'destroy'])->name('collection_point.destroy');
      });
 });
+
+// ROTAS PÚBLICAS
+Route::get('/home', [MainController::class, 'index'])->name('home');
+Route::get('/ponto-de-coleta/{id}', [MainController::class, 'view'])->name('collection_point.view');
+Route::get('/mapa', [MainController::class, 'map'])->name('map');

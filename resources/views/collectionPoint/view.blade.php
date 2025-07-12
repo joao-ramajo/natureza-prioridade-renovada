@@ -1,6 +1,7 @@
 @extends('layouts.main_layout')
 
 @section('content')
+    <x-layout.header></x-layout.header>
     <div class="container py-5">
         <h2 class="mb-4">
             <i class="bi bi-geo-alt-fill text-primary"></i> {{ $point->name }}

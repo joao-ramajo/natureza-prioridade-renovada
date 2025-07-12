@@ -55,5 +55,6 @@ Route::prefix('ponto-de-coleta')->group(function () {
 
 // ROTAS PÚBLICAS
 Route::get('/home', [MainController::class, 'index'])->name('home');
+Route::redirect('/', '/home');
 Route::get('/ponto-de-coleta/{id}', [MainController::class, 'view'])->name('collection_point.view');
 Route::get('/mapa', [MainController::class, 'map'])->name('map');

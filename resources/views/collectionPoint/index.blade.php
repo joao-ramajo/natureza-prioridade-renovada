@@ -1,6 +1,7 @@
 @extends('layouts.main_layout')
 
 @section('content')
+    <x-layout.header></x-layout.header>
     <x-form.form method="POST" route="collection_point.store" title="Novo ponto de coleta" btnLabel="Cadastrar">
         <x-alerts.alert />
 

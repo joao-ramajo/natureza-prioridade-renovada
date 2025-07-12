@@ -1,9 +1,10 @@
 @extends('layouts.main_layout')
 
 @section('content')
+    <x-layout.header></x-layout.header>
     <section id="collectionPoints" class="container py-5">
 
-      
+
 
         <h2 class="mb-4 text-center">Pontos de Coleta</h2>
 

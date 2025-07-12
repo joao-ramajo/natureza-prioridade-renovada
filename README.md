@@ -313,74 +313,8 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 #### ESTRUTURA DAS TABELAS
 
 
-![Estrutura do banco de dados feito](./public/readme/db_tables_structure.png)
+![Estrutura do banco de dados](./public/readme/db_tables_structure.png)
 
-<!-- 
-1. Tabela `users` (Usuários)
-
-| Campo                        | Tipo                    | Observações                      |
-| ---------------------------- | ----------------------- | -------------------------------- |
-| id                           | bigint (auto-increment) | Chave primária                      |
-| name                         | string(100)             | –                                |
-| email                        | string(100)             | Valor único                         |
-| email\_verified\_at          | timestamp               | opcional                       |
-| password                     | string(200)             | –                                |
-| two\_factor\_secret          | text                    | opcional                       |
-| two\_factor\_recovery\_codes | text                    | opcional                       |
-| two\_factor\_confirmed\_at   | timestamp               | opcional                       |
-| remember\_token              | string (100)            | Token de sessão automática       |
-| created\_at                  | timestamp               |            |
-| updated\_at                  | timestamp               | –                                |
-| deleted\_at                  | timestamp               |  |
-
-2. Tabela `password_reset_tokens` - `Fortify`
-
-| Campo       | Tipo      | Observações   |
-| ----------- | --------- | ------------- |
-| email       | string    | Chave primária |
-| token       | string    | –             |
-| created\_at | timestamp | opcional    |
-
-3. Tabela `categories` (Categorias)
-
-| Campo | Tipo                    | Observações |
-| ----- | ----------------------- | ----------- |
-| id    | bigint (auto-increment) | Chave primária |
-| name  | string(30)              | Valor único    |
-
-4. Tabela `collection_points` (Pontos de Coleta) 
-
-| Campo        | Tipo                    | Observações                                       |
-| ------------ | ----------------------- | ------------------------------------------------- |
-| id           | bigint (auto-increment) | Chave primária                                       |
-| name         | string(60)              | Valor único                                          |
-| cep          | string(8)               | –                                                 |
-| score        | integer                 |                                       |
-| user\_id     | foreignId               | ID do usuário que registrou |
-| street       | string                  | –                                                 |
-| number       | string                  | opcional                                        |
-| complement   | string                  | opcional                                        |
-| neighborhood | string                  | –                                                 |
-| city         | string                  | –                                                 |
-| state        | string(2)               | –                                                 |
-| latitude     | decimal(10, 7)          | opcional                                        |
-| longitude    | decimal(10, 7)          | opcional                                        |
-| open\_from   | time                    | Horário de abertura                               |
-| open\_to     | time                    | Horário de fechamento                             |
-| days\_open   | string                  | Dias de funcionamento (ex: seg-sex)               |
-| description  | text                    | opcional                                        |
-| created\_at  | timestamp               |                                     |
-| updated\_at  | timestamp               | –                                                 |
-| deleted\_at  | timestamp               |                   |
-
-5. Tabela Pivô `collection_point_category`
-
-| Campo                 | Tipo                    | Observações                                                   |
-| --------------------- | ----------------------- | ------------------------------------------------------------- |
-| id                    | bigint (auto-increment) | Chave primária                                                   |
-| collection\_point\_id | foreignId               | ID do Ponto de Coleta |
-| category\_id          | foreignId               | ID da categoria        |
- -->
 ###### RELACIONAMENTOS
 Explicação sobre os relacionamentos entre as tabelas
 

@@ -10,7 +10,7 @@ use App\Services\Operations;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Cache;
 
 class MainController extends Controller
 {
@@ -30,8 +30,9 @@ class MainController extends Controller
     {
         $points = $this->collectionPointService->getAllWithSearchIndex($request);
 
-        $categories = $this->categoryService->getAllCategoriesWithPointExists();
-
+        $categories = Cache::remember('all_categories_with_exists_point', 360000, function() {
+            return $this->categoryService->getAllCategoriesWithPointExists();
+        });
 
         return view('home', [
             'points' => $points,

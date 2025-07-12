@@ -9,6 +9,8 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 - [Tecnologias](#tecnologias-implementadas)
 - [Operações de Usuário](#operações-das-entidades-do-sistema)
 - [Pontos de Coleta](#pontos-de-coleta)
+    - [Integração com a ViaCEP](#integração-com-a-api-da-viacep)
+    - [Integração com OpenCage API]()
 - [Níveis de Acesso](#níveis-de-acesso)
 - [Como Rodar o Projeto](#como-rodar-o-projeto-localmente)
 - [Rotas](#rotas)
@@ -89,7 +91,7 @@ Acessando a home é carregado as informações dos pontos de coletas registrados
 
 Ao clicar em qualquer card sobre um ponto, o usuário é redirecionado para uma página com mais detalhes e informações sobre o ponto.
 
-#### CADASTRAR UM NOVO Ponto de Coleta
+#### CADASTRAR UM NOVO PONTO DE COLETA
 Para cadastrar um novo Ponto de Coleta, é realizar o preenchimento do formulário com as seguintes informações
 
 - Nome do Ponto de Coleta
@@ -121,12 +123,22 @@ O CEP irá ser formatado para remover a pontuação.
 
 Após isso é realizado o registro das informações no banco de dados na entidade `collection_points` e após isso com base nas informações das categorias será registrado na tabela pivô entre os pontos de coleta e as categorias suas respectivas categorias.
 
-**Integração com a *api* da [ViaCEP](https://viacep.com.br/)**
+###### INTEGRAÇÃO COM A API DA [ViaCEP](https://viacep.com.br/)
 O uso da api é feito a partir de uma requisição *fetch* em javascript que se encontrar resultados válidos irá substituir os campos rua, bairro, cidade e estado, automaticamente, facilitando assim o preenchimento das informações.
 
 A requisição acontece apartir de uma chamada de função assíncrona que espera uma resposta *json* com as informações de endereço.
 
 Caso aconteça algum erro ou não encontre as informações, o usuário será informado que deve verificar o cep ou preencher as informações a mão caso tenha certeza que a informaçãoe está correta.   
+
+###### INTEGRAÇÃO COM A API DA [OpenCage](https://opencagedata.com/)
+
+Para buscar as informações de latitude e longitude dos endereços, buscando diminuir a complexidade do formulário de cadastro de um novo ponto de coleta.
+
+A *OpenCage* disponibiliza uma api que com base nas informações do endereço, retorna dados detalhados relacionados a outras informações que a *ViaCEP* não disponibiliza como `Latitude` e `Longitude` que para uma integração com mapas é de grande utilizade por facilitar a comunicação entre estes serviços.
+
+Em relação as limitações, na busca por apis que ofereçam este tipo de serviço, a OpenCage disponibiliza um plano gratuito com uma quantidade generosa de requisições por mês, mas infelizmente sua precisão se perde por alguns bairros.
+
+Mas dentro das limitações ela serve bem a um objetivo simples.
 
 >⚠️ *Aviso sobre permissões:* somente usuários que validaram sua conta atrâves da verificação por email podem realizar realizar esta tarefa 
 

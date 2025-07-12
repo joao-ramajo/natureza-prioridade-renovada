@@ -3,6 +3,10 @@
 use App\Http\Controllers\CollectionPointController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
+use App\Jobs\WelcomeEmailJob;
+use App\Mail\Welcome;
+use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -58,3 +62,4 @@ Route::get('/home', [MainController::class, 'index'])->name('home');
 Route::redirect('/', '/home');
 Route::get('/ponto-de-coleta/{id}', [MainController::class, 'view'])->name('collection_point.view');
 Route::get('/mapa', [MainController::class, 'map'])->name('map');
+

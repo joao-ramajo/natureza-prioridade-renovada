@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Jobs\WelcomeEmailJob;
 use App\Mail\Welcome;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -32,8 +33,7 @@ class CreateNewUser implements CreatesNewUsers
             ],
             'password' => $this->passwordRules(),
         ])->validate();
-
-        Mail::to($input['email'])->send(new Welcome($input['name']));
+        WelcomeEmailJob::dispatch($input['email'], $input['name']);
 
         return User::create([
             'name' => $input['name'],

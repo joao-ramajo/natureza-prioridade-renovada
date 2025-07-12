@@ -47,6 +47,13 @@
                     </h5>
                     <p class="fs-6">{{ $point->description }}</p>
                 @endif
+
+                @if ($point->latitude && $point->longitude)
+                    <h5 class="mt-4">
+                        <i class="bi bi-geo"></i> Latitude e Longitude
+                    </h5>
+                    <p class="fs-6">{{ $point->latitude }}  {{ $point->longitude }}</p>
+                @endif
             </div>
 
             <div class="col-md-6">

@@ -8,6 +8,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class CollectionPointService extends Service
@@ -65,6 +66,35 @@ class CollectionPointService extends Service
             Log::channel('npr')->error("Erro ao buscar categorias para esquema de buscas", ['exception' => $e->getMessage()]);
 
             return new LengthAwarePaginator([], 0, 10);
+        }
+    }
+
+    public function getGeoInfo($cep, $bairro, $cidade, $estado, $rua): array
+    {
+        try {
+            $cepFormatado = preg_replace('/\D/', '', $cep); // só números
+            $q = "{$rua}, {$bairro}, {$cidade}, {$estado}, Brasil, {$cepFormatado}";
+
+            $response = Http::withoutVerifying()->get('https://api.opencagedata.com/geocode/v1/json', [
+                'q' => $q,
+                'key' => env('OPENCAGE_API_KEY'),
+                'language' => 'pt-BR',
+                'limit' => 1
+            ]);
+            $data = $response->json();
+
+
+            $lat = $data['results'][0]['geometry']['lat'];
+            $lng = $data['results'][0]['geometry']['lng'];
+            $geo = [
+                'latitude' => $lat,
+                'longitude' =>  $lng
+            ];
+
+            return $geo;
+        } catch (Exception $e) {
+            Log::channel('npr')->error('Erro ao buscar latitude e longitude', ['exception' => $e->getMessage()]);
+            return [];
         }
     }
 }

@@ -15,6 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CollectionPointController extends Controller
 {
@@ -41,9 +42,19 @@ class CollectionPointController extends Controller
                 ->withInput();
         }
 
+        // OPEN GATE API
+        $geodata = $this->collectionPointService->getGeoInfo($request->input('cep'), $request->input('neighborhood'), $request->input('city'), $request->input('state'), $request->input('street'));
+
+
+
         $days_open = implode(' - ', $request->days_open);
 
         $point = new CollectionPoint();
+
+        if ($geodata) {
+            $point->latitude = $geodata['latitude'];
+            $point->longitude = $geodata['longitude'];
+        }
 
         $point->name = $request->input('name');
         $point->cep = str_replace('-', '', $request->input('cep'));
@@ -64,13 +75,13 @@ class CollectionPointController extends Controller
 
         try {
             $point->save();
-
             $point->categories()->sync($categories_id);
             // dd($categories_id);
             return redirect()
                 ->route('home')
                 ->with('success', 'Ponto de coleta cadastrado com sucesso !');
         } catch (QueryException $e) {
+            Log::channel('npr')->error('Houve um erro ao salvar o ponto de coleta', ['exception' => $e->getMessage()]);
             if ($e->getCode() === '23000') {
                 return back()
                     ->withInput()

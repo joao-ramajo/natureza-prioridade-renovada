@@ -13,6 +13,8 @@ Acredito que seja um bom projeto para implementar e aprofundar meus conhecimento
 - [Como Rodar o Projeto](#como-rodar-o-projeto-localmente)
 - [Rotas](#rotas)
 - [Observabilidade](#observabilidade)
+    - [Tratamento de Exceções](#tratamento-de-exceçôes)
+    - [Envio de Email Crítico](#envio-de-email-crítico)
 - [Entidades e Banco e Dados](#entidades-e-banco-de-dados)
     - [Relacionamentos](#relacionamentos)
 - [Prótotipo e implementação](#protótipo-e-implementação)
@@ -279,15 +281,17 @@ Enquanto isso os erros são guardados em arquivos de logs usando um canal person
 
 Para erros críticos em funcionalidades essenciais como um erro de conexão de banco de dados, além do sistema de `Log` implementei um handler com o envio de email para no momento em que algum problema for identificado, que seja rapidamente encontrado pela equipe de desenvolvimento.
 
-###### COMO FUNCIONA ? 
+###### ENVIO DE EMAIL CRÍTICO 
 
-Ao ser lançado uma exceção do tipo `QueryException` será interpretada como um erro de conexão com o banco de dados que deve ser verificado o quanto antes, com isso é chamado a `Facade` de envio de emails do laravel, executa o envio de email. 
+Ao ser lançado uma exceção do tipo `QueryException` será interpretada como um erro de conexão com o banco de dados que deve ser verificado o quanto antes.
+ 
+Após isso o handler `handleCriticalException` que vai logar o erro em `npr.log` e em seguida, fazer a chamada para o job `SystemErrorNotificationJob` que se responsabiliza pelo envio do email de forma assíncrona.
 
-Caso aconteça de o envio de email também falhar, é logado junto do erro crítico uma mensagem informando que o email não foi enviado.
+Caso aconteça de o envio de email também falhar, como o envio acontece atravês de um service que está encarregado de lidar com o resultado do envio, é logado junto do erro e uma mensagem informando que o email não foi enviado.
 
-Se não acontecer e ocorrer tudo bem também é guardado uma mensagem informando que o email foi enviado com sucesso.
+Se não acontecer e ocorrer tudo bem também é guardado uma mensagem informando que o email foi enviado com sucesso e o responsável recebe a mensagem de erro sem a necessidade de entrar no sistema.
 
-> ⚠️*Sobre o envio de email:* para o desenvolvimento local, o driver do envio de emails guarda os emails apenas em logs em `laravel.log`
+
 
 ## ENTIDADES E BANCO DE DADOS
 O uso de um banco de dados relacional como o *MySQL* parece uma escolha certa quando vou pensar no escopo do projeto, estrutura de dados fixos e relacionamentos entre entidades trazem muitos benefícios com a estrutura do projeto, a partir do momento em que as informações que vão ser utilizadas são fixas e possuem relacionamentos com um certo nivel de complexidade.

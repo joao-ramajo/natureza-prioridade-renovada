@@ -312,6 +312,10 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 
 #### ESTRUTURA DAS TABELAS
 
+
+![Estrutura do banco de dados feito](./public/readme/db_tables_structure.png)
+
+<!-- 
 1. Tabela `users` (Usuários)
 
 | Campo                        | Tipo                    | Observações                      |
@@ -376,7 +380,7 @@ Com isso o uso de um banco de dados relacional se mostra uma ótima escolha, sej
 | id                    | bigint (auto-increment) | Chave primária                                                   |
 | collection\_point\_id | foreignId               | ID do Ponto de Coleta |
 | category\_id          | foreignId               | ID da categoria        |
-
+ -->
 ###### RELACIONAMENTOS
 Explicação sobre os relacionamentos entre as tabelas
 

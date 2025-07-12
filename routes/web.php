@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CollectionPointController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
@@ -63,3 +64,6 @@ Route::redirect('/', '/home');
 Route::get('/ponto-de-coleta/{id}', [MainController::class, 'view'])->name('collection_point.view');
 Route::get('/mapa', [MainController::class, 'map'])->name('map');
 
+
+
+// Route::get('/csv', [AdminController::class, 'exportCsv'])->name('csv-export');

@@ -1,0 +1,106 @@
+@import "../variables";
+
+.form {
+    width: 400px;
+    min-height: 500px;
+
+    .form-subtitle {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 20px;
+
+        font-family: $fonte-riot !important;
+    }
+
+    .form-input {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        margin-bottom: 20px;
+
+        .form-input__label {
+            margin-left: 10px;
+            margin-bottom: 10px;
+
+            font-size: 20px;
+        }
+
+        .form-input__input {
+            width: 100%;
+            height: 50px;
+            padding: 18px 10px;
+            font-size: 18px;
+
+            border-radius: 8px;
+            border: 1px solid black;
+        }
+
+        .form-input__forgot-password {
+            margin-top: 10px;
+        }
+    }
+
+    .form-input__show-password {
+        margin-left: 10px;
+        margin-top: 10px;
+        display: flex;
+        // background-color: orange;
+        justify-content: flex-start;
+        align-items: center;
+        .form-show-password__checkbox {
+            width: 15px;
+            height: 15px;
+            margin-right: 10px;
+        }
+
+        .form-show-password__label {
+            font-size: 14px;
+        }
+    }
+
+    .form__submit-button {
+        width: 100%;
+        height: 50px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 32px;
+
+        border-radius: 8px;
+
+        background-color: $verde-floresta;
+        color: white;
+        box-shadow: none;
+        border: none;
+
+        font-family: $font-text;
+        font-weight: 200;
+
+        transition: 0.5s ease all;
+        &:hover {
+            background-color: $verde-floresta-negra;
+        }
+    }
+
+    .form-checkbox {
+        margin-bottom: 2rem;
+        .form-checkbox__input {
+            width: 15px;
+            height: 15px;
+            margin-right: 10px;
+        }
+
+        .form-checkbox__label {
+            font-family: $font-text;
+            font-size: $font-size-paragraph;
+            transform: translateY(-2px);
+        }
+    }
+
+    .form-input_error{
+        color: red;
+        margin-top: 5px;
+    }
+}

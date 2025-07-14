@@ -21,49 +21,28 @@
   font-family: "Roboto", sans-serif;
 }
 
-body {
-  overflow-X: hidden;
-}
-
-.logo {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  z-index: -1;
-  width: 100px;
-}
-
-.main_content {
-  min-height: 98vh;
-}
-.main_content .left-side {
-  margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.main_content .left-side .form {
+.form {
   width: 400px;
-  height: 500px;
+  min-height: 500px;
 }
-.main_content .left-side .form .form-subtitle {
+.form .form-subtitle {
   text-align: center;
   font-size: 32px;
   margin-bottom: 20px;
   font-family: "Protest Riot", cursive !important;
 }
-.main_content .left-side .form .form-input {
+.form .form-input {
   display: flex;
   flex-direction: column;
   width: 400px;
   margin-bottom: 20px;
 }
-.main_content .left-side .form .form-input .form-input__label {
+.form .form-input .form-input__label {
   margin-left: 10px;
   margin-bottom: 10px;
   font-size: 20px;
 }
-.main_content .left-side .form .form-input .form-input__input {
+.form .form-input .form-input__input {
   width: 100%;
   height: 50px;
   padding: 18px 10px;
@@ -71,25 +50,25 @@ body {
   border-radius: 8px;
   border: 1px solid black;
 }
-.main_content .left-side .form .form-input .form-input__forgot-password {
+.form .form-input .form-input__forgot-password {
   margin-top: 10px;
 }
-.main_content .left-side .form .form-input__show-password {
+.form .form-input__show-password {
   margin-left: 10px;
   margin-top: 10px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
-.main_content .left-side .form .form-input__show-password .form-show-password__checkbox {
+.form .form-input__show-password .form-show-password__checkbox {
   width: 15px;
   height: 15px;
   margin-right: 10px;
 }
-.main_content .left-side .form .form-input__show-password .form-show-password__label {
+.form .form-input__show-password .form-show-password__label {
   font-size: 14px;
 }
-.main_content .left-side .form .form__submit-button {
+.form .form__submit-button {
   width: 100%;
   height: 50px;
   display: flex;
@@ -105,13 +84,23 @@ body {
   font-weight: 200;
   transition: 0.5s ease all;
 }
-.main_content .left-side .form .form__submit-button:hover {
+.form .form__submit-button:hover {
   background-color: #007000;
 }
-.main_content .right-side {
-  background-color: rgb(10, 0, 152) !important;
-  position: relative;
-  background-image: url("/assets/img/arvores.jpg");
-  background-size: cover;
-  background-position: center;
-}/*# sourceMappingURL=main.css.map */
+.form .form-checkbox {
+  margin-bottom: 2rem;
+}
+.form .form-checkbox .form-checkbox__input {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+.form .form-checkbox .form-checkbox__label {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  transform: translateY(-2px);
+}
+.form .form-input_error {
+  color: red;
+  margin-top: 5px;
+}/*# sourceMappingURL=Form.css.map */

@@ -1,32 +1,34 @@
+@import "./globals";
 @import url("https://fonts.googleapis.com/css2?family=Protest+Riot&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
 $fonte-riot: "Protest Riot", cursive;
-$fonte-roboto: "Roboto", sans-serif;
-
-* {
-    margin: 0px;
-    padding: 0px;
-    // height: 100%;
-    box-sizing: border-box;
-    font-family: $fonte-roboto;
-}
-
-.separator {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #666;
-    font-weight: 600;
-    margin: 20px 0;
-}
-
-.separator::before,
-.separator::after {
-    content: "";
-    flex: 1;
-    border-bottom: 1px solid #3d3d3d;
-    margin: 0 10px;
-}
 
 $verde-floresta: #03a303;
 $verde-floresta-negra: #007000;
 $fonte-padrao: "sans";
+
+// Peso da fonte
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+// Fonte principal serifada
+$font-primary: "Protest Riot", cursive;
+$font-text: "Roboto", sans-serif;
+// Cores
+$color-primary: #03a303; // azul escuro principal
+$color-primary-darker: #007000; // azul ainda mais escuro
+$color-text-dark: #333333; // cinza escuro para texto
+$color-contrast-light: #f5f5f5; // laranja dourado vibrante
+
+// Tamanhos de fonte (em rem)
+$font-size-title: 2.5rem; // títulos principais (ex: h1)
+$font-size-subtitle: 1.5rem; // subtítulos (ex: h2, h3)
+$font-size-paragraph: 1rem; // texto padrão (parágrafos)
+
+* {
+    // margin: 0px;
+    // padding: 0px;
+    // height: 100%;
+    box-sizing: border-box;
+    font-family: $font-text;
+}

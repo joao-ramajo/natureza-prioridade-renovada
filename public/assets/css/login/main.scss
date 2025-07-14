@@ -1,7 +1,7 @@
 @import "../variables";
 
 body {
-    overflow: hidden;
+    overflow-X: hidden;
 }
 
 .logo {
@@ -96,7 +96,7 @@ body {
                 box-shadow: none;
                 border: none;
 
-                font-family: $fonte-roboto;
+                font-family: $font-text;
                 font-weight: 200;
 
                 transition: 0.5s ease all;

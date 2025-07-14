@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('register') }}" method="POST" class="form mx-auto">
+    <form action="{{ route('register') }}" method="POST" class="form mx-auto mb-5">
         @csrf
         <h2 class="form-subtitle">Cadastre-se</h2>
         <div class="form-input">

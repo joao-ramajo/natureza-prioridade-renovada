@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/notes', function () {
-     return view('notes');
-})->name('notes');
-
-
 Route::get('/', function () {
      try {
           DB::connection()->getPdo();

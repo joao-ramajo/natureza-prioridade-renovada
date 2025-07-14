@@ -34,7 +34,7 @@ class MainController extends Controller
             return $this->categoryService->getAllCategoriesWithPointExists();
         });
 
-        return view('home', [
+        return view('pages.home', [
             'points' => $points,
             'categories' => $categories
         ]);
@@ -50,7 +50,7 @@ class MainController extends Controller
 
     public function map(): View
     {
-        return view('map');
+        return view('pages.map');
     }
 
     public function view($id): View | RedirectResponse

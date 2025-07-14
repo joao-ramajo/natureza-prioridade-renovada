@@ -16,10 +16,12 @@
             <li>
                 <a href="{{ route('home') }}"><i class="bi bi-geo-alt-fill"></i> Pontos de Coleta</a>
             </li>
-            <li>
-                <a href="{{ route('collection_point.index') }}"><i class="bi bi-plus-circle-fill"></i> Cadastrar um
-                    ponto de coleta</a>
-            </li>
+            @auth
+                <li>
+                    <a href="{{ route('collection_point.index') }}"><i class="bi bi-plus-circle-fill"></i> Cadastrar um
+                        ponto de coleta</a>
+                </li>
+            @endauth
         </ul>
 
         <div class="separator">NPR</div>

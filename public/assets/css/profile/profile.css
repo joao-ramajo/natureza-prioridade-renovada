@@ -1,0 +1,94 @@
+.profile {
+  padding: 60px 0;
+  background: #f2f8f3;
+}
+.profile-sidebar {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.profile-sidebar__header {
+  position: relative;
+}
+.profile-sidebar__image {
+  width: 100%;
+  border-radius: 12px;
+}
+.profile-sidebar__badges {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+}
+.profile-sidebar__badges .profile-sidebar__badge {
+  background: #fff;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+.profile-sidebar__name {
+  margin-top: 30px;
+  font-size: 1.4rem;
+  color: #2e7d32;
+  font-weight: bold;
+}
+.profile-sidebar__menu {
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+}
+.profile-sidebar__menu li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  padding: 8px 0;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s;
+}
+.profile-sidebar__menu li:hover {
+  color: #2e7d32;
+}
+.profile-sidebar__menu li i {
+  font-size: 1.1rem;
+}
+.profile-sidebar__menu__delete {
+  color: #e53935 !important;
+}
+.profile-sidebar__menu__delete:hover {
+  color: #b71c1c !important;
+}
+.profile-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.profile-content h4 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.profile-content__card {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.profile-content__title {
+  font-weight: bold;
+  color: #2e7d32;
+}
+.profile-content__rating {
+  color: #ffc107;
+  font-size: 1.2rem;
+}
+.profile-content__author {
+  font-size: 0.9rem;
+  color: #1976d2;
+}/*# sourceMappingURL=profile.css.map */

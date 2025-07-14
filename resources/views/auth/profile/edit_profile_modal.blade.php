@@ -1,6 +1,6 @@
 <!-- Botão para abrir o modal -->
-<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-    <i class="bi bi-pencil-square me-1"></i> Editar Perfil
+<button type="button" class="btn w-100 px-0" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+    <li><i class="bi bi-pencil-square"></i> Alterar Dados</li>
 </button>
 
 <!-- Modal -->

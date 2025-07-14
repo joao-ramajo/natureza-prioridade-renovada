@@ -1,0 +1,112 @@
+.profile {
+    padding: 60px 0;
+    background: #f2f8f3;
+
+    &-sidebar {
+        background: #fff;
+        border-radius: 16px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+        &__header {
+            position: relative;
+        }
+
+        &__image {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        &__badges {
+            display: flex;
+            justify-content: space-around;
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+
+            .profile-sidebar__badge {
+                background: #fff;
+                padding: 5px 10px;
+                border-radius: 12px;
+                font-size: 0.8rem;
+                font-weight: 500;
+                box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        &__name {
+            margin-top: 30px;
+            font-size: 1.4rem;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        &__menu {
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+
+            li {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 1rem;
+                padding: 8px 0;
+                cursor: pointer;
+                color: #333;
+                transition: color 0.2s;
+
+                &:hover {
+                    color: #2e7d32;
+                }
+
+                i {
+                    font-size: 1.1rem;
+                }
+            }
+
+            &__delete {
+                color: #e53935 !important;
+
+                &:hover {
+                    color: #b71c1c !important;
+                }
+            }
+        }
+    }
+
+    &-content {
+        background: #fff;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+        h4 {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        &__card {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        &__title {
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        &__rating {
+            color: #ffc107;
+            font-size: 1.2rem;
+        }
+
+        &__author {
+            font-size: 0.9rem;
+            color: #1976d2;
+        }
+    }
+}

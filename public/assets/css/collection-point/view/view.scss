@@ -1,0 +1,145 @@
+@import '../../variables';
+
+.collection-detail {
+    padding: 60px 0;
+    background: #fff;
+
+    &__wrapper {
+        align-items: flex-start;
+    }
+
+    &__gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    &__main-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    &__thumbs {
+        display: flex;
+        gap: 12px;
+    }
+
+    &__thumb {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    &__info {
+        padding-left: 20px;
+    }
+
+    &__title {
+        color: $color-primary;
+        font-family: $font-primary;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    &__description {
+        margin: 20px 0;
+        color: $color-text-dark;
+        font-size: 1rem;
+    }
+
+    &__label {
+        font-weight: 600;
+        color: darken($color-text-dark, 10%);
+        margin-top: 10px;
+        margin-bottom: 2px;
+    }
+
+    &__text {
+        color: $color-text-dark;
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    &__map-link {
+        color: #000;
+        text-decoration: underline;
+        font-weight: 500;
+        display: inline-block;
+        margin-top: 5px;
+
+        &:hover {
+            color: #2e7d32;
+        }
+    }
+
+    &__rating {
+        font-size: 1.2rem;
+        color: #ffc107;
+    }
+
+    &__star {
+        &.is-filled {
+            color: #ffc107;
+        }
+
+        &:not(.is-filled) {
+            color: #ccc;
+        }
+    }
+
+    &__review-count {
+        font-size: 0.9rem;
+        color: #666;
+        margin-left: 8px;
+    }
+
+    &__author {
+        font-size: 0.9rem;
+        color: #666;
+
+        a {
+            color: #1976d2;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    color: $color-primary;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    margin-bottom: 20px;
+    transform: scale(1.4);
+
+    &:hover {
+        color: lighten($color-primary, 10%);
+        text-decoration: none;
+    }
+
+    &__icon {
+        font-size: 1.2rem;
+    }
+
+    &__text {
+        font-size: 1rem;
+    }
+}

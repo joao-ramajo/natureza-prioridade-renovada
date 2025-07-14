@@ -22,6 +22,10 @@
   font-family: "Roboto", sans-serif;
 }
 
+.no-text-decoration {
+  text-decoration: none;
+}
+
 .sidebar__toggle {
   position: fixed;
   top: 1rem;

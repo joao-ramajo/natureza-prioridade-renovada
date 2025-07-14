@@ -32,3 +32,7 @@ $font-size-paragraph: 1rem; // texto padrão (parágrafos)
     box-sizing: border-box;
     font-family: $font-text;
 }
+
+.no-text-decoration{
+    text-decoration: none;
+}

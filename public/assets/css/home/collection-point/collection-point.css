@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Protest+Riot&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Protest+Riot&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #666;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #3d3d3d;
+  margin: 0 10px;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.no-text-decoration {
+  text-decoration: none;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #666;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #3d3d3d;
+  margin: 0 10px;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.no-text-decoration {
+  text-decoration: none;
+}
+
+.subtitle {
+  color: red;
+  font-family: "Protest Riot", cursive;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #4d4d4d;
+  text-shadow: 1.5px 1.5px 3px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  margin-bottom: 20px;
+}
+.subtitle::first-letter {
+  color: #03a303;
+}/*# sourceMappingURL=collection-point.css.map */

@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Protest+Riot&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Protest+Riot&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #666;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #3d3d3d;
+  margin: 0 10px;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.no-text-decoration {
+  text-decoration: none;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #666;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #3d3d3d;
+  margin: 0 10px;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.no-text-decoration {
+  text-decoration: none;
+}
+
+.collection-card {
+  border-radius: 6px;
+  background-color: #fff;
+  margin-bottom: 30px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.077);
+  max-width: 800px;
+}
+.collection-card__header {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 0.9rem;
+  color: #1976d2;
+  font-weight: 500;
+}
+.collection-card__body {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.collection-card__icon img {
+  width: 80px;
+  height: auto;
+}
+.collection-card__info {
+  flex: 1;
+}
+.collection-card__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #03a303;
+  font-family: "Protest Riot", cursive;
+  letter-spacing: 0.2rem;
+  margin-bottom: 10px;
+}
+.collection-card__description {
+  font-size: 1rem;
+  color: #333333;
+  margin-bottom: 10px;
+}
+.collection-card__categories {
+  font-size: 0.95rem;
+  color: #666666;
+  margin-bottom: 10px;
+}
+.collection-card__rating {
+  font-size: 1.2rem;
+  color: #ffc107;
+}
+.collection-card__star.is-filled {
+  color: #ffc107;
+}
+.collection-card__star:not(.is-filled) {
+  color: #ddd;
+}/*# sourceMappingURL=collection-card.css.map */

@@ -21,6 +21,10 @@
   font-family: "Roboto", sans-serif;
 }
 
+.no-text-decoration {
+  text-decoration: none;
+}
+
 .form {
   width: 90%;
   max-width: 500px;

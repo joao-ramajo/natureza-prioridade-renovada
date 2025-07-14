@@ -1,0 +1,74 @@
+@import '../../variables';
+@import '../../typography';
+
+.collection-card {
+    // border: 2px solid #2196f3;
+    border-radius: 6px;
+    background-color: #fff;
+    margin-bottom: 30px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.077);
+
+    max-width: 800px;
+
+    &__header {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 0.9rem;
+        color: #1976d2;
+        font-weight: 500;
+    }
+
+    &__body {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    &__icon img {
+        width: 80px;
+        height: auto;
+    }
+
+    &__info {
+        flex: 1;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: $color-primary;
+        font-family: $font-primary;
+        letter-spacing: .2rem;
+        margin-bottom: 10px;
+    }
+
+    &__description {
+        font-size: 1rem;
+        color: $color-text-dark;
+        margin-bottom: 10px;
+    }
+
+    &__categories {
+        font-size: 0.95rem;
+        color: lighten($color-text-dark, 20%);
+        margin-bottom: 10px;
+    }
+
+    &__rating {
+        font-size: 1.2rem;
+        color: #ffc107;
+    }
+
+    &__star {
+        &.is-filled {
+            color: #ffc107;
+        }
+
+        &:not(.is-filled) {
+            color: #ddd;
+        }
+    }
+}

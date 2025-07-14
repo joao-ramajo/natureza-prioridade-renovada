@@ -15,20 +15,24 @@
     font-weight: $font-weight-bold;
     color: lighten($color-text-dark, 10%);
 
-    &::first-letter{
+    &::first-letter {
         color: $color-primary;
     }
     // margin-bottom: $spacing-medium;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.053); // sombra um pouco mais forte para títulos
-
 }
 
 @mixin subtitle-style {
-    font-family: $font-secondary;
+    font-family: $font-primary;
     font-size: $font-size-subtitle;
     font-weight: 500;
-    color: $color-primaryer;
-    margin-top: $spacing-large;
-    margin-bottom: $spacing-small;
+    color: lighten($color-text-dark, 10%);
+
+    &::first-letter {
+        color: $color-primary;
+    }
+
+    // margin-top: $spacing-large;
+    // margin-bottom: $spacing-small;
     text-shadow: 1.5px 1.5px 3px rgba(0, 0, 0, 0.15); // sombra intermediária para subtítulos
 }

@@ -56,7 +56,7 @@ class CollectionPointService extends Service
                 });
             }
 
-            $points = $query->paginate(10)->withQueryString();
+            $points = $query->paginate(3)->withQueryString();
 
             return $points;
         } catch (QueryException $e) {

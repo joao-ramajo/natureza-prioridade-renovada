@@ -29,7 +29,7 @@
   justify-content: space-between;
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 999;
   background-color: #ffffff;
   box-shadow: 2px 5px 5px 1px rgba(211, 205, 205, 0.189);
 }

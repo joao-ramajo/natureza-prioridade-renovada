@@ -1,10 +1,7 @@
 <footer class="footer">
     <div class="footer__content">
         <ul class="footer__nav">
-            {{-- <li class="footer__nav-item"><a href="/" class="footer__nav-link">Início</a></li>
-            <li class="footer__nav-item"><a href="/sobre" class="footer__nav-link">Sobre</a></li>
-            <li class="footer__nav-item"><a href="/servicos" class="footer__nav-link">Serviços</a></li>
-            <li class="footer__nav-item"><a href="/contato" class="footer__nav-link">Contato</a></li> --}}
+
             <li class="footer__nav-item"><a href="{{ route('home') }}" class="footer__nav-link">Home</a></li>
             <li class="footer__nav-item"><a href="{{ route('home') }}" class="footer__nav-link">Pontos de Coleta</a></li>
             <li class="footer__nav-item"><a href="{{ route('map') }}" class="footer__nav-link">Mapa</a></li>

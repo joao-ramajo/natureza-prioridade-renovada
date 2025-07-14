@@ -1,0 +1,79 @@
+@import "../../variables";
+@import "../../typography";
+.hero {
+    position: relative;
+    padding: 80px 0;
+    background-color: #ffffff;
+
+    z-index: 1;
+
+    &__row {
+        position: relative;
+        z-index: 2;
+    }
+
+    &__content {
+        text-align: left;
+    }
+
+    .hero__title {
+        @include title-style;
+    }
+
+    &__text {
+        @include paragraph-style;
+        margin: 20px 0;
+    }
+
+    &__cta {
+        font-size: 1rem;
+        padding: 12px 24px;
+        background-color: $color-primary;
+        text-decoration: none;
+        color: white;
+        border-radius: 8px;
+        margin-top: 40px; 
+        font-size: 1.2rem;
+    }
+
+    &__image-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__image {
+        width: 100%;
+        height: 400px;
+        background-image: url("https://placehold.co/600x400");
+        background-size: cover;
+        background-position: center;
+        border-radius: 12px;
+        position: relative;
+        z-index: 1;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        &::before {
+            width: 100px;
+            height: 100px;
+            background-color: $color-primary;
+            top: -30px;
+            left: -30px;
+        }
+
+        &::after {
+            width: 60px;
+            height: 60px;
+            background-color: $color-primary-darker;
+            bottom: -20px;
+            right: -20px;
+        }
+    }
+}

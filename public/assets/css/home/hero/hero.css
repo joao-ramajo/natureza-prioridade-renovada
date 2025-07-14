@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Protest+Riot&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Protest+Riot&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #666;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #3d3d3d;
+  margin: 0 10px;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #666;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #3d3d3d;
+  margin: 0 10px;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.hero {
+  position: relative;
+  padding: 80px 0;
+  background-color: #ffffff;
+  z-index: 1;
+}
+.hero__row {
+  position: relative;
+  z-index: 2;
+}
+.hero__content {
+  text-align: left;
+}
+.hero .hero__title {
+  font-family: "Protest Riot", cursive;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #4d4d4d;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.053);
+}
+.hero .hero__title::first-letter {
+  color: #03a303;
+}
+.hero__text {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+.hero__cta {
+  font-size: 1rem;
+  padding: 12px 24px;
+  background-color: #03a303;
+  text-decoration: none;
+  color: white;
+  border-radius: 8px;
+  margin-top: 40px;
+  font-size: 1.2rem;
+}
+.hero__image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero__image {
+  width: 100%;
+  height: 400px;
+  background-image: url("https://placehold.co/600x400");
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  position: relative;
+  z-index: 1;
+}
+.hero__image::before, .hero__image::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+.hero__image::before {
+  width: 100px;
+  height: 100px;
+  background-color: #03a303;
+  top: -30px;
+  left: -30px;
+}
+.hero__image::after {
+  width: 60px;
+  height: 60px;
+  background-color: #007000;
+  bottom: -20px;
+  right: -20px;
+}/*# sourceMappingURL=hero.css.map */

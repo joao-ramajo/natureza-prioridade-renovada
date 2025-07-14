@@ -2,7 +2,7 @@
 
 @section('content')
     <x-layout.header></x-layout.header>
-    <section id="collectionPoints" class="container py-5">
+    {{-- <section id="collectionPoints" class="container py-5">
 
         <a href="{{ route('csv-export') }}">Exportar</a>
 
@@ -36,5 +36,7 @@
             {{ $points->links() }}
         </div>
 
-    </section>
+    </section> --}}
+
+    @include('home.hero')
 @endsection

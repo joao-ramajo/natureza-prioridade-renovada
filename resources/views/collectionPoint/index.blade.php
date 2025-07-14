@@ -2,7 +2,9 @@
 
 @section('content')
     <x-layout.header></x-layout.header>
-    <x-form.form method="POST" route="collection_point.store" title="Novo ponto de coleta" btnLabel="Cadastrar">
+    {{-- <x-form.form method="POST" route="collection_point.store" title="Novo ponto de coleta" btnLabel="Cadastrar"> --}}
+    <form method="POST" action="{{ route('collection_point.store') }}" class="container mb-5">
+        @csrf
         <x-alerts.alert />
 
         <x-form.input-field label="" type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
@@ -38,10 +40,7 @@
                 @foreach ($categories as $category)
                     <div class="col-md-4 mb-3">
                         <div class="form-check">
-                            <input 
-                                type="checkbox"
-                                name="categories-id[]" 
-                                value="{{ $category->id }}"
+                            <input type="checkbox" name="categories-id[]" value="{{ $category->id }}"
                                 id="category-{{ $category->id }}" class="form-check-input"
                                 @if (is_array(old('categories-id')) && in_array($category->id, old('categories-id'))) checked @endif>
                             <label for="category-{{ $category->id }}" class="form-check-label">
@@ -110,9 +109,12 @@
         </div>
 
 
-    </x-form.form>
+        {{-- </x-form.form>
+     --}}
+        <input type="submit" value="Cadastrar" class="btn btn-outline-success">
 
+        <form>
 
-    <script type="module" src="{{ asset('assets/js/masks/cep.js') }}"></script>
-    <script type="module" src="{{ asset('assets/js/masks/hour.js') }}"></script>
-@endsection
+            <script type="module" src="{{ asset('assets/js/masks/cep.js') }}"></script>
+            <script type="module" src="{{ asset('assets/js/masks/hour.js') }}"></script>
+        @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CollectionPoint\StoreRequest;
 use App\Http\Requests\CollectionPoint\UpdateRequest;
+use App\Jobs\GetGeoInfoJob;
 use App\Models\CollectionPoint;
 use App\Services\CollectionPointService;
 use Database\Seeders\CategoriesTableSeeder;
@@ -43,7 +44,7 @@ class CollectionPointController extends Controller
         }
 
         // OPEN GATE API
-        $geodata = $this->collectionPointService->getGeoInfo($request->input('cep'), $request->input('neighborhood'), $request->input('city'), $request->input('state'), $request->input('street'));
+        // $geodata = $this->collectionPointService->getGeoInfo($request->input('cep'), $request->input('neighborhood'), $request->input('city'), $request->input('state'), $request->input('street'));
 
 
 
@@ -51,10 +52,10 @@ class CollectionPointController extends Controller
 
         $point = new CollectionPoint();
 
-        if ($geodata) {
-            $point->latitude = $geodata['latitude'];
-            $point->longitude = $geodata['longitude'];
-        }
+        // if ($geodata) {
+        //     $point->latitude = $geodata['latitude'];
+        //     $point->longitude = $geodata['longitude'];
+        // }
 
         $point->name = $request->input('name');
         $point->cep = str_replace('-', '', $request->input('cep'));
@@ -76,7 +77,9 @@ class CollectionPointController extends Controller
         try {
             $point->save();
             $point->categories()->sync($categories_id);
-            // dd($categories_id);
+            $data = $request->only(['cep', 'neighborhood', 'city', 'state', 'street']);
+            GetGeoInfoJob::dispatch($this->collectionPointService, $data, $point->id);
+
             return redirect()
                 ->route('home')
                 ->with('success', 'Ponto de coleta cadastrado com sucesso !');

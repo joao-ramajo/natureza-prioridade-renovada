@@ -147,6 +147,21 @@
                         <p class="collection-detail__author mt-2">
                             Cadastrado por <a href="#">{{ $point->user->name }}</a>
                         </p>
+
+                        <div class="row gap-3">
+                            @can('user_can_delete', $point)
+                                <form action="{{ route('collection_point.destroy', ['id' => Crypt::encrypt($point->id)]) }}"
+                                    method="POST" class="col-3">
+                                    @method('DELETE')
+                                    @csrf
+
+                                    <input type="submit" value="Apagar" class="w-100 btn btn-outline-danger">
+                                </form>
+                            @endcan
+                            @can('user_can_edit', $point)
+                                <a href="#" class="col-3 btn btn-outline-info">Editar</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
             </div>

@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 
 class CollectionPointController extends Controller
@@ -166,6 +167,9 @@ class CollectionPointController extends Controller
         try {
             $id = Operations::decryptId($id);
             $point = $this->collectionPointService->findCollectionPointById($id);
+            if (Gate::denies('user_can_delete', $point)) {
+                abort(403, "Você não tem permissão para acessar este recurso ");
+            }
             $point->delete();
             return redirect()
                 ->route('home')

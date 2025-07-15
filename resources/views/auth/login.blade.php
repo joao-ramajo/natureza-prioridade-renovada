@@ -9,7 +9,7 @@
         @csrf
         {{-- <h2 class="form-subtitle">Entre em sua conta</h2> --}}
         <x-form.form-title>Entre em sua conta</x-form.form-title>
-        <x-form.input label='Email' type='email' name='email' />
+        <x-form.input label='Email' type='email' name='email' value="{{ old('email') }}" />
         <x-form.input label='Senha' type='password' name='password' />
 
         <button type="submit" class="form__submit-button">Entrar</button>

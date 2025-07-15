@@ -18,7 +18,7 @@
 
 <body>
     {{-- <x-layout.header /> --}}
-    <div class="container mt-3"><x-alerts.alert /></div>
+    {{-- <div class="container mt-3"><x-alerts.alert /></div> --}}
     <main class="">@yield('content')</main>
 
     <x-layout.footer />

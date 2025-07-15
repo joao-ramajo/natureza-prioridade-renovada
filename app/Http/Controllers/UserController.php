@@ -95,7 +95,7 @@ class UserController extends Controller
             Auth::logout();
             session()->invalidate();
             session()->regenerateToken();
-
+            // dd('apagado');
             return redirect()
                 ->route('login')
                 ->with('success', 'Conta apagada com sucesso');

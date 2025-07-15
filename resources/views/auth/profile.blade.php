@@ -72,8 +72,7 @@
                                 <li><i class="bi bi-plus-circle"></i> Cadastrar Ponto</li>
                             </a>
                             {{-- <li><i class="bi bi-trash3"></i> Excluir Ponto</li> --}}
-                            <form action="{{ route('me.destroy', ['id' => Crypt::encrypt(Auth::user()->id)]) }}"
-                                method="POST">
+                            <form action="{{ route('me.destroy') }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 {{-- <input type="submit" value="Apagar conta" class="btn btn-outline-danger"> --}}

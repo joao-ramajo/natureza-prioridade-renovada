@@ -1,6 +1,7 @@
 <div class="collection-card mx-auto">
     <div class="collection-card__header">
         Cadastrado por <strong>{{ $point->user->name }}</strong>
+
     </div>
 
     <div class="collection-card__body">

@@ -56,7 +56,7 @@ class CollectionPointService extends Service
                 });
             }
 
-            $points = $query->orderBy('created_at', 'desc')->paginate(3)->withQueryString();
+            $points = $query->with('user')->orderBy('created_at', 'desc')->paginate(3)->withQueryString();
 
             return $points;
         } catch (QueryException $e) {

@@ -72,7 +72,7 @@ class CollectionPointController extends Controller
         $point->days_open = $days_open;
         $point->description = $request->input('description');
 
-        $categories_id = $request->input('categories-id', []); // já é um array ou [] por padrão
+        $categories_id = $request->input('categories-id', []); 
 
         try {
             $point->save();

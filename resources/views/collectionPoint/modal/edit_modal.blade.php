@@ -1,14 +1,17 @@
 <!-- Botão para abrir o modal -->
-<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCollectionPointModal">
-    <i class="bi bi-pencil-square me-1"></i> Editar Ponto de Coleta
+<button class="col-3 btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#editCollectionPointModal">
+    <i class="bi bi-pencil-square me-1"></i> Editar 
 </button>
+
+{{-- <a href="#" class="col-3 btn btn-outline-info">Editar</a> --}}
 
 <!-- Modal de Edição do Ponto de Coleta -->
 <div class="modal fade" id="editCollectionPointModal" tabindex="-1" aria-labelledby="editCollectionPointModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <form action="{{ route('collection_point.update', ['id' => Crypt::encrypt($point->id)]) }}" method="POST">
+            <form action="{{ route('collection_point.update', ['id' => Crypt::encrypt($point->id)]) }}" method="POST"
+                class="form w-100">
                 @csrf
                 @method('PUT')
 
@@ -18,42 +21,42 @@
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
-                <x-form.input-field label="" type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
+                <x-form.input label="" type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
 
                 <div class="modal-body">
-                    <x-form.input-field label="Nome do Ponto" type="text" name="name"
-                        value="{{ old('name', $point->name) }}" />
-
-                    <div class="row">
-                        <x-form.input-field label="CEP" type="text" name="cep"
-                            value="{{ old('cep', $point->cep) }}" class="col col-6 px-0 pe-2" />
-                        <x-form.input-field label="Estado" type="text" name="state"
-                            value="{{ old('state', $point->state) }}" class="col col-6 px-0 ps-2" />
+                    <div class="d-flex gap-2 gap-2">
+                        <x-form.input label="Nome do Ponto" type="text" name="name"
+                            value="{{ old('name', $point->name) }}" class='w-50' />
+                        <x-form.input label="CEP" type="text" name="cep" value="{{ old('cep', $point->cep) }}"
+                            class='w-50' />
                     </div>
 
-                    <div class="row">
-                        <x-form.input-field label="Cidade" type="text" name="city"
-                            value="{{ old('city', $point->city) }}" class="col col-6 px-0 pe-2" />
-                        <x-form.input-field label="Bairro" type="text" name="neighborhood"
-                            value="{{ old('neighborhood', $point->neighborhood) }}" class="col col-6 px-0 ps-2" />
+                    <div class="d-flex gap-2 gap-2">
+                        <x-form.input label="Estado" type="text" name="state"
+                            value="{{ old('state', $point->state) }}" class='w-50' />
+                        <x-form.input label="Cidade" type="text" name="city"
+                            value="{{ old('city', $point->city) }}" class='w-50' />
+                    </div>
+                    <div class="d-flex gap-2">
+                        <x-form.input label="Bairro" type="text" name="neighborhood"
+                            value="{{ old('neighborhood', $point->neighborhood) }}" class='w-50' />
+                        <x-form.input label="Rua" type="text" name="street"
+                            value="{{ old('street', $point->street) }}" class='w-50' />
+                    </div>
+                    <div class="d-flex gap-2">
+                        <x-form.input label="Número" type="text" name="number"
+                            value="{{ old('number', $point->number) }}" class='w-50' />
+                        <x-form.input label="Complemento" type="text" name="complement"
+                            value="{{ old('complement', $point->complement) }}" class='w-50' />
                     </div>
 
-                    <div class="row">
-                        <x-form.input-field label="Rua" type="text" name="street"
-                            value="{{ old('street', $point->street) }}" class="col col-6 px-0 pe-2" />
-                        <x-form.input-field label="Número" type="text" name="number"
-                            value="{{ old('number', $point->number) }}" class="col col-6 px-0 ps-2" />
+                    <div class="d-flex gap-2">
+                        <x-form.input label="Abre às" type="text" name="open_from"
+                            value="{{ old('open_from', $point->open_from) }}" class='w-50' />
+                        <x-form.input label="Fecha às" type="text" name="open_to"
+                            value="{{ old('open_to', $point->open_to) }}" class='w-50' />
                     </div>
 
-                    <x-form.input-field label="Complemento" type="text" name="complement"
-                        value="{{ old('complement', $point->complement) }}" />
-
-                    <div class="row">
-                        <x-form.input-field label="Abre às" type="text" name="open_from"
-                            value="{{ old('open_from', $point->open_from) }}" class="col col-6 px-0 pe-2" />
-                        <x-form.input-field label="Fecha às" type="text" name="open_to"
-                            value="{{ old('open_to', $point->open_to) }}" class="col col-6 px-0 ps-2" />
-                    </div>
 
                     {{-- Dias da semana --}}
                     @php
@@ -93,13 +96,8 @@
                             @foreach ($categories as $category)
                                 <div class="col-md-4">
                                     <div class="form-check">
-                                        <input 
-                                            type="checkbox" 
-                                            name="categories-id[]" 
-                                            value="{{ $category->id }}"
-                                            id="category-{{ $category->id }}" 
-                                            class="form-check-input"
-                                            
+                                        <input type="checkbox" name="categories-id[]" value="{{ $category->id }}"
+                                            id="category-{{ $category->id }}" class="form-check-input"
                                             {{ in_array($category->id, old('categories-id', $point->categories->pluck('id')->toArray())) ? 'checked' : '' }}>
                                         <label for="category_{{ $category->id }}" class="form-check-label">
                                             {{ $category->name }}

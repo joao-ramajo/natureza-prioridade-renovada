@@ -33,6 +33,32 @@ $font-size-paragraph: 1rem; // texto padrão (parágrafos)
     font-family: $font-text;
 }
 
-.no-text-decoration{
+.no-text-decoration {
     text-decoration: none;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    color: $color-primary;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    margin-bottom: 20px;
+    transform: scale(1.4);
+
+    &:hover {
+        color: lighten($color-primary, 10%);
+        text-decoration: none;
+    }
+
+    &__icon {
+        font-size: 1.2rem;
+    }
+
+    &__text {
+        font-size: 1rem;
+    }
 }

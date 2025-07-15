@@ -6,6 +6,7 @@
 
 @section('content')
     <form action="{{ route('password.confirm') }}" method="POST" class="form">
+        <x-back-link />
         @csrf
         <h2 class="form-subtitle">Confirme Sua Senha</h2>
         <p class="text-secondary text-center">
@@ -19,7 +20,7 @@
 
             <div class="row">
                 <div class="col">
-                         <x-form.show-pass />
+                    <x-form.show-pass />
                 </div>
                 <div class="col">
                     <div class="form-input__forgot-password">
@@ -29,5 +30,9 @@
             </div>
         </div>
         <button type="submit" class="form__submit-button">Continuar</button>
+
+  
+
+
     </form>
 @endsection

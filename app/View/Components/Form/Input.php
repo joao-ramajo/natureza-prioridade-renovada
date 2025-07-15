@@ -17,7 +17,8 @@ class Input extends Component
     public string $value;
     public string $placeholder;
     public string $rules;
-    public function __construct($label, $type, $name, $value = '', $placeholder = '', $rules = '')
+    public string $class;
+    public function __construct($label, $type, $name, $value = '', $placeholder = '', $rules = '', $class = '')
     {
         $this->label = $label;
         $this->type = $type;
@@ -25,6 +26,7 @@ class Input extends Component
         $this->placeholder = $placeholder;
         $this->value = $value;
         $this->rules = $rules;
+        $this->class = $class;
     }
 
     /**

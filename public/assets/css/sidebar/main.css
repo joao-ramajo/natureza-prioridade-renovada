@@ -26,6 +26,29 @@
   text-decoration: none;
 }
 
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  color: #03a303;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  margin-bottom: 20px;
+  transform: scale(1.4);
+}
+.back-link:hover {
+  color: #04d504;
+  text-decoration: none;
+}
+.back-link__icon {
+  font-size: 1.2rem;
+}
+.back-link__text {
+  font-size: 1rem;
+}
+
 .sidebar__toggle {
   position: fixed;
   top: 1rem;

@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/header/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/sidebar/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/Footer/Footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/Form/Form.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/login/main.css') }}">
     @yield('head')
 </head>
 

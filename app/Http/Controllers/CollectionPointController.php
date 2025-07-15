@@ -107,9 +107,10 @@ class CollectionPointController extends Controller
     {
         try {
             $id = Crypt::decrypt($id);
-
             $point = $this->collectionPointService->findCollectionPointById($id);
-
+            if (Gate::denies('user_can_edit', $point)) {
+                abort(403, 'Você não tem permissão para acessar este recurso.');
+            }
 
             if (!$this->collectionPointService->verifyIfUserCreateThePoint($point->user_id, $id)) {
                 return back()

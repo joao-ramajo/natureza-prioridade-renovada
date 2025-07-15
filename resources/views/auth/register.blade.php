@@ -8,46 +8,11 @@
 @section('content')
     <form action="{{ route('register') }}" method="POST" class="form mx-auto mb-5">
         @csrf
-        <h2 class="form-subtitle">Cadastre-se</h2>
-        <div class="form-input">
-            <label for="email" class="form-input__label">Email</label>
-            <input type="email" name="email" id="email" class="form-input__input" value="admin@gmail.com">
-            <x-form.input-error>
-                @error('email')
-                    {{ $message }}
-                @enderror
-            </x-form.input-error>
-        </div>
-
-        <div class="form-input">
-            <label for="name" class="form-input__label">Nome</label>
-            <input type="text" name="name" id="name" class="form-input__input" value="John Doe">
-            <x-form.input-error>
-                @error('name')
-                    {{ $message }}
-                @enderror
-            </x-form.input-error>
-        </div>
-        <div class="form-input">
-            <label for="password" class="form-input__label">Senha</label>
-            <input type="password" name="password" id="password" class="form-input__input" value="12345678">
-            <x-form.input-error>
-                @error('password')
-                    {{ $message }}
-                @enderror
-            </x-form.input-error>
-            <x-form.show-pass />
-        </div>
-        <div class="form-input">
-            <label for="password_confirmation" class="form-input__label">Confirme a senha</label>
-            <input type="password" name="password_confirmation" id="password_confirmation" class="form-input__input"
-                value="12345678">
-            <x-form.input-error>
-                @error('password_confirmation')
-                    {{ $message }}
-                @enderror
-            </x-form.input-error>
-        </div>
+        <x-form.form-title>Cadastre-se</x-form.form-title>
+        <x-form.input label='Email' type='email' name='email' />
+        <x-form.input label='Nome' type='text' name='name' />
+        <x-form.input label='Senha' type='password' name='password' />
+        <x-form.input label='Confirme a senha' type='password_confirmation' name='password_confirmation' />
 
         <button type="submit" class="form__submit-button">Cadastrar</button>
         <div class="form-checkbox mt-3">

@@ -8,31 +8,17 @@
     <form action="{{ route('password.confirm') }}" method="POST" class="form">
         @csrf
         <h2 class="form-subtitle">Informe a nova senha</h2>
+        <x-form.form-title>Informe a nova senha</x-form.form-title>
 
-        <div class="form-input">
-            <label for="email" class="form-input__label">Digite seu email</label>
-            <input type="email" name="email" id="email" class="form-input__input">
-        </div>
+        <x-form.input label='Coloque seu email' type='email' name='email' />
 
-        <div class="form-input">
-            <label for="password" class="form-input__label">Coloque sua nova senha</label>
-            <input type="password" name="password" id="password" class="form-input__input">
+        <x-form.input label='Nova senha' type='password' name='password' />
+        <x-form.input label='Confirme a senha' type='password_confirmation' name='password_confirmation' />
 
-            <div class="row">
-                <div class="col">
-                         <x-form.show-pass />
-                </div>
-
-            </div>
-        </div>
-
-        <div class="form-input">
-            <label for="password.confirmation" class="form-input__label">Repita a nova senha</label>
-            <input type="password" name="password.confirmation" id="password.confirmation" class="form-input__input">
-        </div>
         <button type="submit" class="form__submit-button">Continuar</button>
 
-
+        <div class="separator">Ou</div>
+        <a href="{{ route('login') }}" class="text-center">Login</a>
 
     </form>
 @endsection

@@ -6,4 +6,3 @@
           </div>
       </div>
   </div>
-  <script src="{{ asset('assets/js/ShowPass.js') }}"></script>

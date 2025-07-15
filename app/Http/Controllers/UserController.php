@@ -82,7 +82,7 @@ class UserController extends Controller
     {
         try {
             $id = Auth::user()->id;
-
+      
             if ($id === null) {
                 return back()
                     ->with('server_error', 'Desculpe houve um erro ao atualizar seu perfil, tente novamente');

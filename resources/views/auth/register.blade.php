@@ -61,4 +61,6 @@
         <div class="text-center mx-auto w-100">Já tem uma conta ? <a href="{{ route('login') }}"> Faça login</a></div>
 
     </form>
+
+    <script src="{{ asset('assets/js/ShowPass.js') }}"></script>
 @endsection

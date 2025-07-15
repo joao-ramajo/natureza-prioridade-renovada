@@ -274,7 +274,7 @@ password.confirm: para acessar é necessário inserir a senha do usuário
 |--------|-----------------------|--------------------------|-------------------------------|-----------------------------------------------------|----------------------|
 | GET    | /home                 | home                     | MainController@index           | Página inicial do sistema após login                | auth                 |
 | GET    | /ponto-de-coleta/{id} | collection_point.view    | MainController@view            | Exibe detalhes de um Ponto de Coleta específico     | auth                 |
-| GET    | /perfil/{id}          | user.profile             | MainController@profile         | Exibe perfil do usuário                              | auth                 |
+| GET    | /perfil/{id}          | me.profile             | MainController@profile         | Exibe perfil do usuário                              | auth                 |
 
 ### ROTAS AUTENTICADAS E VERIFICADAS (auth + verified)
 
@@ -289,8 +289,8 @@ password.confirm: para acessar é necessário inserir a senha do usuário
 
 | Método | Rota                  | Nome (alias)           | Controller / Ação               | Descrição                                          | Middlewares                    |
 |--------|-----------------------|------------------------|-------------------------------|----------------------------------------------------|-------------------------------|
-| PUT    | /user/{id}            | user.update            | UserController@update          | Atualiza dados do usuário                           | auth, verified, password.confirm |
-| DELETE | /user/{id}            | user.destroy           | UserController@destroy         | Apaga conta do usuário                              | auth, verified, password.confirm |
+| PUT    | /user/{id}            | me.update            | UserController@update          | Atualiza dados do usuário                           | auth, verified, password.confirm |
+| DELETE | /user/{id}            | me.destroy           | UserController@destroy         | Apaga conta do usuário                              | auth, verified, password.confirm |
 
 
 ### ROTAS DE AÇÃO DOS PONTOS DE COLETA (auth + verified + password.confirm)

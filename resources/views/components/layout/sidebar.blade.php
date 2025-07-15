@@ -35,7 +35,7 @@
 
         @auth
             <ul>
-                <li><a href="{{ route('user.profile', ['id' => Crypt::encrypt(Auth::user()->id)]) }}"><i
+                <li><a href="{{ route('me.profile', ['id' => Crypt::encrypt(Auth::user()->id)]) }}"><i
                             class="bi bi-person-circle"></i> Perfil</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="post" style="display:inline;">

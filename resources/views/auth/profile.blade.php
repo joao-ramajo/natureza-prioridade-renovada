@@ -35,7 +35,7 @@
                         </dl>
 
                         @include('auth.profile.edit_profile_modal')
-                        <form action="{{ route('user.destroy', ['id' => Crypt::encrypt(Auth::user()->id)]) }}"
+                        <form action="{{ route('me.destroy', ['id' => Crypt::encrypt(Auth::user()->id)]) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')
@@ -72,7 +72,7 @@
                                 <li><i class="bi bi-plus-circle"></i> Cadastrar Ponto</li>
                             </a>
                             {{-- <li><i class="bi bi-trash3"></i> Excluir Ponto</li> --}}
-                            <form action="{{ route('user.destroy', ['id' => Crypt::encrypt(Auth::user()->id)]) }}"
+                            <form action="{{ route('me.destroy', ['id' => Crypt::encrypt(Auth::user()->id)]) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')

@@ -6,7 +6,7 @@
 <!-- Modal -->
 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form method="POST" action="{{ route('user.update', ['id' => Crypt::encrypt($user->id)]) }}">
+        <form method="POST" action="{{ route('me.update', ['id' => Crypt::encrypt($user->id)]) }}">
             @csrf
             @method('PUT')
             <div class="modal-content">

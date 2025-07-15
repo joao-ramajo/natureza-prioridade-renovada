@@ -7,6 +7,7 @@ use App\Http\Requests\CollectionPoint\UpdateRequest;
 use App\Jobs\GetGeoInfoJob;
 use App\Models\CollectionPoint;
 use App\Services\CollectionPointService;
+use App\Services\Operations;
 use Database\Seeders\CategoriesTableSeeder;
 use Exception;
 use GuzzleHttp\Psr7\Query;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -72,7 +74,7 @@ class CollectionPointController extends Controller
         $point->days_open = $days_open;
         $point->description = $request->input('description');
 
-        $categories_id = $request->input('categories-id', []); 
+        $categories_id = $request->input('categories-id', []);
 
         try {
             $point->save();
@@ -162,7 +164,7 @@ class CollectionPointController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         try {
-            $id = Crypt::decrypt($id);
+            $id = Operations::decryptId($id);
             $point = $this->collectionPointService->findCollectionPointById($id);
             $point->delete();
             return redirect()

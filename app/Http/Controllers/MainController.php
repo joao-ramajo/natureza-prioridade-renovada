@@ -30,7 +30,7 @@ class MainController extends Controller
     {
         $points = $this->collectionPointService->getAllWithSearchIndex($request);
 
-        $categories = Cache::remember('all_categories_with_exists_point', 360000, function() {
+        $categories = Cache::remember('all_categories_with_exists_point', 360000, function () {
             return $this->categoryService->getAllCategoriesWithPointExists();
         });
 
@@ -53,7 +53,7 @@ class MainController extends Controller
         return view('pages.map');
     }
 
-    public function view($id): View | RedirectResponse
+    public function view(string $id): View | RedirectResponse
     {
         $id = Operations::decryptId($id);
 
@@ -67,9 +67,9 @@ class MainController extends Controller
         return view('collectionPoint.view', ['point' => $point, 'categories' => $categories]);
     }
 
-    public function profile($id): View | RedirectResponse
+    public function profile(): View | RedirectResponse
     {
-        $id = Operations::decryptId($id);
+        $id = Auth::user()->id;
 
         if ($id === null || $id != Auth::user()->id) {
             return redirect()

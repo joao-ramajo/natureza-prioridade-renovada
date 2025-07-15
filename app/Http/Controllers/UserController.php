@@ -19,9 +19,9 @@ class UserController extends Controller
         $this->userService = $service;
     }
 
-    public function update(StoreRequest $request, string $id): RedirectResponse
+    public function update(StoreRequest $request): RedirectResponse
     {
-        $id = Operations::decryptId($id);
+        $id = Auth::user()->id;
 
         if ($id === null) {
             return back()
@@ -78,10 +78,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(): RedirectResponse
     {
         try {
-            $id = Operations::decryptId($id);
+            $id = Auth::user()->id;
 
             if ($id === null) {
                 return back()

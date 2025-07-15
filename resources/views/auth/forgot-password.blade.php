@@ -12,19 +12,7 @@
             Um email será enviado ao endereço preenchido abaixo com as orientações para recuperação de conta.
         </p>
 
-        <div class="form-input">
-            <label for="email" class="form-input__label">Coloque seu email</label>
-            <input type="email" name="email" id="email" class="form-input__input">
-
-            <div class="row">
-
-                <div class="col">
-                    <div class="form-input__forgot-password">
-                        <a href="{{ route('login') }}">Fazer login</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <x-form.input label='Email' type='email' name='email' />
         <button type="submit" class="form__submit-button">Continuar</button>
         <p class="text-secondary mt-3" style="font-size: .9rem">Caso já tenha solicitado, verifique sua caixa de spam.</p>
         @if (session('status'))
@@ -32,6 +20,11 @@
                 {{ session('status') }}
             </div>
         @endif
+
+        <div class="separator">Ou</div>
+        <div class="mx-auto w-100 text-center">
+            Faça <a href="{{ route('login') }}">login</a>
+        </div>
 
     </form>
 @endsection

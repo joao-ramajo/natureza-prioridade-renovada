@@ -11,8 +11,11 @@
         <x-form.form-title>Entre em sua conta</x-form.form-title>
         <x-form.input label='Email' type='email' name='email' />
         <x-form.input label='Senha' type='password' name='password' />
-        
+
         <button type="submit" class="form__submit-button">Entrar</button>
+        <div class=" mx-auto w-100">
+            Esqueci minha senha. <a href="{{ route('password.request') }}"> Recuperar senha</a>
+        </div>
 
         <div class="separator">Ou</div>
 

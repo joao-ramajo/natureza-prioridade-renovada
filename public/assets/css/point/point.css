@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Protest+Riot&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #666;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #3d3d3d;
+  margin: 0 10px;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.no-text-decoration {
+  text-decoration: none;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  color: #03a303;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  margin-bottom: 20px;
+  transform: scale(1.4);
+}
+.back-link:hover {
+  color: #04d504;
+  text-decoration: none;
+}
+.back-link__icon {
+  font-size: 1.2rem;
+}
+.back-link__text {
+  font-size: 1rem;
+}/*# sourceMappingURL=point.css.map */

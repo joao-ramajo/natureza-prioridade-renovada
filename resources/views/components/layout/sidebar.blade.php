@@ -14,7 +14,7 @@
                 <a href="{{ route('map') }}"><i class="bi bi-map-fill"></i> Mapa</a>
             </li>
             <li>
-                <a href="{{ route('home') }}"><i class="bi bi-geo-alt-fill"></i> Pontos de Coleta</a>
+                <a href="{{ route('pontos') }}"><i class="bi bi-geo-alt-fill"></i> Pontos de Coleta</a>
             </li>
             @auth
                 <li>

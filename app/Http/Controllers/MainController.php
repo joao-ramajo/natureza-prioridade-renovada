@@ -26,18 +26,9 @@ class MainController extends Controller
         $this->categoryService = $cs;
     }
 
-    public function index(Request $request): View
+    public function index(): View
     {
-        $points = $this->collectionPointService->getAllWithSearchIndex($request);
-
-        $categories = Cache::remember('all_categories_with_exists_point', 360000, function () {
-            return $this->categoryService->getAllCategoriesWithPointExists();
-        });
-
-        return view('pages.home', [
-            'points' => $points,
-            'categories' => $categories
-        ]);
+        return view('pages.home');
     }
 
     public function collectionPoint(): View
@@ -80,5 +71,19 @@ class MainController extends Controller
         $user = Auth::user();
 
         return view('auth.profile', ['user' => $user]);
+    }
+
+    public function pontos(Request $request): View
+    {
+
+        $points = $this->collectionPointService->getAllWithSearchIndex($request);
+
+        // $categories = Cache::remember('all_categories_with_exists_point', 360000, function () {
+        //     return $this->categoryService->getAllCategoriesWithPointExists();
+        // });
+
+        $categories = $this->categoryService->getAllCategoriesWithPointExists();
+
+        return view('pages.points', ['points' => $points, 'categories' => $categories]);
     }
 }

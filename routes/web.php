@@ -5,12 +5,12 @@ use App\Http\Controllers\CollectionPointController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+Route::get('/csv', [AdminController::class, 'exportCsv'])->name('csv-export');
 
 Route::get('/', [MainController::class, 'index'])->name('home');
 Route::redirect('/home', '/');
 Route::get('/mapa', [MainController::class, 'map'])->name('map');
 Route::get('/pontos', [MainController::class, 'pontos'])->name('pontos');
-Route::get('/csv', [AdminController::class, 'exportCsv'])->name('csv-export');
 
 Route::prefix('me')->middleware(['auth'])->group(function () {
      Route::get('/', [MainController::class, 'profile'])->name('me.profile');

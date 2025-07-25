@@ -28,4 +28,18 @@ class UpdateRequest extends FormRequest
             ]
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'O campo nome é obrigatório.',
+            'name.string' => 'O campo nome deve ser um texto válido.',
+            'name.max' => 'O campo nome não pode ter mais que 60 caracteres.',
+
+            'email.required' => 'O campo email é obrigatório.',
+            'email.string' => 'O campo email deve ser um texto válido.',
+            'email.email' => 'O campo email deve ser um endereço de email válido.',
+            'email.max' => 'O campo email não pode ter mais que 60 caracteres.',
+        ];
+    }
 }

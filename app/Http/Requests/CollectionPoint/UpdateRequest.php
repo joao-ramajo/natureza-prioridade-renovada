@@ -62,4 +62,69 @@ class UpdateRequest extends FormRequest
             'longitude' => ['nullable', 'numeric', 'between:-180,180'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'O nome do ponto é obrigatório.',
+            'name.string' => 'O nome do ponto deve ser um texto.',
+            'name.max' => 'O nome do ponto não pode ter mais que 60 caracteres.',
+            'name.min' => 'O nome do ponto deve ter pelo menos 1 caractere.',
+
+            'user_id.required' => 'O ID do usuário é obrigatório.',
+            'user_id.integer' => 'O ID do usuário deve ser um número inteiro.',
+            'user_id.exists' => 'Usuário não encontrado.',
+
+            'cep.required' => 'O CEP é obrigatório.',
+            'cep.string' => 'O CEP deve ser um texto.',
+            'cep.max' => 'O CEP não pode ter mais que 10 caracteres.',
+            'cep.regex' => 'O formato do CEP é inválido. Use 12345-678 ou 12345678.',
+
+            'street.required' => 'A rua é obrigatória.',
+            'street.string' => 'A rua deve ser um texto.',
+            'street.max' => 'A rua não pode ter mais que 100 caracteres.',
+
+            'number.string' => 'O número deve ser um texto.',
+            'number.max' => 'O número não pode ter mais que 10 caracteres.',
+
+            'complement.string' => 'O complemento deve ser um texto.',
+            'complement.max' => 'O complemento não pode ter mais que 50 caracteres.',
+
+            'neighborhood.required' => 'O bairro é obrigatório.',
+            'neighborhood.string' => 'O bairro deve ser um texto.',
+            'neighborhood.max' => 'O bairro não pode ter mais que 100 caracteres.',
+
+            'city.required' => 'A cidade é obrigatória.',
+            'city.string' => 'A cidade deve ser um texto.',
+            'city.max' => 'A cidade não pode ter mais que 100 caracteres.',
+
+            'state.required' => 'O estado é obrigatório.',
+            'state.string' => 'O estado deve ser um texto.',
+            'state.size' => 'O estado deve conter exatamente 2 letras (ex: SP).',
+
+            'categories-id.required' => 'Selecione pelo menos uma categoria.',
+            'categories-id.array' => 'O campo de categorias deve ser uma lista.',
+            'categories-id.*.integer' => 'Cada categoria deve ser um número inteiro.',
+            'categories-id.*.exists' => 'Uma ou mais categorias selecionadas são inválidas.',
+
+            'days_open.required' => 'Selecione pelo menos um dia de funcionamento.',
+            'days_open.array' => 'O campo de dias abertos deve ser uma lista.',
+            'days_open.*.string' => 'Cada dia deve ser um texto válido.',
+
+            'open_from.required' => 'O horário de abertura é obrigatório.',
+            'open_from.date_format' => 'O horário de abertura deve estar no formato HH:mm.',
+
+            'open_to.required' => 'O horário de fechamento é obrigatório.',
+            'open_to.date_format' => 'O horário de fechamento deve estar no formato HH:mm.',
+
+            'description.string' => 'A descrição deve ser um texto.',
+            'description.max' => 'A descrição não pode ter mais que 200 caracteres.',
+
+            'latitude.numeric' => 'A latitude deve ser um número.',
+            'latitude.between' => 'A latitude deve estar entre -90 e 90.',
+
+            'longitude.numeric' => 'A longitude deve ser um número.',
+            'longitude.between' => 'A longitude deve estar entre -180 e 180.',
+        ];
+    }
 }

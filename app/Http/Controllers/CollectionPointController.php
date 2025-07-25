@@ -125,46 +125,26 @@ class CollectionPointController extends Controller
                     ->with('error', 'Você não pode atualizar as informações deste ponto');
             }
 
-            if (!$this->collectionPointService->verifyIfUserCreateThePoint(Auth::user()->id, $point->user_id)) {
-                return back()
-                    ->with('error', 'Desculpe, você não tem permissão para alterar estas informações');
-            }
-
             if ($this->collectionPointService->timeInputIsNotValid($request->open_from, $request->open_to)) {
                 return back()
                     ->withErrors(['open_to' => 'O horário de fechamento deve ser maior que o de abertura.'])
                     ->withInput();
             }
 
-            $days_open = implode(' - ', $request->days_open);
 
+            $result = $this->collectionPointService->update($request, $point);
 
-            $point->name = $request->input('name');
-            $point->cep = str_replace('-', '', $request->input('cep'));
-            $point->street = $request->street;
-            $point->neighborhood = $request->neighborhood;
-            $point->city = $request->city;
-            $point->state = $request->state;
-            $point->complement = $request->complement;
-
-            $point->open_from = $request->input('open_from');
-            $point->open_to = $request->input('open_to');
-            $point->days_open = $days_open;
-            $point->description = $request->input('description');
-
-            $categories_id = $request->input('categories-id', []);
-
-            $point->updated_at = now();
-
-            $point->save();
-
-            $point->categories()->sync($categories_id);
-
-
-            return redirect()
-                ->route('collection_point.view', ['id' => Crypt::encrypt($point->id)])
-                ->with('success', 'Informações atualizadas com sucesso');
+            if ($result) {
+                return redirect()
+                    ->route('collection_point.view', ['id' => Crypt::encrypt($point->id)])
+                    ->with('success', 'Informações atualizadas com sucesso');
+            } else {
+                return redirect()
+                    ->route('collection_point.view', ['id' => Crypt::encrypt($point->id)])
+                    ->with('error', 'Não foi posssivel atualizar as informações, tente novamente mais tarde');
+            }
         } catch (Exception $e) {
+            Log::channel('npr')->error("CollectionPointController@update : {$e->getMessage()}");
             return back()
                 ->with('error', 'Desculpe, houve um erro ao atualizar o registro, tente novamente mais tarde.');
         }

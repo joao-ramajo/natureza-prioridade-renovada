@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\GetGeoInfoJob;
 use App\Models\CollectionPoint;
 use Exception;
 use Illuminate\Database\QueryException;
@@ -96,5 +97,47 @@ class CollectionPointService extends Service
             Log::channel('npr')->error('Erro ao buscar latitude e longitude', ['exception' => $e->getMessage()]);
             return [];
         }
+    }
+
+
+    public function update(Request $request, CollectionPoint $point)
+    {
+
+        $days_open = implode(' - ', $request->days_open);
+
+
+        $point->name = $request->input('name');
+
+        $point->street = $request->street;
+        $point->neighborhood = $request->neighborhood;
+        $point->city = $request->city;
+        $point->state = $request->state;
+        $point->complement = $request->complement;
+
+        if ($point->cep !== str_replace('-', '', $request->input('cep'))) {
+            $cep = str_replace('-', '', $request->input('cep'));
+            $geo = $this->getGeoInfo($cep, $point->neighborhood, $point->city, $point->state, $point->street);
+
+            $data = $request->only(['cep', 'neighborhood', 'city', 'state', 'street']);
+            GetGeoInfoJob::dispatch($this, $data, $point->id);
+        };
+
+        $point->cep = str_replace('-', '', $request->input('cep'));
+
+
+
+        $point->open_from = $request->input('open_from');
+        $point->open_to = $request->input('open_to');
+        $point->days_open = $days_open;
+        $point->description = $request->input('description');
+
+        $categories_id = $request->input('categories-id', []);
+
+        $point->updated_at = now();
+
+        $point->save();
+        $point->categories()->sync($categories_id);
+
+        return true;
     }
 }

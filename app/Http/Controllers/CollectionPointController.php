@@ -129,15 +129,13 @@ class CollectionPointController extends Controller
 
             $result = $this->collectionPointService->update($request, $point);
 
-            if ($result) {
-                return redirect()
-                    ->route('collection_point.view', ['id' => Crypt::encrypt($point->id)])
-                    ->with('success', 'Informações atualizadas com sucesso');
-            } else {
-                return redirect()
-                    ->route('collection_point.view', ['id' => Crypt::encrypt($point->id)])
-                    ->with('error', 'Não foi posssivel atualizar as informações, tente novamente mais tarde');
+            if (!$result) {
+                throw new Exception('Falha ao atualizar o ponto de coleta no CollectionPointService@update');
             }
+
+            return redirect()
+                ->route('collection_point.view', ['id' => Crypt::encrypt($point->id)])
+                ->with('success', 'Informações atualizadas com sucesso');
         } catch (AuthorizationException $e) {
             Log::channel('npr')->warning('Usuário ' . Auth::user()->email . ' tentou acessar CollectionPointController@update sem autorização');
             return redirect()

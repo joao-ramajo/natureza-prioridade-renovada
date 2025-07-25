@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Services\Operations;
 use App\Services\UserService;
 use Exception;
@@ -20,7 +21,7 @@ class UserController extends Controller
         $this->userService = $service;
     }
 
-    public function update(StoreRequest $request): RedirectResponse
+    public function update(UpdateRequest $request): RedirectResponse
     {
         $id = Auth::user()->id;
 

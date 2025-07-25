@@ -19,18 +19,35 @@
 
         <div class="mb-3">
             <label for="name" class="form-label">Nome do Ponto</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                value="{{ old('name') }}">
+            @error('name')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="row mx-auto">
             <div class="col col-6 px-0 pe-2 mb-3">
                 <label for="cep" class="form-label">CEP</label>
-                <input type="text" class="form-control" id="cep" name="cep" value="{{ old('cep') }}"
-                    required maxlength="9">
+                <input type="text" class="form-control @error('cep') is-invalid @enderror" id="cep" name="cep"
+                    value="{{ old('cep') }}" required maxlength="9">
+                @error('cep')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="col col-6 px-0 ps-2 mb-3">
                 <label for="state" class="form-label">Estado</label>
-                <input type="text" class="form-control" id="state" name="state" value="{{ old('state') }}">
+                <input type="text" class="form-control @error('state') is-invalid @enderror" id="state"
+                    name="state" value="{{ old('state') }}">
+                @error('state')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
 
@@ -115,13 +132,30 @@
                 <div class="row">
                     <div class="col col-md-2 col-sm-4 mb-3">
                         <label for="open_from" class="form-label">Abre às</label>
-                        <input type="text" class="form-control" id="open_from" name="open_from"
-                            value="{{ old('open_from') }}" placeholder="00:00" pattern="\d{2}:\d{2}" required>
+                        <input type="text" class="form-control @error('open_from') is-invalid @enderror"
+                            id="open_from" name="open_from" value="{{ old('open_from') }}" placeholder="00:00"
+                            pattern="^([01]\d|2[0-3]):[0-5]\d$" required>
+                        <div class="invalid-feedback">
+                            @error('open_from')
+                                {{ $message }}
+                            @else
+                                Informe um horário válido no formato HH:MM (ex: 08:00)
+                            @enderror
+                        </div>
                     </div>
+
                     <div class="col col-md-2 col-sm-4 mb-3">
                         <label for="open_to" class="form-label">Fecha às</label>
-                        <input type="text" class="form-control" id="open_to" name="open_to"
-                            value="{{ old('open_to') }}" placeholder="00:00" pattern="\d{2}:\d{2}" required>
+                        <input type="text" class="form-control @error('open_to') is-invalid @enderror" id="open_to"
+                            name="open_to" value="{{ old('open_to') }}" placeholder="00:00"
+                            pattern="^([01]\d|2[0-3]):[0-5]\d$" required>
+                        <div class="invalid-feedback">
+                            @error('open_to')
+                                {{ $message }}
+                            @else
+                                Informe um horário válido no formato HH:MM (ex: 18:30)
+                            @enderror
+                        </div>
                     </div>
                 </div>
             </div>
@@ -130,9 +164,14 @@
 
             <div class="mb-3">
                 <div class="form-floating">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="description" name="description"
-                        style="height: 100px">{{ old('description') }}</textarea>
-                    <label for="floatingTextarea2">Descrição</label>
+                    <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Descreva o ponto de coleta"
+                        id="description" name="description" style="height: 100px" maxlength="200">{{ old('description') }}</textarea>
+                    <label for="description">Descrição</label>
+                    @error('description')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
         </div>

@@ -52,7 +52,7 @@
         <div class="container">
             <div class="row">
                 <!-- Sidebar -->
-                <div class="col-md-4">
+                <div class="col-md-4 mb-3">
                     <div class="profile-sidebar">
                         <div class="profile-sidebar__header">
                             <img src="https://placehold.co/150x150" alt="Foto de perfil" class="profile-sidebar__image">
@@ -87,7 +87,7 @@
                 </div>
 
                 <!-- Conteúdo -->
-                <div class="col-md-8">
+                <div class="col col-12 col-md-8 mb-3">
                     <div class="profile-content">
                         <div class="row">
                             <div class="col-md-6">

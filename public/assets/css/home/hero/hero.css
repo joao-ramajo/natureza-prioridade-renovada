@@ -100,6 +100,7 @@
 
 .hero {
   position: relative;
+  overflow-x: hidden;
   padding: 80px 0;
   background-color: #ffffff;
   z-index: 1;
@@ -110,6 +111,11 @@
 }
 .hero__content {
   text-align: left;
+}
+@media screen and (max-width: 786px) {
+  .hero__content {
+    margin-bottom: 75px;
+  }
 }
 .hero .hero__title {
   font-family: "Protest Riot", cursive;
@@ -138,6 +144,11 @@
   border-radius: 8px;
   margin-top: 40px;
   font-size: 1.2rem;
+}
+@media screen and (max-width: 520px) {
+  .hero__cta {
+    margin-bottom: 50px;
+  }
 }
 .hero__image-wrapper {
   display: flex;

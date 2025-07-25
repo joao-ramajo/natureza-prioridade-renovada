@@ -9,7 +9,7 @@
     <x-layout.header></x-layout.header>
 
     <section class="hero container">
-        <div class="row align-items-center hero__row">
+        <div class="row align-items-center hero__row mx-auto">
             <div class="col-md-6 hero__content">
                 <h1 class="hero__title">Natureza Prioridade Renovada</h1>
                 <p class="hero__text mb-5">Nós, da NPR, estamos empenhados em contribuir para o combate ao descarte

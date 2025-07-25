@@ -18,7 +18,7 @@
                     informativo que destaca esses pontos e uma ampla quantidade de informações sobre práticas
                     sustentáveis. Acreditamos que, juntos, podemos fazer a diferença e ajudar a preservar o meio
                     ambiente.</p>
-                <a href="/contato" class="hero__cta">Fale Conosco</a>
+                <a href="{{ route('collection_point.index')}}" class="hero__cta">Ver Pontos de Coleta</a>
             </div>
 
             <div class="col-md-6 hero__image-wrapper">
@@ -26,6 +26,4 @@
             </div>
         </div>
     </section>
-
-
 @endsection

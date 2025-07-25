@@ -1,37 +1,65 @@
 @extends('layouts.main_layout')
 
+@section('head')
+    <link rel="stylesheet" href="{{ asset('assets/css/login/main.css') }}">
+@endsection
+
 @section('content')
     <x-layout.header></x-layout.header>
     {{-- <x-form.form method="POST" route="collection_point.store" title="Novo ponto de coleta" btnLabel="Cadastrar"> --}}
-    <form method="POST" action="{{ route('collection_point.store') }}" class="container mb-5">
+    <form method="POST" action="{{ route('collection_point.store') }}" class="container mb-5 form">
         @csrf
         <x-alerts.alert />
 
-        <x-form.input-field label="" type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
+        <x-form.input label="" type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
 
 
         {{-- address info --}}
-        <h5 class="mb-3">Informações do Endereço</h5>
-        <x-form.input-field label="Nome do Ponto" type="text" name="name" value="{{ old('name') }}" />
-        <div class="row mx-auto">
-            <x-form.input-field label="cep" type="text" name="cep" value="{{ old('cep') }}"
-                rules=" required maxlength=9 " class="col col-6 px-0 pe-2" />
-            <x-form.input-field label="Estado" type="text" name="state" value="{{ old('state') }}"
-                class="col col-6 px-0 ps-2" />
+        <h5 class="mb-3 form-subtitle">Cadastre um Novo Ponto de Coleta</h5>
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Nome do Ponto</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
         </div>
-        <div id="cepMessage" class="alert alert-warning d-none "></div>
+
         <div class="row mx-auto">
-            <x-form.input-field label="Rua" type="text" name="street" value="{{ old('street') }}"
-                class="col col-6 px-0 pe-2" />
-            <x-form.input-field label="Complemento" type="text" name="complement" value="{{ old('complement') }}"
-                class="col col-6 px-0 ps-2" />
+            <div class="col col-6 px-0 pe-2 mb-3">
+                <label for="cep" class="form-label">CEP</label>
+                <input type="text" class="form-control" id="cep" name="cep" value="{{ old('cep') }}"
+                    required maxlength="9">
+            </div>
+            <div class="col col-6 px-0 ps-2 mb-3">
+                <label for="state" class="form-label">Estado</label>
+                <input type="text" class="form-control" id="state" name="state" value="{{ old('state') }}">
+            </div>
         </div>
+
+        <div id="cepMessage" class="alert alert-warning d-none"></div>
+
         <div class="row mx-auto">
-            <x-form.input-field label="Bairro" type="text" name="neighborhood" value="{{ old('neighborhood') }}"
-                class="col col-6 px-0 pe-2" />
-            <x-form.input-field label="Cidade" type="text" name="city" value="{{ old('city') }}"
-                class="col col-6 px-0 ps-2" />
+            <div class="col col-6 px-0 pe-2 mb-3">
+                <label for="street" class="form-label">Rua</label>
+                <input type="text" class="form-control" id="street" name="street" value="{{ old('street') }}">
+            </div>
+            <div class="col col-6 px-0 ps-2 mb-3">
+                <label for="complement" class="form-label">Complemento</label>
+                <input type="text" class="form-control" id="complement" name="complement"
+                    value="{{ old('complement') }}">
+            </div>
         </div>
+
+        <div class="row mx-auto">
+            <div class="col col-6 px-0 pe-2 mb-3">
+                <label for="neighborhood" class="form-label">Bairro</label>
+                <input type="text" class="form-control" id="neighborhood" name="neighborhood"
+                    value="{{ old('neighborhood') }}">
+            </div>
+            <div class="col col-6 px-0 ps-2 mb-3">
+                <label for="city" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="city" name="city" value="{{ old('city') }}">
+            </div>
+        </div>
+
 
         <hr>
         <div class="mb-3">
@@ -69,7 +97,7 @@
             @endphp
 
             <h5>Dias da semana</h5>
-            <div class="row">
+            <div class="row mb-3">
                 @foreach ($days as $abbr => $day)
                     <div class="col col-md-4 mb-3">
                         <div class="form-check">
@@ -85,16 +113,19 @@
             <div class="mb-3">
                 <h5>Horário de Funcionamento</h5>
                 <div class="row">
-                    <div class="col col-md-2 col-sm-4">
-                        <x-form.input-field label="Abre às" type="text" name="open_from" value="{{ old('open_from') }}"
-                            rules='placeholder=00:00 pattern=\d{2}:\d{2} required' />
+                    <div class="col col-md-2 col-sm-4 mb-3">
+                        <label for="open_from" class="form-label">Abre às</label>
+                        <input type="text" class="form-control" id="open_from" name="open_from"
+                            value="{{ old('open_from') }}" placeholder="00:00" pattern="\d{2}:\d{2}" required>
                     </div>
-                    <div class="col col-md-2 col-sm-4">
-                        <x-form.input-field label="Fecha às" type="text" name="open_to" value="{{ old('open_to') }}"
-                            rules='placeholder=00:00 pattern=\d{2}:\d{2} required' />
+                    <div class="col col-md-2 col-sm-4 mb-3">
+                        <label for="open_to" class="form-label">Fecha às</label>
+                        <input type="text" class="form-control" id="open_to" name="open_to"
+                            value="{{ old('open_to') }}" placeholder="00:00" pattern="\d{2}:\d{2}" required>
                     </div>
                 </div>
             </div>
+
 
 
             <div class="mb-3">
@@ -111,7 +142,7 @@
 
         {{-- </x-form.form>
      --}}
-        <input type="submit" value="Cadastrar" class="btn btn-outline-success">
+        <input type="submit" value="Cadastrar" class="btn btn-outline-success btn-lg">
 
         <form>
 

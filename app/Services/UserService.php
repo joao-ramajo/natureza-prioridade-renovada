@@ -14,7 +14,6 @@ class UserService extends Service
     public function verifyIfEmailExists(string $email): bool | null
     {
         try {
-
             return User::where('email', $email)->exists();
         } catch (QueryException $e) {
             $this->handleCriticalException($e, 'Erro no banco de dados');

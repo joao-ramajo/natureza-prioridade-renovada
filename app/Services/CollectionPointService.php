@@ -69,7 +69,7 @@ class CollectionPointService extends Service
         }
     }
 
-    public function getGeoInfo($cep, $bairro, $cidade, $estado, $rua): array
+    public function getGeoInfo(string $cep, string $bairro, string $cidade, string $estado, string $rua): array
     {
         try {
             $cepFormatado = preg_replace('/\D/', '', $cep); // só números

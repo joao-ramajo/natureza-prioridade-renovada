@@ -110,9 +110,7 @@ class CollectionPointController extends Controller
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(UpdateRequest $request, string $id): RedirectResponse
     {
         try {

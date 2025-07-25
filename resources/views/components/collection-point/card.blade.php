@@ -1,7 +1,6 @@
-<div class="collection-card mx-auto">
+<div class="collection-card mx-auto position-relative">
     <div class="collection-card__header">
         Cadastrado por <strong>{{ $point->user->name }}</strong>
-
     </div>
 
     <div class="collection-card__body">
@@ -19,14 +18,14 @@
                     - {{ $category->name }}
                 @endforeach
             </p>
-
-            {{-- <div class="collection-card__rating">
-                <span class="collection-card__star is-filled">★</span>
-                <span class="collection-card__star is-filled">★</span>
-                <span class="collection-card__star is-filled">★</span>
-                <span class="collection-card__star is-filled">★</span>
-                <span class="collection-card__star is-filled">★</span>
-            </div> --}}
         </div>
+    </div>
+
+    <!-- Botão visual decorativo -->
+    <div class="position-absolute bottom-0 end-0 p-3">
+        <span class="btn btn-success btn-sm d-flex align-items-center shadow-sm" style="pointer-events: none;">
+            Ver detalhes
+            <i class="bi bi-arrow-right ms-2"></i>
+        </span>
     </div>
 </div>

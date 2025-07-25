@@ -80,10 +80,6 @@ class MainController extends Controller
 
         $points = $this->collectionPointService->getAllWithSearchIndex($request);
 
-        // $categories = Cache::remember('all_categories_with_exists_point', 360000, function () {
-        //     return $this->categoryService->getAllCategoriesWithPointExists();
-        // });
-
         $categories = $this->categoryService->getAllCategoriesWithPointExists();
 
         return view('pages.points', ['points' => $points, 'categories' => $categories]);

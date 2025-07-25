@@ -9,19 +9,18 @@
     </div>
     <section class="collection-detail">
         <div class="container">
-            <a href="{{ url()->previous() }}" class="back-link">
+            <a href="{{ url()->previous() }}" class="back-link mx-2">
                 <span class="back-link__icon">←</span>
                 <span class="back-link__text">Voltar</span>
             </a>
             <x-alerts.alert />
             <div class="collection-detail__wrapper row">
-                <!-- Galeria -->
-                <div class="col-md-6">
+                <div class="col-md-6 mb-5">
                     <div class="collection-detail__gallery">
                         <div class="collection-detail__main-image">
                             <img src="https://placehold.co/600x400" alt="Imagem principal">
                         </div>
-                        <div class="collection-detail__thumbs mt-3 d-flex gap-3">
+                        <div class="collection-detail__thumbs mt-3 d-flex gap-3 bg-sduccess justify-content-between">
                             <img src="https://placehold.co/120x120" class="collection-detail__thumb" alt="thumb 1">
                             <img src="https://placehold.co/120x120" class="collection-detail__thumb" alt="thumb 2">
                             <img src="https://placehold.co/120x120" class="collection-detail__thumb" alt="thumb 3">
@@ -56,16 +55,6 @@
                             CEP: {{ $point->cep }}
                         </p>
 
-                        {{-- <a href="#" class="collection-detail__map-link">Ver no Mapa</a> --}}
-
-                        {{-- <div class="collection-detail__rating mt-3">
-                            <span class="collection-detail__star is-filled">★</span>
-                            <span class="collection-detail__star is-filled">★</span>
-                            <span class="collection-detail__star is-filled">★</span>
-                            <span class="collection-detail__star is-filled">★</span>
-                            <span class="collection-detail__star is-filled">★</span>
-                            <span class="collection-detail__review-count">(243)</span>
-                        </div> --}}
 
                         <p class="collection-detail__author mt-2">
                             Cadastrado por <a href="#">{{ $point->user->name }}</a>

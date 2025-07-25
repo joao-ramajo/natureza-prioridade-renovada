@@ -13,7 +13,7 @@ use Carbon\Carbon;
 
 class CollectionPoint extends Model
 {
-    use SoftDeletes;
+    
 
     public function user(): BelongsTo
     {

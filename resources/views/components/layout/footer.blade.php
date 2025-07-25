@@ -3,7 +3,7 @@
         <ul class="footer__nav">
 
             <li class="footer__nav-item"><a href="{{ route('home') }}" class="footer__nav-link">Home</a></li>
-            <li class="footer__nav-item"><a href="{{ route('home') }}" class="footer__nav-link">Pontos de Coleta</a></li>
+            <li class="footer__nav-item"><a href="{{ route('pontos') }}" class="footer__nav-link">Pontos de Coleta</a></li>
             <li class="footer__nav-item"><a href="{{ route('map') }}" class="footer__nav-link">Mapa</a></li>
             @guest
                 <li class="footer__nav-item"><a href="{{ route('login') }}" class="footer__nav-link">Login</a></li>

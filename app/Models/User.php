@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use SoftDeletes, Notifiable;
+    use Notifiable;
 
     protected $fillable = [
         'name',

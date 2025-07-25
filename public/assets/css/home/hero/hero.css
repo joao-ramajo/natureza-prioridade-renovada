@@ -39,7 +39,7 @@
   transform: scale(1.4);
 }
 .back-link:hover {
-  color: #04d504;
+  color: rgb(3.921686747, 213.078313253, 3.921686747);
   text-decoration: none;
 }
 .back-link__icon {
@@ -88,7 +88,7 @@
   transform: scale(1.4);
 }
 .back-link:hover {
-  color: #04d504;
+  color: rgb(3.921686747, 213.078313253, 3.921686747);
   text-decoration: none;
 }
 .back-link__icon {
@@ -115,7 +115,7 @@
   font-family: "Protest Riot", cursive;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #4d4d4d;
+  color: rgb(76.5, 76.5, 76.5);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.053);
 }
 .hero .hero__title::first-letter {

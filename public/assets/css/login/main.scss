@@ -1,7 +1,7 @@
 @import "../variables";
 
 body {
-    overflow-X: hidden;
+    overflow-x: hidden;
 }
 
 .logo {
@@ -12,9 +12,16 @@ body {
     width: 100px;
 }
 
-.main_content {
-    min-height: 98vh;   
+.form-subtitle {
+    text-align: center;
+    // font-size: 32px;
+    // margin-bottom: 20px;
 
+    font-family: $fonte-riot !important;
+}
+
+.main_content {
+    min-height: 98vh;
 
     .left-side {
         margin-top: 100px;
@@ -24,14 +31,6 @@ body {
         .form {
             width: 400px;
             height: 500px;
-
-            .form-subtitle {
-                text-align: center;
-                font-size: 32px;
-                margin-bottom: 20px;
-
-                font-family: $fonte-riot !important;
-            }
 
             .form-input {
                 display: flex;

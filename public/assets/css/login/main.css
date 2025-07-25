@@ -38,7 +38,7 @@
   transform: scale(1.4);
 }
 .back-link:hover {
-  color: #04d504;
+  color: rgb(3.921686747, 213.078313253, 3.921686747);
   text-decoration: none;
 }
 .back-link__icon {
@@ -49,7 +49,7 @@
 }
 
 body {
-  overflow-X: hidden;
+  overflow-x: hidden;
 }
 
 .logo {
@@ -58,6 +58,11 @@ body {
   left: 15px;
   z-index: -1;
   width: 100px;
+}
+
+.form-subtitle {
+  text-align: center;
+  font-family: "Protest Riot", cursive !important;
 }
 
 .main_content {
@@ -72,12 +77,6 @@ body {
 .main_content .left-side .form {
   width: 400px;
   height: 500px;
-}
-.main_content .left-side .form .form-subtitle {
-  text-align: center;
-  font-size: 32px;
-  margin-bottom: 20px;
-  font-family: "Protest Riot", cursive !important;
 }
 .main_content .left-side .form .form-input {
   display: flex;

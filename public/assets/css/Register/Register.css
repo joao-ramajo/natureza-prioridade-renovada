@@ -38,7 +38,7 @@
   transform: scale(1.4);
 }
 .back-link:hover {
-  color: #04d504;
+  color: rgb(3.921686747, 213.078313253, 3.921686747);
   text-decoration: none;
 }
 .back-link__icon {
@@ -49,8 +49,7 @@
 }
 
 .form {
-  width: 90%;
-  max-width: 500px;
+  max-width: 600px;
 }
 .form .form-input {
   width: 100%;

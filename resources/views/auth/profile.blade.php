@@ -8,6 +8,7 @@
     <section class="profile">
         <div class="container">
             <x-alerts.alert />
+            
             <div class="row">
                 <!-- Sidebar -->
                 <div class="col-md-4 mb-3">
@@ -44,7 +45,9 @@
 
                             @if ($user->email_verified_at === null)
                                 <form action="{{ route('verification.send') }}" method="POST">
-                                    <button type="submit" class="btn w-100 px-0">
+                                    @csrf
+                                    <button type="submit" class="btn w-100 px-0"
+                                        onclick="alert('Ao clicar aqui será enviado um email para sua caixa de entrada, por favor verifique.')">
                                         <li class="text-success">
                                             <i class="bi bi-envelope-arrow-down-fill"></i>Verificar conta
                                         </li>

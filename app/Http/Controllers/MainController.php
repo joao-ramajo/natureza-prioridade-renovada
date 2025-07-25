@@ -32,14 +32,6 @@ class MainController extends Controller
         return view('pages.home');
     }
 
-    public function collectionPoint(): View
-    {
-
-        $categories = $this->categoryService->getAllCategories();
-
-        return view('collectionPoint.index', ['categories' => $categories]);
-    }
-
     public function map(): View
     {
         return view('pages.map');

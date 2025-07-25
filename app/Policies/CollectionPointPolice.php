@@ -13,23 +13,29 @@ class CollectionPointPolice
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user !== null;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, CollectionPoint $collectionPoint): bool
+    public function view(User $user): bool
     {
         return true;
     }
+
+    public function viewForm(User $user): bool
+    {
+        return $user->email_verified_at !== null;
+    }
+
 
     /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool
     {
-        return (in_array($user->role, ['admin', 'manager'], true) || $user->email_verified_at !== null);
+        return ($user->email_verified_at !== null);
     }
 
     /**
@@ -37,7 +43,7 @@ class CollectionPointPolice
      */
     public function update(User $user, CollectionPoint $collectionPoint): bool
     {
-        return (in_array($user->role, ['admin', 'manager'], true) || $user->id === $collectionPoint->user_id);
+        return ($user->id === $collectionPoint->user_id || in_array($user->role, ['admin', 'manager'], true));
     }
 
     /**

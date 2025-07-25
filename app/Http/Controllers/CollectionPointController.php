@@ -5,23 +5,32 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CollectionPoint\StoreRequest;
 use App\Jobs\GetGeoInfoJob;
 use App\Models\CollectionPoint;
+use App\Policies\CollectionPointPolice;
+use App\Services\CategoryService;
 use App\Services\CollectionPointService;
 use App\Services\Operations;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Illuminate\View\View;
+
 
 class CollectionPointController extends Controller
 {
     protected CollectionPointService $collectionPointService;
-
-    public function __construct(CollectionPointService $service)
+    protected CategoryService $categoryService;
+    protected CollectionPointPolice $police;
+    public function __construct(CollectionPointService $service, CategoryService $cs, CollectionPointPolice $police)
     {
         $this->collectionPointService = $service;
+        $this->categoryService = $cs;
+        $this->police = $police;
     }
 
     public function index()
@@ -29,11 +38,27 @@ class CollectionPointController extends Controller
         return CollectionPoint::paginate(5);
     }
 
+    public function create(): RedirectResponse | View
+    {
+
+        if (!Gate::allows('viewForm', CollectionPoint::class)) {
+            return redirect()
+                ->back()
+                ->with('error', 'Você não tem permissão para acessar este contéudo');
+        }
+
+        $categories = $this->categoryService->getAllCategories();
+
+        return view('collectionPoint.index', ['categories' => $categories]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreRequest $request): RedirectResponse
     {
+        Gate::allows('create', CollectionPoint::class);
+
         if ($this->collectionPointService->timeInputIsNotValid($request->open_from, $request->open_to)) {
             return back()
                 ->withErrors(['open_to' => 'O horário de fechamento deve ser maior que o de abertura.'])
@@ -90,19 +115,21 @@ class CollectionPointController extends Controller
     public function update(Request $request, string $id): RedirectResponse
     {
         try {
+
             $id = Crypt::decrypt($id);
             $point = $this->collectionPointService->findCollectionPointById($id);
-            if (Gate::denies('user_can_edit', $point)) {
-                abort(403, 'Você não tem permissão para acessar este recurso.');
+
+            if (!Gate::allows('update', $point)) {
+                return redirect()
+                    ->back()
+                    ->with('error', 'Você não pode atualizar as informações deste ponto');
             }
 
-            if (!$this->collectionPointService->verifyIfUserCreateThePoint($point->user_id, $id)) {
+            if (!$this->collectionPointService->verifyIfUserCreateThePoint(Auth::user()->id, $point->user_id)) {
                 return back()
                     ->with('error', 'Desculpe, você não tem permissão para alterar estas informações');
             }
 
-
-            // create model data
             if ($this->collectionPointService->timeInputIsNotValid($request->open_from, $request->open_to)) {
                 return back()
                     ->withErrors(['open_to' => 'O horário de fechamento deve ser maior que o de abertura.'])
@@ -149,6 +176,7 @@ class CollectionPointController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         try {
+            Gate::authorize('delete', CollectionPoint::class);
             $id = Operations::decryptId($id);
             $point = $this->collectionPointService->findCollectionPointById($id);
             if (Gate::denies('user_can_delete', $point)) {

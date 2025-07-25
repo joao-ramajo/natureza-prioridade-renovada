@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'john_doe@gmail.com',
                 'password' => bcrypt('12345678'),
                 'role' => 'manager',
-                'email_verified_at' => now(), // <- E-mail não verificado
+                'email_verified_at' => now(), 
                 'created_at' => now(),
             ],
             [
@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'dennis@gmail.com',
                 'password' => bcrypt('12345678'),
                 'role' => 'user',
-                'email_verified_at' => now(), // <- E-mail não verificado
+                'email_verified_at' => null, 
                 'created_at' => now(),
             ],
         ]);

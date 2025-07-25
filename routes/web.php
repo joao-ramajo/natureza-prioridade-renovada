@@ -18,7 +18,7 @@ Route::prefix('me')->middleware(['auth'])->group(function () {
      Route::delete('/', [UserController::class, 'destroy'])->name('me.destroy')->middleware(['password.confirm']);
 });
 Route::prefix('ponto-de-coleta')->group(function () {
-     Route::get('/', [MainController::class, 'collectionPoint'])->name('collection_point.index');
+     Route::get('/', [CollectionPointController::class, 'create'])->name('collection_point.index');
      Route::get('/{id}', [MainController::class, 'view'])->name('collection_point.view');
      Route::middleware(['auth', 'verified'])->group(function () {
           Route::post('/', [CollectionPointController::class, 'store'])->name('collection_point.store');

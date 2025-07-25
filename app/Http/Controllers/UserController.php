@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use InvalidArgumentException;
 
 class UserController extends Controller
 {
@@ -38,26 +39,24 @@ class UserController extends Controller
         $emailHasExists = $this->userService->verifyIfEmailExists($request->input('email'));
 
 
-        if (empty($emailHasExists)) {
+        if (!$emailHasExists) {
             return back()
                 ->with('server_error', 'Desculpe, não foi possivel fazer está operação, nenhuma alteração realizada.');
         }
 
 
-        if ($emailHasExists) {
-            $email_user = $this->userService->findUserByEmail($request->input('email'));
+        $email_user = $this->userService->findUserByEmail($request->input('email'));
 
-            if (empty($email_user)) {
-                return back()
-                    ->with('error', 'Desculpe, este email não está dentro de nossas diretrizes de nossas permissões');
-            }
-            if ($email_user->id != $id) {
-                return back()
-                    ->with('error', 'Desculpe, este email não está dentro de nossas diretrizes');
-            }
+        if (!$email_user) {
+            return back()
+                ->with('error', 'Desculpe, este email não está dentro de nossas diretrizes de nossas permissões');
+        }
+        if ($email_user->id != $id) {
+            return back()
+                ->with('error', 'Desculpe, este email não está dentro de nossas diretrizes');
         }
 
-        // update user data
+
         $user->email = $request->input('email');
         $user->name = $request->input('name');
 
@@ -81,24 +80,21 @@ class UserController extends Controller
     public function destroy(): RedirectResponse
     {
         try {
-            $id = Auth::user()->id;
-      
-            if ($id === null) {
-                return back()
-                    ->with('server_error', 'Desculpe houve um erro ao atualizar seu perfil, tente novamente');
+            if (!Auth::user()) {
+                throw new InvalidArgumentException('Você deve estar logado para realizar está ação');
             }
-
-            // $user = User::findOrFail($id);
-            $user = $this->userService->findUserById($id);
-            $user->delete();
+            $this->userService->deleteAuthUser();
 
             Auth::logout();
             session()->invalidate();
             session()->regenerateToken();
-            // dd('apagado');
+
             return redirect()
                 ->route('login')
                 ->with('success', 'Conta apagada com sucesso');
+        } catch (InvalidArgumentException $e) {
+            return back()
+                ->with('error', $e->getMessage());
         } catch (Exception $e) {
             Log::channel('npr')->error('Erro ao apagar usuário', ['exception' => $e->getMessage()]);
             return back()

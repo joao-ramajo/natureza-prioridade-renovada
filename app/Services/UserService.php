@@ -5,8 +5,9 @@ namespace App\Services;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
+use InvalidArgumentException;
 
 class UserService extends Service
 {
@@ -48,5 +49,17 @@ class UserService extends Service
             Log::channel('npr')->error('Erro ao buscar usuário por email', ['exception' => $e->getMessage()]);
             return null;
         }
+    }
+
+
+    public function deleteAuthUser(): bool
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            throw new InvalidArgumentException('Usuário não autenticado');
+        }
+
+        return $user->delete();
     }
 }

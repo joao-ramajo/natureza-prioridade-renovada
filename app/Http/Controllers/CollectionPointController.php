@@ -3,21 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CollectionPoint\StoreRequest;
-use App\Http\Requests\CollectionPoint\UpdateRequest;
 use App\Jobs\GetGeoInfoJob;
 use App\Models\CollectionPoint;
 use App\Services\CollectionPointService;
 use App\Services\Operations;
-use Database\Seeders\CategoriesTableSeeder;
 use Exception;
-use GuzzleHttp\Psr7\Query;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 
@@ -46,19 +40,9 @@ class CollectionPointController extends Controller
                 ->withInput();
         }
 
-        // OPEN GATE API
-        // $geodata = $this->collectionPointService->getGeoInfo($request->input('cep'), $request->input('neighborhood'), $request->input('city'), $request->input('state'), $request->input('street'));
-
-
-
         $days_open = implode(' - ', $request->days_open);
 
         $point = new CollectionPoint();
-
-        // if ($geodata) {
-        //     $point->latitude = $geodata['latitude'];
-        //     $point->longitude = $geodata['longitude'];
-        // }
 
         $point->name = $request->input('name');
         $point->cep = str_replace('-', '', $request->input('cep'));
@@ -141,14 +125,13 @@ class CollectionPointController extends Controller
             $point->days_open = $days_open;
             $point->description = $request->input('description');
 
-            $categories_id = $request->input('categories-id', []); // já é um array ou [] por padrão
+            $categories_id = $request->input('categories-id', []);
 
             $point->updated_at = now();
 
             $point->save();
 
             $point->categories()->sync($categories_id);
-            // dd($categories_id);
 
 
             return redirect()

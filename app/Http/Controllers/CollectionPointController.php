@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CollectionPoint\StoreRequest;
+use App\Http\Requests\CollectionPoint\UpdateRequest;
 use App\Jobs\GetGeoInfoJob;
 use App\Models\CollectionPoint;
 use App\Policies\CollectionPointPolice;
@@ -112,10 +113,9 @@ class CollectionPointController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(UpdateRequest $request, string $id): RedirectResponse
     {
         try {
-
             $id = Crypt::decrypt($id);
             $point = $this->collectionPointService->findCollectionPointById($id);
 

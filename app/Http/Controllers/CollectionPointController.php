@@ -119,18 +119,13 @@ class CollectionPointController extends Controller
             $id = Crypt::decrypt($id);
             $point = $this->collectionPointService->findCollectionPointById($id);
 
-            if (!Gate::allows('update', $point)) {
-                return redirect()
-                    ->back()
-                    ->with('error', 'Você não pode atualizar as informações deste ponto');
-            }
+            Gate::authorize('update', $point);
 
             if ($this->collectionPointService->timeInputIsNotValid($request->open_from, $request->open_to)) {
                 return back()
                     ->withErrors(['open_to' => 'O horário de fechamento deve ser maior que o de abertura.'])
                     ->withInput();
             }
-
 
             $result = $this->collectionPointService->update($request, $point);
 
@@ -143,6 +138,11 @@ class CollectionPointController extends Controller
                     ->route('collection_point.view', ['id' => Crypt::encrypt($point->id)])
                     ->with('error', 'Não foi posssivel atualizar as informações, tente novamente mais tarde');
             }
+        } catch (AuthorizationException $e) {
+            Log::channel('npr')->warning('Usuário ' . Auth::user()->email . ' tentou acessar CollectionPointController@update sem autorização');
+            return redirect()
+                ->back()
+                ->with('error', 'Você não pode atualizar as informações deste ponto');
         } catch (Exception $e) {
             Log::channel('npr')->error("CollectionPointController@update : {$e->getMessage()}");
             return back()

@@ -18,9 +18,6 @@ return new class extends Migration
             $table->integer('score')->default(0);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
-
-            // address info 
-
             $table->string('street');
             $table->string('number')->nullable();
             $table->string('complement')->nullable();
@@ -31,10 +28,7 @@ return new class extends Migration
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
 
-
-
             $table->timestamps();
-   
         });
     }
 

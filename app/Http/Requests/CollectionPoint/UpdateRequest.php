@@ -25,7 +25,6 @@ class UpdateRequest extends FormRequest
             'name' => 'required|string|max:60|min:1',
             'user_id' => 'required|integer|exists:users,id',
 
-            // Se usar 'zip_code' em vez de 'cep'
             'cep' => [
                 'required',
                 'string',
@@ -41,7 +40,6 @@ class UpdateRequest extends FormRequest
             'city' => 'required|string|max:100',
             'state' => 'required|string|size:2',
 
-            // Categoria (assumindo relacionamento Many to Many)
             'categories-id' => 'required|array',
             'categories-id.*' => 'integer|exists:categories,id',
 

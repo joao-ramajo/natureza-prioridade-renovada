@@ -13,6 +13,7 @@
                 <span class="back-link__icon">←</span>
                 <span class="back-link__text">Voltar</span>
             </a>
+            <x-alerts.alert />
             <div class="collection-detail__wrapper row">
                 <!-- Galeria -->
                 <div class="col-md-6">
@@ -81,7 +82,6 @@
                                 </form>
                             @endcan
                             @can('user_can_edit', $point)
-                               
                                 @include('collectionPoint.modal.edit_modal')
                             @endcan
                         </div>

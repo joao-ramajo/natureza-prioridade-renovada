@@ -19,11 +19,11 @@
 </head>
 
 <body>
-    {{-- <x-layout.header /> --}}
-    {{-- <div class="container mt-3"><x-alerts.alert /></div> --}}
-    {{-- <div class="my-5">OASDK</div> --}}
-    {{-- <h2>teste</h2> --}}
-    <main class="">@yield('content')</main>
+
+    <main class="">
+
+        @yield('content')
+    </main>
 
     <x-layout.footer />
     @yield('scripts')

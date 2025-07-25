@@ -13,7 +13,7 @@
 
         <x-form.input label="" type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
 
-
+        <x-alerts.alert />
         {{-- address info --}}
         <h5 class="mb-3 form-subtitle">Cadastre um Novo Ponto de Coleta</h5>
 

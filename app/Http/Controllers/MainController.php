@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Services\CategoryService;
@@ -68,7 +69,8 @@ class MainController extends Controller
                 ->with('server_error', 'Conta não encontrada');
         }
 
-        $user = Auth::user();
+        // $user = Auth::user();
+        $user = User::with(['collectionPoints',])->where('id', Auth::user()->id)->first();
 
         return view('auth.profile', ['user' => $user]);
     }

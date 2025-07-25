@@ -7,6 +7,7 @@
 
 @section('content')
     <x-layout.header></x-layout.header>
+    <x-alerts.alert />
     <div class="mt-5 opacity-0"></div>
     <section class="row mx-auto container collection-point">
         <h2 class="text-center mb-3 title">Pontos de Coleta</h2>

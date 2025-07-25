@@ -10,6 +10,7 @@
         @csrf
 
         {{-- Título do formulário --}}
+        <x-alerts.alert />
         <h2 class="text-center mb-4" style="font-family: 'Riot', sans-serif;">
             Cadastre-se
         </h2>
@@ -19,7 +20,7 @@
             <div class="col-12 col-md-6">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                    name="email" value="{{ old('email') }}"  autofocus />
+                    name="email" value="{{ old('email') }}" autofocus />
                 @error('email')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -30,7 +31,7 @@
             <div class="col-12 col-md-6">
                 <label for="name" class="form-label">Nome</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-                    value="{{ old('name') }}"  />
+                    value="{{ old('name') }}" />
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -42,7 +43,7 @@
         <div class="mb-3">
             <label for="password" class="form-label">Senha</label>
             <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
-                name="password"  />
+                name="password" />
             @error('password')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -52,7 +53,7 @@
 
         <div class="mb-3">
             <label for="password_confirmation" class="form-label">Confirme a senha</label>
-            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"  />
+            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" />
         </div>
 
         {{-- Checkbox termos --}}

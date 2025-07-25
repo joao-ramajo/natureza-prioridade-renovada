@@ -7,6 +7,7 @@
 @section('content')
     <form action="{{ route('login') }}" method="POST" class="mx-auto mb-5 form">
         @csrf
+        <x-alerts.alert />
 
         {{-- Título do formulário --}}
         <h2 class="text-center mb-4 form-subtitle">

@@ -7,7 +7,7 @@
 @section('content')
     <form action="{{ route('password.email') }}" method="POST" class="mx-auto mb-5" style="max-width: 500px;">
         @csrf
-
+        <x-alerts.alert />
         {{-- Título --}}
         <h2 class="form-subtitle text-center mb-3">Recuperação de conta</h2>
 

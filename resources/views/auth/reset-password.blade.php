@@ -7,6 +7,7 @@
 @section('content')
     <form action="{{ route('password.confirm') }}" method="POST" class="form">
         @csrf
+        <x-alerts.alert />
         <h2 class="form-subtitle">Informe a nova senha</h2>
         <x-form.form-title>Informe a nova senha</x-form.form-title>
 

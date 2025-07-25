@@ -9,6 +9,7 @@
     <x-layout.header></x-layout.header>
 
     <section class="hero container">
+        <x-alerts.alert />
         <div class="row align-items-center hero__row mx-auto">
             <div class="col-md-6 hero__content">
                 <h1 class="hero__title">Natureza Prioridade Renovada</h1>
@@ -18,7 +19,7 @@
                     informativo que destaca esses pontos e uma ampla quantidade de informações sobre práticas
                     sustentáveis. Acreditamos que, juntos, podemos fazer a diferença e ajudar a preservar o meio
                     ambiente.</p>
-                <a href="{{ route('collection_point.index')}}" class="hero__cta">Ver Pontos de Coleta</a>
+                <a href="{{ route('pontos') }}" class="hero__cta">Ver Pontos de Coleta</a>
             </div>
 
             <div class="col-md-6 hero__image-wrapper">

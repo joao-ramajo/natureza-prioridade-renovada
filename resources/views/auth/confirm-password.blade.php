@@ -5,8 +5,9 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('password.confirm') }}" method="POST" class="form">
+    <form action="{{ route('password.confirm.store') }}" method="POST" class="form">
         <x-back-link />
+        <x-alerts.alert />
         @csrf
         <h2 class="form-subtitle">Confirme Sua Senha</h2>
         <p class="text-secondary text-center">
@@ -17,7 +18,9 @@
         <div class="form-input">
             <label for="password" class="form-input__label">Coloque sua senha</label>
             <input type="password" name="password" id="password" class="form-input__input">
-
+            @error('password')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
             <div class="row">
                 <div class="col">
                     <x-form.show-pass />
@@ -31,7 +34,7 @@
         </div>
         <button type="submit" class="form__submit-button">Continuar</button>
 
-  
+
 
 
     </form>

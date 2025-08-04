@@ -12,9 +12,10 @@ use App\Services\CollectionPointService;
 use App\Services\Operations;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
@@ -27,6 +28,7 @@ class CollectionPointController extends Controller
     protected CollectionPointService $collectionPointService;
     protected CategoryService $categoryService;
     protected CollectionPointPolice $police;
+
     public function __construct(CollectionPointService $service, CategoryService $cs, CollectionPointPolice $police)
     {
         $this->collectionPointService = $service;
@@ -34,14 +36,13 @@ class CollectionPointController extends Controller
         $this->police = $police;
     }
 
-    public function index()
+    public function index(): LengthAwarePaginator
     {
         return CollectionPoint::paginate(5);
     }
 
     public function create(): RedirectResponse | View
     {
-
         if (!Gate::allows('viewForm', CollectionPoint::class)) {
             return redirect()
                 ->back()
@@ -53,9 +54,6 @@ class CollectionPointController extends Controller
         return view('collectionPoint.index', ['categories' => $categories]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreRequest $request): RedirectResponse
     {
         Gate::allows('create', CollectionPoint::class);
@@ -98,11 +96,13 @@ class CollectionPointController extends Controller
                 ->with('success', 'Ponto de coleta cadastrado com sucesso !');
         } catch (QueryException $e) {
             Log::channel('npr')->error('Houve um erro ao salvar o ponto de coleta', ['exception' => $e->getMessage()]);
+
             if ($e->getCode() === '23000') {
                 return back()
                     ->withInput()
                     ->with('error', 'Nome do ponto já cadastrado');
             }
+
             return back()
                 ->withInput()
                 ->with('error', 'Houve um erro ao salvar as informações, aguarde alguns instantes e tente novamente');
@@ -136,33 +136,33 @@ class CollectionPointController extends Controller
                 ->with('success', 'Informações atualizadas com sucesso');
         } catch (AuthorizationException $e) {
             Log::channel('npr')->warning('Usuário ' . Auth::user()->email . ' tentou acessar CollectionPointController@update sem autorização');
+
             return redirect()
                 ->back()
                 ->with('error', 'Você não pode atualizar as informações deste ponto');
         } catch (Exception $e) {
             Log::channel('npr')->error("CollectionPointController@update : {$e->getMessage()}");
+
             return back()
                 ->with('error', 'Desculpe, houve um erro ao atualizar o registro, tente novamente mais tarde.');
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id): RedirectResponse
     {
         try {
             Gate::authorize('delete', CollectionPoint::class);
             $id = Operations::decryptId($id);
             $point = $this->collectionPointService->findCollectionPointById($id);
-            if (Gate::denies('user_can_delete', $point)) {
-                abort(403, "Você não tem permissão para acessar este recurso ");
-            }
+
             $point->delete();
+
             return redirect()
                 ->route('home')
                 ->with('success', 'Registro apagado com sucesso');
         } catch (Exception $e) {
+            Log::channel('npr')->error("ColllectionPointController@destroy: {$e->getMessage()}");
+
             return back()
                 ->with('error', 'Erro ao apagar registro, tente novamente mais tarde');
         }

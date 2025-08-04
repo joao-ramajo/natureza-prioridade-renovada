@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
-use App\Services\Operations;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -66,7 +64,7 @@ class UserController extends Controller
         } catch (Exception $e) {
             Log::channel('npr')->error('Erro ao atualizar informações do usuário', ['exception' => $e->getMessage()]);
             return back()
-                ->with('error_server', 'Aconteceu algo inesperado ao tentar atualizar as informações, tente novamente mais tarde');
+                ->with('server_error', 'Aconteceu algo inesperado ao tentar atualizar as informações, tente novamente mais tarde');
         }
 
         Auth::setUser($user);
@@ -75,9 +73,6 @@ class UserController extends Controller
             ->with('success', 'Dados alterados com sucesso');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(): RedirectResponse
     {
         try {

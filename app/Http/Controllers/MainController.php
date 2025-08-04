@@ -11,7 +11,6 @@ use App\Services\Operations;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 
 class MainController extends Controller
 {
@@ -47,7 +46,9 @@ class MainController extends Controller
             return back()
                 ->with('error', 'Não encontramos nenhuma informação');
         }
+
         $categories = $this->categoryService->getAllCategories();
+
         return view('collectionPoint.view', ['point' => $point, 'categories' => $categories]);
     }
 
@@ -55,13 +56,12 @@ class MainController extends Controller
     {
         $id = Auth::user()->id;
 
-        if ($id === null || $id != Auth::user()->id) {
+        if ($id === null) {
             return redirect()
                 ->route('home')
                 ->with('server_error', 'Conta não encontrada');
         }
 
-        // $user = Auth::user();
         $user = User::with(['collectionPoints',])->where('id', Auth::user()->id)->first();
 
         return view('auth.profile', ['user' => $user]);
@@ -69,7 +69,6 @@ class MainController extends Controller
 
     public function pontos(Request $request): View
     {
-
         $points = $this->collectionPointService->getAllWithSearchIndex($request);
 
         $categories = $this->categoryService->getAllCategoriesWithPointExists();

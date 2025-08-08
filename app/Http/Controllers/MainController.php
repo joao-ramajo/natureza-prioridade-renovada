@@ -19,11 +19,11 @@ class MainController extends Controller
     protected UserService $userService;
     protected CategoryService $categoryService;
 
-    public function __construct(CollectionPointService $cps, UserService $us, CategoryService $cs)
+    public function __construct(CollectionPointService $collectionPointService, UserService $userService, CategoryService $categoryService)
     {
-        $this->collectionPointService = $cps;
-        $this->userService = $us;
-        $this->categoryService = $cs;
+        $this->collectionPointService = $collectionPointService;
+        $this->userService = $userService;
+        $this->categoryService = $categoryService;
     }
 
     public function index(): View
@@ -39,16 +39,15 @@ class MainController extends Controller
     public function view(string $id): View | RedirectResponse
     {
         $id = Operations::decryptId($id);
-
         $point = $this->collectionPointService->findCollectionPointById($id);
 
         if (!$point) {
             return back()
-                ->with('error', 'Não encontramos nenhuma informação');
+            ->with('error', 'Não encontramos nenhuma informação');
         }
 
         $categories = $this->categoryService->getAllCategories();
-
+        // dd($point);
         return view('collectionPoint.view', ['point' => $point, 'categories' => $categories]);
     }
 

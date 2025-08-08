@@ -58,7 +58,7 @@ class CollectionPointController extends Controller
     {
         Gate::allows('create', CollectionPoint::class);
 
-        if ($this->collectionPointService->timeInputIsNotValid($request->open_from, $request->open_to)) {
+        if ($this->collectionPointService->timeInputIsValid($request->open_from, $request->open_to)) {
             return back()
                 ->withErrors(['open_to' => 'O horário de fechamento deve ser maior que o de abertura.'])
                 ->withInput();
@@ -119,7 +119,7 @@ class CollectionPointController extends Controller
 
             Gate::authorize('update', $point);
 
-            if ($this->collectionPointService->timeInputIsNotValid($request->open_from, $request->open_to)) {
+            if ($this->collectionPointService->timeInputIsValid($request->open_from, $request->open_to)) {
                 return back()
                     ->withErrors(['open_to' => 'O horário de fechamento deve ser maior que o de abertura.'])
                     ->withInput();

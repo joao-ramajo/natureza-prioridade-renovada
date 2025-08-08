@@ -11,17 +11,9 @@ use InvalidArgumentException;
 
 class UserService extends Service
 {
-    public function verifyIfEmailExists(string $email): bool | null
+    public function verifyIfEmailExists(string $email): bool
     {
-        try {
-            return User::where('email', $email)->exists();
-        } catch (QueryException $e) {
-            $this->handleCriticalException($e, 'Erro no banco de dados');
-            return null;
-        } catch (Exception $e) {
-            Log::channel('npr')->error('Erro ao verificar se o email já está cadastrado', ['exception' => $e->getMessage()]);
-            return null;
-        }
+            return User::where('email', $email)->exists() != null;
     }
 
     public function findUserById(int|string $id): ?User
@@ -58,7 +50,8 @@ class UserService extends Service
         if (!$user) {
             throw new InvalidArgumentException('Usuário não autenticado');
         }
-
-        return $user->delete();
+        // so estou refazendo esta busca para evitar o erro de interpretação do editor
+        $register = User::findOrFail($user->id);
+        return $register->delete();
     }
 }

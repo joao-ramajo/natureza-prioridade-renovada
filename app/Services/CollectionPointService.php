@@ -14,16 +14,12 @@ use Illuminate\Support\Facades\Log;
 
 class CollectionPointService extends Service
 {
-    public function timeInputIsNotValid(string $input_1, string $input_2): bool
+    public function timeInputIsValid(string $open_from, string $open_to): bool
     {
-        if (strtotime($input_1) >= strtotime($input_2)) {
-            return true;
-        } else {
-            return false;
-        }
+        return strtotime($open_from) < strtotime($open_to);
     }
 
-    public function findCollectionPointById(string|int $id)
+    public function findCollectionPointById(string|int $id): ?CollectionPoint
     {
         try {
             return CollectionPoint::findOrFail($id);

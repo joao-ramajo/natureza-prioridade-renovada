@@ -16,7 +16,6 @@
             <li>
                 <a href="{{ route('pontos') }}"><i class="bi bi-geo-alt-fill"></i> Pontos de Coleta</a>
             </li>
-     
             @can('viewForm', App\Models\CollectionPoint::class)
                 <li>
                     <a href="{{ route('collection_point.index') }}"><i class="bi bi-plus-circle-fill"></i> Cadastrar um

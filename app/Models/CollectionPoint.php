@@ -12,8 +12,6 @@ use Carbon\Carbon;
 
 class CollectionPoint extends Model
 {
-    
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -27,14 +25,14 @@ class CollectionPoint extends Model
     protected function openFrom(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Carbon::createFromFormat('H:i:s', $value)->format('H:i')
+            get: fn($value) => Carbon::createFromFormat('H:i', $value)->format('H:i')
         );
     }
 
     protected function openTo(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Carbon::createFromFormat('H:i:s', $value)->format('H:i')
+            get: fn($value) => Carbon::createFromFormat('H:i', $value)->format('H:i')
         );
     }
 }
